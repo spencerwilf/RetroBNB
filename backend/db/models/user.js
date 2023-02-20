@@ -44,12 +44,21 @@ module.exports = (sequelize, DataTypes) => {
       return await User.scope('currentUser').findByPk(user.id);
     }
     static associate(models) {
-      // define association here
+      User.hasMany(models.Review, {foreignKey: 'userId'});
+      User.hasMany(models.Booking, {foreignKey: 'userId'});
     }
   };
 
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -62,13 +71,12 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: false
+      hashedPassword: {
+        type: DataTypes.STRING.BINARY,
+        allowNull: false,
+        validate: {
+          len: [60, 60]
+        }
       },
       email: {
         type: DataTypes.STRING,
@@ -78,13 +86,6 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: true
         }
       },
-      hashedPassword: {
-        type: DataTypes.STRING.BINARY,
-        allowNull: false,
-        validate: {
-          len: [60, 60]
-        }
-      }
     },
     {
       sequelize,
