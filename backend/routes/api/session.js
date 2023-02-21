@@ -1,5 +1,5 @@
 const express = require('express');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
@@ -62,6 +62,16 @@ const validateLogin = [
       } else return res.json({ user: null });
     }
   );
+
+
+  router.get('/', requireAuth, async (req, res) => {
+    const { user } = req;
+      if (user) {
+        return res.json({
+          user: user.toSafeObject()
+        });
+      } else return res.json({ user: null });
+  })
 
 
 
