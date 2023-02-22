@@ -109,7 +109,6 @@ router.get('/current', requireAuth, async (req, res) => {
 
     let spots;
     for (let user of userJSON) {
-        console.log(user)
         spots = await Spot.findAll({
             where: {
                 ownerId: user.id
