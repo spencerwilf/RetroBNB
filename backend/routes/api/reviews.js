@@ -8,6 +8,8 @@ const { where } = require('sequelize');
 const spot = require('../../db/models/spot');
 const ReviewImages = require('../../db/seeders/5-review-images');
 const review = require('../../db/models/review');
+const user = require('../../db/models/user');
+const validateReviewCreation = require('./spots')
 
 router.get('/current', requireAuth, async(req, res) => {
 
@@ -19,8 +21,10 @@ router.get('/current', requireAuth, async(req, res) => {
         },
         include: [
             {model: User, attributes: {exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']}},
-            {model: Spot},
-            {model: ReviewImage}
+            {model: Spot,
+                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
+            },
+            {model: ReviewImage, attributes: ['id', 'url']},
         ]
     })
 
@@ -33,7 +37,9 @@ router.get('/current', requireAuth, async(req, res) => {
                 review.Spot.dataValues.previewImage = spotImage.url
             }
         }
-        review.Spot.dataValues.previewImage = 'no preview'
+        if (!review.Spot.dataValues.previewImage) {
+            review.Spot.dataValues.previewImage = 'no preview'
+        }
         reviewsArr.push(review.toJSON())
     }
 
@@ -44,20 +50,108 @@ res.json({reviewsArr})
 
 
 
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
-// router.post('/current', requireAuth, async (req, res) => {
-//     const {review, stars, spotId} = req.body;
+    let currentUser = req.user.id;
+    let {url} = req.body;
 
-//     const { user } = req;
+    let review = await Review.findByPk(req.params.reviewId);
 
-//     let newReview = await user.createReview({
-//         spotId,
-//         review,
-//         stars
-//     })
-//     res.status(201).json(newReview);
-// })
+    if (!review) {
+        return res.status(404).json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    }
 
+
+    if (currentUser !== review.userId) {
+        return res.status(403).json({
+            message: 'Forbidden',
+            statusCode: 403
+        })
+    }
+
+
+    let imageCount = await ReviewImage.findAll({
+        where: {
+            reviewId: review.id
+        }
+    })
+
+    if (imageCount.length >= 10) {
+        return res.status(403).json({
+            message: "Maximum number of images for this resource was reached",
+            statusCode: 403
+        })
+    }
+
+    let newImage = await review.createReviewImage({
+        url
+    })
+
+    res.status(200).json({
+        id: newImage.id,
+        url: newImage.url
+    })
+
+})
+
+
+router.put('/:reviewId', validateReviewCreation, async (req, res) => {
+    let currentUser = req.user.id;
+    let {review, stars} = req.body
+    let foundReview = await Review.findByPk(req.params.reviewId);
+
+    if (!foundReview) {
+        return res.status(404).json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    }
+
+    if (currentUser !== foundReview.userId) {
+        return res.status(403).json({
+            message: 'Forbidden',
+            statusCode: 403
+        })
+    }
+
+    let updatedReview = await foundReview.update({
+        review,
+        stars
+    })
+
+    res.status(200).json(updatedReview)
+
+})
+
+
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+    let review = await Review.findByPk(req.params.reviewId);
+    let currentUser = req.user.id;
+
+    if (!review) {
+        return res.status(404).json({
+            "message": "Review couldn't be found",
+            "statusCode": 404
+          })
+    }
+
+    if (currentUser !== review.userId) {
+        return res.status(403).json({
+            message: 'Forbidden',
+            statusCode: 403
+        })
+    }
+
+    await review.destroy();
+
+    res.status(200).json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+      })
+})
 
 
 
