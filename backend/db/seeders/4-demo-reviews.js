@@ -25,7 +25,7 @@ module.exports = {
     },
     {
       spotId: 2,
-      userId: 1,
+      userId: 2,
       review: 'I had a great time at this spot! The location was convenient and the staff were friendly.',
       stars: 4,
     },

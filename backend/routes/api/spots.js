@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, Review, User, sequelize } = require('../../db/models');
+const { Spot, SpotImage, Review, ReviewImage, User, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { where } = require('sequelize');
@@ -59,10 +59,15 @@ router.get('/', async(req, res) => {
             {model: Review}
         ],
     })
+
+
+
     let spotList = [];
     spots.forEach(spot => {
         spotList.push(spot.toJSON());
     })
+
+
 
     for (let spot of spotList) {
         let avg = await Review.findAll({
@@ -101,6 +106,7 @@ router.get('/current', requireAuth, async (req, res) => {
         ]
     })
 
+
     let userJSON = [];
     users.forEach(user => {
         userJSON.push(user.toJSON());
@@ -127,7 +133,9 @@ router.get('/:spotId', async (req, res) => {
             "statusCode": 404
           })
     }
-    let images = await spot.getSpotImages()
+    let images = await spot.getSpotImages({
+        attributes: {exclude: ['createdAt', 'updatedAt', 'spotId']}
+    })
     let owner = await spot.getUser()
     let reviewCount = await Review.count({
         where: {
@@ -272,6 +280,29 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
   "message": "Successfully deleted",
   "statusCode": 200
 })
+})
+
+
+router.get('/:spotId/reviews', async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          })
+    }
+
+    let reviews = await spot.getReviews({
+        include: {model: ReviewImage, attributes: ['id', 'url']}
+    });
+    for (let i = 0; i < reviews.length; i++) {
+        let user = await reviews[i].getUser({
+            attributes: ['id', 'firstName', 'lastName']
+        });
+        reviews[i].dataValues.User = user
+    }
+    return res.json({reviews})
 })
 
 module.exports = router

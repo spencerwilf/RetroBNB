@@ -11,28 +11,35 @@ const review = require('../../db/models/review');
 
 router.get('/current', requireAuth, async(req, res) => {
 
-
+    const {user} = req;
 
     const reviews = await Review.findAll({
         where: {
-            userId: req.user.id
+            userId: user.id
         },
-        include: [{model: User, attributes: {exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']}},
-        {model: Spot, attributes: {exclude: ['createdAt', 'updatedAt', 'description']}, include: {
-            model: SpotImage, attributes: ['preview'], where: {
-
-            }
-        }},
-        {model: ReviewImage}]
+        include: [
+            {model: User, attributes: {exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']}},
+            {model: Spot},
+            {model: ReviewImage}
+        ]
     })
 
+    let reviewsArr = [];
+    for (let review of reviews) {
+        let spot =  await review.getSpot()
+        let spotImages = await spot.getSpotImages()
+        for (let spotImage of spotImages) {
+            if (spotImage.preview === true) {
+                review.Spot.dataValues.previewImage = spotImage.url
+            }
+        }
+        review.Spot.dataValues.previewImage = 'no preview'
+        reviewsArr.push(review.toJSON())
+    }
+
+res.json({reviewsArr})
 
 
-
-
-
-
-    res.status(200).json({reviews})
 })
 
 
