@@ -18,6 +18,12 @@ module.exports = {
       stars: 5,
     },
     {
+      spotId: 1,
+      userId: 2,
+      review: 'filthy!',
+      stars: 3,
+    },
+    {
       spotId: 2,
       userId: 1,
       review: 'I had a great time at this spot! The location was convenient and the staff were friendly.',
