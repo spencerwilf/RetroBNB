@@ -6,6 +6,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { where } = require('sequelize');
 const spot = require('../../db/models/spot');
+const moment = require('moment');
 
 
 const validateSpotCreation = [
@@ -113,27 +114,15 @@ router.get('/', async(req, res) => {
 
 
 router.get('/current', requireAuth, async (req, res) => {
-    let users = await User.findAll({
-        include: [
-            {model: Spot}
-        ]
+
+    let currentUserId = req.user.id;
+
+    const spots = await Spot.findAll({
+        where: {
+            ownerId: currentUserId
+        }
     })
 
-
-    let userJSON = [];
-    users.forEach(user => {
-        userJSON.push(user.toJSON());
-    })
-
-
-    let spots;
-    for (let user of userJSON) {
-        spots = await Spot.findAll({
-            where: {
-                ownerId: user.id
-            }
-        })
-    }
     res.json({spots})
 })
 
@@ -412,7 +401,7 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
     }
 
     if (endDate <= startDate) {
-        res.status(400).json({
+        return res.status(400).json({
             "message": "Validation error",
             "statusCode": 400,
             "errors": {
@@ -421,6 +410,11 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
           })
     }
 
+    let newStartDate = new Date(startDate).getTime();
+    let newEndDate = new Date(endDate).getTime();
+    let today = new Date().getTime();
+
+
     let bookingsArr = [];
     let spotBookings = await spot.getBookings();
     for (let booking of spotBookings) {
@@ -428,7 +422,11 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
     }
 
     for (let booking of bookingsArr) {
-        if ((startDate >= booking.startDate && startDate <= booking.endDate) || (endDate <= booking.endDate && endDate >= startDate)) {
+
+        let existingBookingStart = new Date(booking.startDate).getTime();
+        let existingBookingEnd = new Date(booking.endDate).getTime();
+
+        if ((newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) || (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart)) {
             return res.status(403).json({
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
@@ -439,6 +437,8 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
               })
         }
     }
+
+
 
     let newBooking = await spot.createBooking({
         userId: currentUserId,

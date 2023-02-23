@@ -60,22 +60,19 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
         })
     }
 
-let today = moment(new Date()).format("YYYY/MM/DD");
-let bookingStart = moment(booking.startDate).format("YYYY/MM/DD");
-let bookingEnd = moment(booking.endDate).format("YYYY/MM/DD");
-
-let newStart = moment(startDate).format("YYYY/MM/DD");
-let newEnd = moment(endDate).format("YYYY/MM/DD");
+let newStartDate = new Date(startDate).getTime();
+let newEndDate = new Date(endDate).getTime();
+let today = new Date().getTime();
 
 
-    if (today > bookingEnd) {
+    if (today > newEndDate) {
         return res.status(403).json({
             message: "Past bookings can't be modified",
             statusCode: 403
         })
     }
 
-    if (startDate > endDate) {
+    if (newStartDate > newEndDate) {
         return res.status(400).json({
             "message": "Validation error",
             "statusCode": 400,
@@ -102,7 +99,10 @@ let newEnd = moment(endDate).format("YYYY/MM/DD");
 
     for (let booking of bookings) {
 
-        if ((startDate >= booking.startDate && startDate <= booking.endDate) || (endDate <= booking.endDate && endDate >= booking.startDate)) {
+        let existingBookingStart = new Date(booking.startDate).getTime();
+        let existingBookingEnd = new Date(booking.endDate).getTime();
+
+        if ((newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) || (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart)) {
 
             return res.status(403).json({
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -147,9 +147,11 @@ router.delete('/:bookingId', requireAuth, async(req, res) => {
         })
     }
 
-    let today = moment(new Date()).format("YYYY/MM/DD");
+    let newStartDate = new Date(booking.startDate).getTime();
+    let today = new Date().getTime();
 
-    if (today >= booking.startDate) {
+
+    if (today >= newStartDate) {
         return res.status(200).json({
             "message": "Bookings that have been started can't be deleted",
             "statusCode": 403
