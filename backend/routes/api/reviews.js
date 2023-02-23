@@ -2,7 +2,22 @@ const express = require('express')
 const router = express.Router();
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Spot, SpotImage, Review, ReviewImage, User, sequelize } = require('../../db/models');
-const validateReviewCreation = require('./spots')
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+const { where } = require('sequelize');
+
+
+const validateReviewCreation = [
+    check('review')
+      .exists({ checkFalsy: true })
+      .withMessage('Review text is required.'),
+
+    check('stars')
+      .exists({ checkFalsy: true })
+      .isNumeric()
+      .withMessage('Stars must be an integer from 1 to 5.'),
+    handleValidationErrors
+  ];
 
 
 router.get('/current', requireAuth, async(req, res) => {
@@ -92,7 +107,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 })
 
 
-router.put('/:reviewId', validateReviewCreation, async (req, res) => {
+router.put('/:reviewId', requireAuth, validateReviewCreation, async (req, res) => {
     let currentUser = req.user.id;
     let {review, stars} = req.body
     let foundReview = await Review.findByPk(req.params.reviewId);
