@@ -37,7 +37,7 @@ router.get('/current', requireAuth, async(req, res) => {
         ]
     })
 
-    let reviewsArr = [];
+    let Reviews = [];
     for (let review of reviews) {
         let spot =  await review.getSpot()
         let spotImages = await spot.getSpotImages()
@@ -49,10 +49,10 @@ router.get('/current', requireAuth, async(req, res) => {
         if (!review.Spot.dataValues.previewImage) {
             review.Spot.dataValues.previewImage = 'no preview'
         }
-        reviewsArr.push(review.toJSON())
+        Reviews.push(review.toJSON())
     }
 
-res.json({reviewsArr})
+res.json({Reviews})
 
 
 })
