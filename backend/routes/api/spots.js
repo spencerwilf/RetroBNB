@@ -310,7 +310,11 @@ router.get('/current', requireAuth, async (req, res) => {
                 [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
             ]
         })
-        spot.avgRating = parseInt(avg[0].dataValues.avgRating)
+        if (!avg[0].dataValues.avgRating || avg[0].dataValues.avgRating === 'null') {
+            spot.avgRating = 'No ratings yet.'
+        } else {
+            spot.avgRating = parseInt(avg[0].dataValues.avgRating).toFixed(1)
+        }
         delete spot.Reviews
     }
 
@@ -357,8 +361,8 @@ router.get('/:spotId', async (req, res) => {
         ]
     })
     delete owner.dataValues.username
-    spot.dataValues.reviewCount = reviewCount
-    spot.dataValues.avgStarRating = avg[0].dataValues.avgRating
+    spot.dataValues.numReviews = reviewCount
+    spot.dataValues.avgStarRating = (avg[0].dataValues.avgRating).toFixed(1)
     spot.dataValues.SpotImages = images
     spot.dataValues.Owner = owner
     res.json(spot)
@@ -586,7 +590,10 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
     let currentUserId = req.user.id;
     let {startDate, endDate} = req.body;
 
-    let spot = await Spot.findByPk(req.params.spotId)
+    let spot = await Spot.findByPk(req.params.spotId);
+
+    let newStartDate = new Date(startDate).getTime();
+    let newEndDate = new Date(endDate).getTime();
 
 
     if (!spot) {
@@ -604,7 +611,7 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
           })
     }
 
-    if (endDate <= startDate) {
+    if (newEndDate <= newStartDate) {
         return res.status(400).json({
             "message": "Validation error",
             "statusCode": 400,
@@ -613,10 +620,6 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
             }
           })
     }
-
-    let newStartDate = new Date(startDate).getTime();
-    let newEndDate = new Date(endDate).getTime();
-    let today = new Date().getTime();
 
 
     let bookingsArr = [];
@@ -630,7 +633,10 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
         let existingBookingStart = new Date(booking.startDate).getTime();
         let existingBookingEnd = new Date(booking.endDate).getTime();
 
-        if ((newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) || (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart)) {
+
+
+
+        if ((newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) || (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart) || (newStartDate <= existingBookingStart && newEndDate >= existingBookingEnd)) {
             return res.status(403).json({
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
@@ -641,8 +647,6 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
               })
         }
     }
-
-
 
     let newBooking = await spot.createBooking({
         userId: currentUserId,

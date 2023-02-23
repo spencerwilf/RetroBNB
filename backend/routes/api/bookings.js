@@ -10,7 +10,7 @@ const moment = require('moment')
 router.get('/current', requireAuth, async (req, res) => {
     let curentUserId = req.user.id;
 
-    let bookings = await Booking.findAll({
+    let Bookings = await Booking.findAll({
         where: {
             userId: curentUserId
         },
@@ -21,7 +21,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
     let arr = [];
-    for (let booking of bookings) {
+    for (let booking of Bookings) {
         let spot =  await booking.getSpot()
         let spotImages = await spot.getSpotImages()
         for (let spotImage of spotImages) {
@@ -35,7 +35,7 @@ router.get('/current', requireAuth, async (req, res) => {
         arr.push(booking.toJSON())
     }
 
-    res.json({bookings})
+    res.json({Bookings})
 })
 
 
@@ -44,16 +44,16 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
     let {startDate, endDate} = req.body;
     let currentUserId = req.user.id;
 
-    let booking = await Booking.findByPk(req.params.bookingId);
+    let newBooking = await Booking.findByPk(req.params.bookingId);
 
-    if (!booking) {
+    if (!newBooking) {
         return res.status(404).json({
             "message": "Booking couldn't be found",
             "statusCode": 404
           })
     }
 
-    if (booking.userId !== currentUserId) {
+    if (newBooking.userId !== currentUserId) {
         return res.status(403).json({
             message: 'Forbidden',
             statusCode: 403
@@ -84,7 +84,7 @@ let today = new Date().getTime();
 
     let allSpotBookings = await Booking.findAll({
         where: {
-            spotId: booking.spotId
+            spotId: newBooking.spotId
         }
     })
 
@@ -102,7 +102,11 @@ let today = new Date().getTime();
         let existingBookingStart = new Date(booking.startDate).getTime();
         let existingBookingEnd = new Date(booking.endDate).getTime();
 
-        if ((newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) || (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart)) {
+        if (booking.id === newBooking.id) {
+            continue;
+        }
+
+        if ((newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) || (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart) || (newStartDate <= existingBookingStart && newEndDate >= existingBookingEnd)) {
 
             return res.status(403).json({
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -116,7 +120,7 @@ let today = new Date().getTime();
         }
     }
 
-    let updatedBooking = await booking.update({
+    let updatedBooking = await newBooking.update({
         startDate,
         endDate
     })
