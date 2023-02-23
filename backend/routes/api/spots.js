@@ -114,16 +114,54 @@ router.get('/', async(req, res) => {
 
 
 router.get('/current', requireAuth, async (req, res) => {
-
     let currentUserId = req.user.id;
 
-    const spots = await Spot.findAll({
+    let spots = await Spot.findAll({
         where: {
             ownerId: currentUserId
-        }
+        },
+        include: [
+            {model: SpotImage},
+            {model: Review}
+        ],
     })
 
-    res.json({spots})
+
+
+    let spotList = [];
+    spots.forEach(spot => {
+        spotList.push(spot.toJSON());
+    })
+
+
+
+    for (let spot of spotList) {
+        let avg = await Review.findAll({
+            where: {
+                spotId: spot.id
+            },
+            attributes: [
+                [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
+            ]
+        })
+        spot.avgRating = parseInt(avg[0].dataValues.avgRating)
+        delete spot.Reviews
+    }
+
+    spotList.forEach(spot => {
+       spot.SpotImages.forEach(img => {
+        if (img.preview === true) {
+            spot.previewImage = img.url
+        }
+       })
+       if (!spot.previewImage) {
+        spot.previewImage = 'no image available'
+       }
+       delete spot.SpotImages
+    });
+
+
+    res.json({spotList})
 })
 
 
