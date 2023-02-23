@@ -7,6 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { where } = require('sequelize');
 const spot = require('../../db/models/spot');
 const moment = require('moment');
+const { Op } = require('sequelize');
 
 
 const validateSpotCreation = [
@@ -67,21 +68,179 @@ const validateSpotCreation = [
 
 
 router.get('/', async(req, res) => {
+
+    let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+
+    let pagination = {};
+    let where = {};
+
+    if (!page) page = 1;
+    if (!size) size = 20;
+
+    page = parseInt(page);
+    size = parseInt(size);
+
+    if (page < 1) {
+        return res.status(400).json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+              "page": "Page must be greater than or equal to 1",}
+            })
+        }
+
+    if (page > 10) {
+        return res.status(400).json({
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                  "page": "Page must be less than or equal to 10",}
+                })
+        }
+
+    if (isNaN(page)) {
+        return res.status(400).json({
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                  "page": "Page input is not valid",}
+                })
+        }
+
+    if (isNaN(size)) {
+            return res.status(400).json({
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                  "page": "Size input is not valid",}
+                })
+            }
+
+        if (size < 1) {
+            return res.status(400).json({
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                  "page": "Size must be greater than or equal to 1",}
+                })
+        }
+
+        if (size > 20) {
+            return res.status(400).json({
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": {
+                  "page": "Size must be less than or equal to 20",}
+                })
+        }
+
+        if (minLat && maxLat) {
+            minLat = Number(minLat);
+            maxLat = Number(maxLat);
+            if (!isNaN(minLat) && !isNaN(maxLat)) {
+                where.lat = {[Op.between]: [minLat, maxLat]}
+            }
+        }
+
+        if (minLat && !maxLat) {
+            minLat = Number(minLat);
+            if (!isNaN(minLat)) {
+                where.lat =  {[Op.gte]: minLat}
+            }
+        }
+
+        if (maxLat && !minLat) {
+            maxLat = Number(maxLat);
+            if (!isNaN(maxLat)) {
+                where.lat =  {[Op.lte]: maxLat}
+            }
+        }
+
+        if (minLng && maxLng) {
+            minLng = Number(minLng);
+            maxLng = Number(maxLng);
+            if (!isNaN(minLng) && !isNaN(maxLng)) {
+                where.lng = {[Op.between]: [minLng, maxLng]}
+            }
+        }
+
+        if (minLng && !maxLng) {
+            minLng = Number(minLng);
+            if (!isNaN(minLng)) {
+                where.lng =  {[Op.gte]: minLng}
+            }
+        }
+
+        if (maxLng && !minLng) {
+            maxLng = Number(maxLng);
+            if (!isNaN(maxLng)) {
+                where.lng =  {[Op.lte]: maxLng}
+            }
+        }
+
+
+        if (minPrice && maxPrice) {
+            minPrice = Number(minPrice);
+            maxPrice = Number(maxPrice);
+            if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+                where.price = {[Op.between]: [minPrice, maxPrice]}
+            } else {
+                return res.status(400).json({
+                    "message": "Validation Error",
+                    "statusCode": 400,
+                    "errors": {
+                      "priceRange": "Price range is invalid",}
+                    })
+            }
+        }
+
+        if (minPrice) {
+            minPrice = Number(minPrice);
+            if (!isNaN(minPrice) && minPrice >= 0) {
+                where.price = {[Op.gte]: minPrice};
+            } else {
+                return res.status(400).json({
+                    "message": "Validation Error",
+                    "statusCode": 400,
+                    "errors": {
+                      "minPrice": "Minimum price must be greater than or equal to 0",}
+                    })
+            }
+        }
+
+
+        if (maxPrice) {
+            maxPrice = Number(maxPrice);
+            if (!isNaN(maxPrice) && maxPrice >= 0) {
+                where.price = {[Op.lte]: maxPrice};
+            } else {
+                return res.status(400).json({
+                    "message": "Validation Error",
+                    "statusCode": 400,
+                    "errors": {
+                      "maxPrice": "Minimum price must be greater than or equal to 0",}
+                    })
+            }
+        }
+
+
+    pagination.limit = size;
+    pagination.offset = size * (page - 1);
+
+
     let spots = await Spot.findAll({
         include: [
             {model: SpotImage},
             {model: Review}
         ],
+        where,
+        ...pagination
     })
-
-
 
     let spotList = [];
     spots.forEach(spot => {
         spotList.push(spot.toJSON());
     })
-
-
 
     for (let spot of spotList) {
         let avg = await Review.findAll({
@@ -108,9 +267,10 @@ router.get('/', async(req, res) => {
        delete spot.SpotImages
     });
 
-
     res.json({spotList})
 })
+
+
 
 
 router.get('/current', requireAuth, async (req, res) => {
@@ -161,7 +321,7 @@ router.get('/current', requireAuth, async (req, res) => {
     });
 
 
-    res.json({spotList})
+    res.json({spotList, page, size})
 })
 
 
