@@ -332,11 +332,12 @@ router.post('/:spotId/reviews', requireAuth, validateReviewCreation, async (req,
           })
     }
 
-    let userReviews = await Review.findAll({
+    let userReviews = await spot.getReviews({
         where: {
             userId: currentUserId
         }
     })
+
 
     if (userReviews.length) {
         return res.status(403).json({
