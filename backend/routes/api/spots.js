@@ -85,25 +85,25 @@ const validateSpotCreation = [
     check('minLat')
     .optional()
     .isNumeric()
-    .custom(lat => lat >= -180 && lat <= 180)
+    .custom(lat => lat >= -90 && lat <= 90)
     .withMessage('Minimum latitude is invalid'),
 
     check('maxLat')
     .optional()
     .isNumeric()
-    .custom(lat => lat >= -180 && lat <= 180)
+    .custom(lat => lat >= -90 && lat <= 90)
     .withMessage('Maximum latitude is invalid'),
 
     check('minLng')
     .optional()
     .isNumeric()
-    .custom(lng => lng >= -90 && lng <= 90)
+    .custom(lng => lng >= -180 && lng <= 180)
     .withMessage('Minimum longitude is invalid'),
 
     check('maxLng')
     .optional()
     .isNumeric()
-    .custom(lng => lng >= -90 && lng <= 90)
+    .custom(lng => lng >= -180 && lng <= 180)
     .withMessage('Maximum longitude is invalid'),
 
     check('minPrice')
