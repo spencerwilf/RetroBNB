@@ -5,8 +5,6 @@ const { Spot, SpotImage, Review, ReviewImage, Booking, User, sequelize } = requi
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { where } = require('sequelize');
-const spot = require('../../db/models/spot');
-const moment = require('moment');
 const { Op } = require('sequelize');
 
 
@@ -86,22 +84,26 @@ const validateSpotCreation = [
 
     check('minLat')
     .optional()
-    .isFloat({min: -180, max: 180})
+    .isNumeric()
+    .custom(lat => lat >= -180 && lat <= 180)
     .withMessage('Minimum latitude is invalid'),
 
     check('maxLat')
     .optional()
-    .isFloat({min: -180, max: 180})
+    .isNumeric()
+    .custom(lat => lat >= -180 && lat <= 180)
     .withMessage('Maximum latitude is invalid'),
 
     check('minLng')
     .optional()
-    .isFloat({min: -90, max: 90})
+    .isNumeric()
+    .custom(lng => lng >= -90 && lng <= 90)
     .withMessage('Minimum longitude is invalid'),
 
     check('maxLng')
     .optional()
-    .isFloat({min: -90, max: 90})
+    .isNumeric()
+    .custom(lng => lng >= -90 && lng <= 90)
     .withMessage('Maximum longitude is invalid'),
 
     check('minPrice')
@@ -205,7 +207,7 @@ router.get('/', validateQueries, async(req, res) => {
         ],
         where: {
             lat: {[Op.between]: [minLat, maxLat]},
-            lng: {[Op.between]: [minLat, maxLat]},
+            lng: {[Op.between]: [minLng, maxLng]},
             price: {[Op.between]: [minPrice, maxPrice]}
         },
         ...pagination
