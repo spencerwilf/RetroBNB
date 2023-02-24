@@ -334,9 +334,15 @@ router.get('/:spotId', async (req, res) => {
             [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating']
         ]
     })
+
+    if (!avg[0].dataValues.avgRating || avg[0].dataValues.avgRating === 'null') {
+        spot.dataValues.avgStarRating = 'No ratings yet.'
+    } else {
+        spot.dataValues.avgStarRating = parseInt(avg[0].dataValues.avgRating).toFixed(1)
+    }
+
     delete owner.dataValues.username
     spot.dataValues.numReviews = reviewCount
-    spot.dataValues.avgStarRating = (avg[0].dataValues.avgRating).toFixed(1)
     spot.dataValues.SpotImages = images
     spot.dataValues.Owner = owner
     res.json(spot)
