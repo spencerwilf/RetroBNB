@@ -70,13 +70,13 @@ const validateSpotCreation = [
     check('minLat')
     .optional()
     .isNumeric()
-    .custom((lat) => lat <= 90 && lat >= 90)
+    .custom((lat) => lat <= 90 && lat >= -90)
     .withMessage('Minimum latitude is invalid'),
 
     check('maxLat')
     .optional()
     .isNumeric()
-    .custom((lat) => lat <= 90 && lat >= 90)
+    .custom((lat) => lat <= 90 && lat >= -90)
     .withMessage('Maximum latitude is invalid'),
 
     check('minLng')
@@ -93,12 +93,13 @@ const validateSpotCreation = [
 
     check('minPrice')
     .optional()
-    .isNumeric({min: 0})
-    .withMessage('Maximum price must be greater than or equal to 0'),
+    .custom((price) => price >= 0)
+    .withMessage('Minimum price must be greater than or equal to 0'),
 
     check('maxPrice')
     .optional()
-    .isNumeric({min: 0}),
+    .custom((price) => price >= 0)
+    .withMessage('Maximum price must be greater than or equal to 0'),
     handleValidationErrors
   ];
 
@@ -143,7 +144,7 @@ router.get('/', validateQueries, async(req, res) => {
             "message": "Validation Error",
             "statusCode": 400,
             "errors": {
-              "page": "Page must be greater than or equal to 1",}
+              "Page": "Page must be greater than or equal to 1",}
             })
         }
 
@@ -152,7 +153,7 @@ router.get('/', validateQueries, async(req, res) => {
                 "message": "Validation Error",
                 "statusCode": 400,
                 "errors": {
-                  "page": "Page must be less than or equal to 10",}
+                  "Page": "Page must be less than or equal to 10",}
                 })
         }
 
@@ -161,7 +162,7 @@ router.get('/', validateQueries, async(req, res) => {
                 "message": "Validation Error",
                 "statusCode": 400,
                 "errors": {
-                  "page": "Page input is not valid",}
+                  "Page": "Page input is not valid",}
                 })
         }
 
@@ -170,7 +171,7 @@ router.get('/', validateQueries, async(req, res) => {
                 "message": "Validation Error",
                 "statusCode": 400,
                 "errors": {
-                  "page": "Size input is not valid",}
+                  "Size": "Size input is not valid",}
                 })
             }
 
@@ -179,7 +180,7 @@ router.get('/', validateQueries, async(req, res) => {
                 "message": "Validation Error",
                 "statusCode": 400,
                 "errors": {
-                  "page": "Size must be greater than or equal to 1",}
+                  "Size": "Size must be greater than or equal to 1",}
                 })
         }
 
@@ -188,7 +189,7 @@ router.get('/', validateQueries, async(req, res) => {
                 "message": "Validation Error",
                 "statusCode": 400,
                 "errors": {
-                  "page": "Size must be less than or equal to 20",}
+                  "Size": "Size must be less than or equal to 20",}
                 })
         }
 
@@ -613,10 +614,27 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
         let existingBookingStart = new Date(booking.startDate).getTime();
         let existingBookingEnd = new Date(booking.endDate).getTime();
 
+        if (newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) {
+            return res.status(403).json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "statusCode": 403,
+                "errors": {
+                  "startDate": "Start date conflicts with an existing booking"
+                }
+              })
+        }
 
+        if (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart) {
+            return res.status(403).json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "statusCode": 403,
+                "errors": {
+                    "endDate": "End date conflicts with an existing booking"
+                }
+              })
+        }
 
-
-        if ((newStartDate >= existingBookingStart && newStartDate <= existingBookingEnd) || (newEndDate <= existingBookingEnd && newEndDate >= existingBookingStart) || (newStartDate <= existingBookingStart && newEndDate >= existingBookingEnd)) {
+        if (newStartDate <= existingBookingStart && newEndDate >= existingBookingEnd) {
             return res.status(403).json({
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
