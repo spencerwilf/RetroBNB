@@ -67,20 +67,77 @@ const validateSpotCreation = [
   ];
 
 
+  const validateQueries = [
+    // check('page')
+    // .isInt({min: 1})
+    // .withMessage('Page must be greater than or equal to 1.'),
 
-router.get('/', async(req, res) => {
+    // check('page')
+    // .isInt({max: 10})
+    // .withMessage('Page must be less than or equal to 10.'),
 
+    // check('size')
+    // .isInt({min: 1})
+    // .withMessage('Size must be greater than or equal to 1.'),
+
+    // check('size')
+    // .isInt({max: 20})
+    // .withMessage('Size must be less than or equal to 20.'),
+
+    check('minLat')
+    .optional()
+    .isFloat({min: -180, max: 180})
+    .withMessage('Minimum latitude is invalid'),
+
+    check('maxLat')
+    .optional()
+    .isFloat({min: -180, max: 180})
+    .withMessage('Maximum latitude is invalid'),
+
+    check('minLng')
+    .optional()
+    .isFloat({min: -90, max: 90})
+    .withMessage('Minimum longitude is invalid'),
+
+    check('maxLng')
+    .optional()
+    .isFloat({min: -90, max: 90})
+    .withMessage('Maximum longitude is invalid'),
+
+    check('minPrice')
+    .optional()
+    .isNumeric({min: 0})
+    .withMessage('Maximum price must be greater than or equal to 0'),
+
+    check('maxPrice')
+    .optional()
+    .isNumeric({min: 0}),
+    handleValidationErrors
+  ];
+
+router.get('/', validateQueries, async(req, res) => {
+
+    //deconstructing request potential request queries
     let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
 
     let pagination = {};
-    let where = {};
 
+    //setting default values if no queries are passed in
     if (!page) page = 1;
     if (!size) size = 20;
+    if (!minPrice) minPrice = 0;
+    if (!maxPrice) maxPrice = 9999999999999;
+    if (!minLng) minLng = -180;
+    if (!maxLng) maxLng = 180;
+    if (!minLat) minLat = -90;
+    if (!maxLat) maxLat = 90;
 
+    //coercing the deconstructed page and size to a number
     page = parseInt(page);
     size = parseInt(size);
 
+
+    //conditionals guarding against invalid page/size queries
     if (page < 1) {
         return res.status(400).json({
             "message": "Validation Error",
@@ -135,106 +192,22 @@ router.get('/', async(req, res) => {
                 })
         }
 
-        if (minLat && maxLat) {
-            minLat = Number(minLat);
-            maxLat = Number(maxLat);
-            if (!isNaN(minLat) && !isNaN(maxLat)) {
-                where.lat = {[Op.between]: [minLat, maxLat]}
-            }
-        }
-
-        if (minLat && !maxLat) {
-            minLat = Number(minLat);
-            if (!isNaN(minLat)) {
-                where.lat =  {[Op.gte]: minLat}
-            }
-        }
-
-        if (maxLat && !minLat) {
-            maxLat = Number(maxLat);
-            if (!isNaN(maxLat)) {
-                where.lat =  {[Op.lte]: maxLat}
-            }
-        }
-
-        if (minLng && maxLng) {
-            minLng = Number(minLng);
-            maxLng = Number(maxLng);
-            if (!isNaN(minLng) && !isNaN(maxLng)) {
-                where.lng = {[Op.between]: [minLng, maxLng]}
-            }
-        }
-
-        if (minLng && !maxLng) {
-            minLng = Number(minLng);
-            if (!isNaN(minLng)) {
-                where.lng =  {[Op.gte]: minLng}
-            }
-        }
-
-        if (maxLng && !minLng) {
-            maxLng = Number(maxLng);
-            if (!isNaN(maxLng)) {
-                where.lng =  {[Op.lte]: maxLng}
-            }
-        }
-
-
-        if (minPrice && maxPrice) {
-            minPrice = Number(minPrice);
-            maxPrice = Number(maxPrice);
-            if (!isNaN(minPrice) && !isNaN(maxPrice)) {
-                where.price = {[Op.between]: [minPrice, maxPrice]}
-            } else {
-                return res.status(400).json({
-                    "message": "Validation Error",
-                    "statusCode": 400,
-                    "errors": {
-                      "priceRange": "Price range is invalid",}
-                    })
-            }
-        }
-
-        if (minPrice) {
-            minPrice = Number(minPrice);
-            if (!isNaN(minPrice) && minPrice >= 0) {
-                where.price = {[Op.gte]: minPrice};
-            } else {
-                return res.status(400).json({
-                    "message": "Validation Error",
-                    "statusCode": 400,
-                    "errors": {
-                      "minPrice": "Minimum price must be greater than or equal to 0",}
-                    })
-            }
-        }
-
-
-        if (maxPrice) {
-            maxPrice = Number(maxPrice);
-            if (!isNaN(maxPrice) && maxPrice >= 0) {
-                where.price = {[Op.lte]: maxPrice};
-            } else {
-                return res.status(400).json({
-                    "message": "Validation Error",
-                    "statusCode": 400,
-                    "errors": {
-                      "maxPrice": "Minimum price must be greater than or equal to 0",}
-                    })
-            }
-        }
-
 
     pagination.limit = size;
     pagination.offset = size * (page - 1);
 
 
+    //getting either all the spots or the ones within the inputted query ranges
     let spots = await Spot.findAll({
         include: [
             {model: SpotImage},
             {model: Review}
         ],
-        where,
+        where: {
+            lat: {[Op.between]: [minLat, maxLat]},
+            lng: {[Op.between]: [minLat, maxLat]},
+            price: {[Op.between]: [minPrice, maxPrice]}
+        },
         ...pagination
     })
 
