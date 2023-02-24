@@ -66,32 +66,17 @@ const validateSpotCreation = [
 
 
   const validateQueries = [
-    // check('page')
-    // .isInt({min: 1})
-    // .withMessage('Page must be greater than or equal to 1.'),
-
-    // check('page')
-    // .isInt({max: 10})
-    // .withMessage('Page must be less than or equal to 10.'),
-
-    // check('size')
-    // .isInt({min: 1})
-    // .withMessage('Size must be greater than or equal to 1.'),
-
-    // check('size')
-    // .isInt({max: 20})
-    // .withMessage('Size must be less than or equal to 20.'),
 
     check('minLat')
     .optional()
     .isNumeric()
-    .custom(lat => lat >= -90 && lat <= 90)
+    .custom((lat) => lat <= 90 && lat >= 90)
     .withMessage('Minimum latitude is invalid'),
 
     check('maxLat')
     .optional()
     .isNumeric()
-    .custom(lat => lat >= -90 && lat <= 90)
+    .custom((lat) => lat <= 90 && lat >= 90)
     .withMessage('Maximum latitude is invalid'),
 
     check('minLng')
@@ -103,7 +88,7 @@ const validateSpotCreation = [
     check('maxLng')
     .optional()
     .isNumeric()
-    .custom(lng => lng >= -180 && lng <= 180)
+    .custom((lng) => lng >= -180 && lng <= 180)
     .withMessage('Maximum longitude is invalid'),
 
     check('minPrice')
@@ -117,6 +102,7 @@ const validateSpotCreation = [
     handleValidationErrors
   ];
 
+
 router.get('/', validateQueries, async(req, res) => {
 
     //deconstructing request potential request queries
@@ -127,16 +113,28 @@ router.get('/', validateQueries, async(req, res) => {
     //setting default values if no queries are passed in
     if (!page) page = 1;
     if (!size) size = 20;
+
     if (!minPrice) minPrice = 0;
-    if (!maxPrice) maxPrice = 9999999999999;
-    if (!minLng) minLng = -180;
-    if (!maxLng) maxLng = 180;
+    if (!maxPrice) maxPrice = 999999999999999;
+
+
     if (!minLat) minLat = -90;
     if (!maxLat) maxLat = 90;
+
+    if (!minLng) minLng = -180;
+    if (!maxLng) maxLng = 180;
+
+
 
     //coercing the deconstructed page and size to a number
     page = parseInt(page);
     size = parseInt(size);
+    minPrice = parseInt(minPrice);
+    maxPrice = parseInt(maxPrice);
+    minLat = parseInt(minLat);
+    maxLat = parseInt(maxLat);
+    minLng = parseInt(minLng);
+    maxLng = parseInt(maxLng);
 
 
     //conditionals guarding against invalid page/size queries
