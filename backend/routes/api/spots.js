@@ -232,7 +232,7 @@ router.get('/', validateQueries, async(req, res) => {
         if (!avg[0].dataValues.avgRating || avg[0].dataValues.avgRating === 'null') {
             spot.avgRating = 'No ratings yet.'
         } else {
-            spot.avgRating = avg[0].dataValues.avgRating.toFixed(1)
+            spot.avgRating = Number(avg[0].dataValues.avgRating).toFixed(1)
 
         }
         delete spot.Reviews
@@ -290,7 +290,7 @@ router.get('/current', requireAuth, async (req, res) => {
         if (!avg[0].dataValues.avgRating || avg[0].dataValues.avgRating === 'null') {
             spot.avgRating = 'No ratings yet.'
         } else {
-            spot.avgRating = avg[0].dataValues.avgRating.toFixed(1)
+            spot.avgRating = Number(avg[0].dataValues.avgRating).toFixed(1)
         }
         delete spot.Reviews
     }
@@ -341,7 +341,7 @@ router.get('/:spotId', async (req, res) => {
     if (!avg[0].dataValues.avgRating || avg[0].dataValues.avgRating === 'null') {
         spot.dataValues.avgStarRating = 'No ratings yet.'
     } else {
-        spot.dataValues.avgStarRating = avg[0].dataValues.avgRating.toFixed(1)
+        spot.dataValues.avgStarRating = Number(avg[0].dataValues.avgRating).toFixed(1)
     }
 
     delete owner.dataValues.username
