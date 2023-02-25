@@ -575,6 +575,7 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
 
     let newStartDate = new Date(startDate).getTime();
     let newEndDate = new Date(endDate).getTime();
+    let today = new Date().getTime()
 
 
     if (!spot) {
@@ -588,6 +589,14 @@ router.post('/:spotId/bookings', requireAuth, async(req, res) => {
     if (spotOwner.id === currentUserId) {
         return res.status(404).json({
             "message": "You cannot book your own spot",
+            "statusCode": 403
+          })
+    }
+
+
+    if (today > newStartDate) {
+        return res.status(404).json({
+            "message": "You cannot make a booking in the past.",
             "statusCode": 403
           })
     }
