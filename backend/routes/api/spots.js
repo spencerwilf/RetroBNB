@@ -538,7 +538,9 @@ router.post('/:spotId/reviews', requireAuth, validateReviewCreation, async (req,
 
 
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+
     let spot = await Spot.findByPk(req.params.spotId);
+
     let currentUser = req.user.id;
 
     if (!spot) {
@@ -559,7 +561,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     if (currentUser === spot.ownerId) {
         let bookings = await Booking.findAll({
             where: {
-                userId: currentUser
+                spotId: spot.id
             },
             include: {model: User, attributes: ['id', 'firstName', 'lastName']}
         })
