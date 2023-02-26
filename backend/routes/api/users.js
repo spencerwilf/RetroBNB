@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -50,6 +50,7 @@ const validateSignup = [
       return res.json(user);
     }
   );
+
 
 
 module.exports = router;
