@@ -11,10 +11,6 @@ import { ModalProvider, Modal } from './context/Modal';
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== "production") {
-  window.store = store;
-}
-
 if (process.env.NODE_ENV !== 'production') {
   restoreCSRF();
 
