@@ -51,7 +51,7 @@ const validateLogin = [
 
 
 
-  router.get('/', requireAuth, async (req, res) => {
+  router.get('/', async (req, res) => {
     const { user } = req;
       if (user) {
         return res.json({
