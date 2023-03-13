@@ -1,0 +1,4 @@
+.home-page-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
