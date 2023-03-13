@@ -22,12 +22,12 @@ const SingleSpot = () => {
   return (
     <div>
         <h1>{spot.name}</h1>
-        <h3>{`Hosted by ${spot.Owner.firstName} ${spot.Owner.lastName}`}</h3>
+        <h3>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h3>
         <h3>
         <i class="fa-solid fa-star"></i>
             {spot.avgStarRating}
         </h3>
-        <h3>${spot.price} night</h3>
+        <h3>{spot.price}</h3>
         <h3>{`Location: ${spot.city}, ${spot.state}, ${spot.country}`}</h3>
         <h5>{spot.description}</h5>
     </div>
