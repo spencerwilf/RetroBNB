@@ -205,12 +205,13 @@ router.get('/', validateQueries, async(req, res) => {
             {model: Review}
         ],
         where: {
-            lat: {[Op.between]: [minLat, maxLat]},
-            lng: {[Op.between]: [minLng, maxLng]},
+            // lat: {[Op.between]: [minLat, maxLat]},
+            // lng: {[Op.between]: [minLng, maxLng]},
             price: {[Op.between]: [minPrice, maxPrice]}
         },
         ...pagination
     })
+
 
     let Spots = [];
     spots.forEach(spot => {

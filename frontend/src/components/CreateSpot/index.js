@@ -18,7 +18,7 @@ const CreateSpot = () => {
   const [price, setPrice] = useState('')
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-  const [photo, setPhoto] = useState('')
+  const [previewImage, setPreviewImage] = useState('')
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({})
 
@@ -34,6 +34,7 @@ const CreateSpot = () => {
         state,
         description,
         name,
+        previewImage,
         price
     }
 
@@ -49,7 +50,7 @@ const CreateSpot = () => {
     setDescription('')
     setName('')
     setPrice('')
-    setPhoto('')
+    setPreviewImage('')
     setHasSubmitted(false)
     setErrors({})
   }
@@ -177,8 +178,8 @@ const CreateSpot = () => {
           <input
             id='previewImage'
             type='text'
-            onChange={e => setPhoto(e.target.value)}
-            value={photo}
+            onChange={e => setPreviewImage(e.target.value)}
+            value={previewImage}
           />
         </div>
         <button>Submit</button>

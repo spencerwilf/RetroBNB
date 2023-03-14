@@ -29,6 +29,9 @@ function App() {
           <Route path='/spots/:spotId'>
             <SingleSpot/>
           </Route>
+          <Route path='/spots/new'>
+            <CreateSpot/>
+          </Route>
         </Switch>
       )}
     </>

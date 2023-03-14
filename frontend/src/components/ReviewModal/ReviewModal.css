@@ -1,0 +1,26 @@
+.rating-input {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.child-star {
+    margin: 0 5px;
+}
+
+#review-modal {
+    padding: 15px 15px;
+    border-radius: 10px
+}
+
+#modal-content {
+    border-radius: 20px;
+}
+
+.rating-input .filled {
+    color: #ff6db6;
+  }
+
+  .rating-input .empty {
+    color: rgb(207, 186, 186);
+  }

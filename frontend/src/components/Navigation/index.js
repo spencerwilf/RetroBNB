@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
@@ -42,7 +42,9 @@ function Navigation({ isLoaded }){
 
         <div className='right-hand-icons'>
         {sessionUser && (
+          <Link to='/spots/new'>
         <h4 id='list-your-spot'>List your spot!</h4>
+        </Link>
       )}
     <i className="fa-solid fa-globe"></i>
       {isLoaded && (

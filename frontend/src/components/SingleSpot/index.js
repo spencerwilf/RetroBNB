@@ -18,6 +18,7 @@ const SingleSpot = () => {
     const reviewArr = Object.values(reviews)
 
 
+
     useEffect(() => {
         dispatch(loadOneSpotThunk(spotId))
         dispatch(loadSpotReviewsThunk(spotId))
@@ -30,6 +31,7 @@ const SingleSpot = () => {
 
     if (!spot) return null
 
+
   return (
     <div>
         <h2>{spot.name}</h2>
@@ -41,9 +43,9 @@ const SingleSpot = () => {
             <span>{`${spot.city}, ${spot.state}, ${spot.country}`}</span>
             </div>
         </div>
-        <h1>
-        -------------------------IMAGES HERE-------------------------
-        </h1>
+        <div>
+    {spot.SpotImages?.length ? <img src={spot.SpotImages[0].url}/> : 'NO IMAGE FOUND'}
+    </div>
         <div className='below-images'>
         <div className='left-side'>
         <h3>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h3>
