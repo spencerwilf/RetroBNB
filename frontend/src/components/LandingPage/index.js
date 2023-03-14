@@ -18,6 +18,9 @@ const LandingPage = () => {
 
     if (!spotsObj) return null;
 
+    console.log('----spotsObj----')
+    console.log(spotsObj)
+
   return (
     <div className='home-page-grid'>
         {spotsObj && spots.map(spot => (

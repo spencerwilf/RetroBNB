@@ -41,12 +41,16 @@ function Navigation({ isLoaded }){
         </div>
 
         <div className='right-hand-icons'>
-    <i class="fa-solid fa-globe"></i>
+        {sessionUser && (
+        <h4 id='list-your-spot'>List your spot!</h4>
+      )}
+    <i className="fa-solid fa-globe"></i>
       {isLoaded && (
         <div>
           <ProfileButton user={sessionUser} />
           </div>
       )}
+
       </div>
     </nav>
   );

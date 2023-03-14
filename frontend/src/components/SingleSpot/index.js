@@ -4,12 +4,15 @@ import { useParams } from 'react-router'
 import { loadOneSpotThunk } from '../../store/spots'
 import { loadSpotReviewsThunk } from '../../store/reviews'
 import './SingleSpot.css'
+import OpenModalButton from '../OpenModalButton';
+import ReviewModal from '../ReviewModal'
 
 const SingleSpot = () => {
 
     const {spotId} = useParams();
     const spot = useSelector(state => state.spots.singleSpot)
     const reviews = useSelector(state => state.reviews.spot)
+    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
     const reviewArr = Object.values(reviews)
@@ -50,7 +53,7 @@ const SingleSpot = () => {
         <h3>${spot.price} night</h3>
         <button onClick={onClick}>Reserve</button>
         <div className='single-spot-reviews'>
-        <i class="fa-solid fa-star"></i>
+        <i className="fa-solid fa-star"></i>
             <span id='single-star-rating'>{spot.avgStarRating}
             {spot.numReviews !== 0 ? ` • ${spot.numReviews} reviews` : ''}</span>
             </div>
@@ -58,11 +61,15 @@ const SingleSpot = () => {
         </div>
         <div className='review-list'>
             <h2>Reviews</h2>
+            {sessionUser && <OpenModalButton
+          buttonText="Leave a review"
+          modalComponent={<ReviewModal />}
+        />}
     {reviewArr.length ? reviewArr.map(review => (
         <div key={review.id} className='indiv-reviews'>
             <h3>{review.User.firstName}</h3>
             <h4>{review.createdAt.slice(0, 10)}</h4>
-            <h5><i class="fa-solid fa-star"></i>{review.stars}</h5>
+            <h5><i className="fa-solid fa-star"></i>{review.stars}</h5>
             <h5>{review.review}</h5>
             ---------------
         </div>
