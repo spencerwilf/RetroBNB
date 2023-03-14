@@ -24,6 +24,11 @@ function LoginFormModal() {
       );
   };
 
+  const demoLogin = (credential, password) => {
+    setCredential('johndoe')
+    setPassword('password')
+    return dispatch(sessionActions.login({credential, password}))
+  }
 
   return (
     <>
@@ -52,7 +57,8 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button disabled={credential.length < 4 || password.length < 6 ? true : false} type="submit">Log In</button>
+        <button onClick={demoLogin}>Log in as Demo User</button>
       </form>
     </>
   );

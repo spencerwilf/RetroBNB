@@ -1,0 +1,38 @@
+body {
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.single-spot-info {
+    display: flex;
+}
+
+#single-star-rating {
+    margin-right: 10px;
+}
+
+.single-spot-reviews {
+    margin-right: 5px;
+}
+
+.reserve-box {
+    border: 1px dotted;
+    width: 33.33%;
+}
+
+.left-side {
+    width: 66.66%
+}
+
+.below-images {
+    display: flex;
+    padding-bottom: 20px;
+    border: 1px dotted;
+}
+
+.review-list {
+    margin-top: 20px;
+}
+
+.indiv-reviews {
+    margin: 20px;
+}
