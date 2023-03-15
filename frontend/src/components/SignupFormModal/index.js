@@ -17,9 +17,6 @@ function SignupFormModal() {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
-  const sessionUser = useSelector((state) => state.session.user);
-  if (sessionUser) return <Redirect to="/" />;
-
 
   const handleSubmit = (e) => {
     e.preventDefault();

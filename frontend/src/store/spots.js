@@ -4,6 +4,9 @@ const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const LOAD_ONE_SPOT = 'spots/GRAB_SPOT'
 const ADD_SPOT = 'spots/ADD_SPOT'
 const ADD_SPOT_IMAGES = 'spots/ADD_SPOT_IMAGES'
+const LOAD_USER_SPOTS = 'spots/LOAD_USER_SPOTS'
+const DELETE_SPOT = 'spots/delete'
+const EDIT_SPOT = 'spots/EDIT_SPOT'
 
 const loadSpots = (spots) => {
     return {
@@ -33,6 +36,27 @@ const addSpotImages = (spot, spotImages) => {
             spot,
             spotImages
         }
+    }
+}
+
+const loadUserSpots = (spots) => {
+    return {
+        type: LOAD_USER_SPOTS,
+        spots
+    }
+}
+
+const deleteSpot = (spotId) => {
+    return {
+        type: DELETE_SPOT,
+        spotId
+    }
+}
+
+const editSpot = (spot) => {
+    return {
+        type: EDIT_SPOT,
+        spot
     }
 }
 
@@ -86,9 +110,46 @@ export const addSpotThunk = (spot, images) => async (dispatch) => {
     }
 }
 
+export const getUserSpotsThunk = () => async (dispatch) => {
+    const res = await csrfFetch('/api/spots/current');
+    if (res.ok) {
+        const spots = await res.json();
+        dispatch(loadUserSpots(spots))
+    }
+}
+
+
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        dispatch(deleteSpot(spotId))
+    }
+}
+
+
+export const editSpotThunk = (spot, spotId) => async (dispatch) => {
+    const owner = spot.Owner;
+    const images = spot.SpotImages;
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(spot)
+    })
+    if (res.ok) {
+        const spot = await res.json();
+        spot.Owner = owner
+        spot.SpotImages = images
+        dispatch(editSpot(spot))
+        return spot
+    }
+}
+
 const initialState = {
     allSpots: {},
-    singleSpot: {}
+    singleSpot: {},
+    userSpots: {}
 }
 
 
@@ -108,6 +169,16 @@ const spotsReducer = (state = initialState, action) => {
             return {...state, singleSpot: {...action.spot}}
         case ADD_SPOT_IMAGES:
             return {...state, singleSpot: {...action.payload.spot, SpotImages: action.payload.spotImages}}
+        case LOAD_USER_SPOTS:
+            newState = {...state, userSpots: {}}
+            action.spots.Spots.map(spot => newState.userSpots[spot.id] = spot)
+            return newState
+        case DELETE_SPOT:
+            newState = {...state, userSpots: {...state.userSpots}};
+            delete newState[action.spotId]
+            return newState
+        case EDIT_SPOT:
+            return {...state, singleSpot: {...action.spot}}
         default:
             return state
     }

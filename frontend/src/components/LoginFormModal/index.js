@@ -24,10 +24,16 @@ function LoginFormModal() {
       );
   };
 
-  const demoLogin = (credential, password) => {
-    setCredential('johndoe')
-    setPassword('password')
-    return dispatch(sessionActions.login({credential, password}))
+  const demoLogin = (e) => {
+    e.preventDefault()
+    return dispatch(sessionActions.login({"credential": "johndoe", "password": "password"}))
+    .then(closeModal)
+    .catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(Object.values(data.errors))
+      }
+    )
   }
 
   return (

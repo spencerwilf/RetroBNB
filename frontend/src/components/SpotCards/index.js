@@ -3,7 +3,6 @@ import './SpotCards.css'
 
 const SpotCard = ({spot}) => {
 
-
   return (
     <div className='card-div tooltip'>
       <span className='tooltiptext'>{spot.name}</span>
