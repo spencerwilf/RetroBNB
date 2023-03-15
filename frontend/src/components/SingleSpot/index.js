@@ -15,14 +15,13 @@ const SingleSpot = () => {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
-    const reviewArr = Object.values(reviews)
-
+    const reviewArr = Object.values(reviews).sort((a, b) => b.id - a.id)
 
 
     useEffect(() => {
         dispatch(loadOneSpotThunk(spotId))
         dispatch(loadSpotReviewsThunk(spotId))
-    }, [dispatch, spotId])
+    }, [dispatch, spotId, reviewArr.length])
 
     const onClick = () => {
         alert('Feature coming soon!')

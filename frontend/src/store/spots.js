@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf"
 const LOAD_SPOTS = 'spots/LOAD_SPOTS'
 const LOAD_ONE_SPOT = 'spots/GRAB_SPOT'
 const ADD_SPOT = 'spots/ADD_SPOT'
+const ADD_SPOT_IMAGES = 'spots/ADD_SPOT_IMAGES'
 
 const loadSpots = (spots) => {
     return {
@@ -25,6 +26,16 @@ const addSpot = (spot) => {
     }
 }
 
+const addSpotImages = (spot, spotImages) => {
+    return {
+        type: ADD_SPOT_IMAGES,
+        payload: {
+            spot,
+            spotImages
+        }
+    }
+}
+
 
 export const fetchSpotsThunk = () => async (dispatch) => {
     const res = await csrfFetch(`/api/spots`)
@@ -35,22 +46,44 @@ export const fetchSpotsThunk = () => async (dispatch) => {
 }
 
 export const loadOneSpotThunk = (spotId) => async (dispatch) => {
-    const res = await fetch(`/api/spots/${spotId}`)
+    const res = await csrfFetch(`/api/spots/${spotId}`)
     if (res.ok) {
         const data = await res.json();
         dispatch(loadOneSpot(data))
+        return data
     }
 }
 
-export const addSpotThunk = (spot) => async (dispatch) => {
+export const addSpotThunk = (spot, images) => async (dispatch) => {
+
+    const owner = spot.Owner
+
     const res = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(spot)
     })
-    const data = await res.json();
-    dispatch(addSpot(data))
-    return data
+
+    if (res.ok) {
+        const spot = await res.json();
+        dispatch(addSpot(spot))
+        spot['SpotImages'] = [];
+        for (let image of images) {
+            let spotImages = await csrfFetch(`/api/spots/${spot.id}/images`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(image)
+            })
+            if (spotImages.ok) {
+                let newImage = await spotImages.json();
+                spot.SpotImages.push(newImage)
+            }
+        }
+
+        spot.Owner = owner
+        dispatch(addSpotImages(spot, spot.SpotImages))
+         return spot
+    }
 }
 
 const initialState = {
@@ -72,9 +105,9 @@ const spotsReducer = (state = initialState, action) => {
             newState.singleSpot = action.spot
             return newState
         case ADD_SPOT:
-            newState = {...state, allSpots: {...state.allSpots}};
-            newState.allSpots[action.spot.id] = action.spot
-            return newState
+            return {...state, singleSpot: {...action.spot}}
+        case ADD_SPOT_IMAGES:
+            return {...state, singleSpot: {...action.payload.spot, SpotImages: action.payload.spotImages}}
         default:
             return state
     }

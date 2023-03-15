@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addSpotThunk } from '../../store/spots';
 
 const CreateSpot = () => {
@@ -16,11 +16,21 @@ const CreateSpot = () => {
   const [description, setDescription] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('')
+  const [previewImg, setPreviewImg] = useState('');
+  const [img2, setImg2] = useState('')
+  const [img3, setImg3] = useState('')
+  const [img4, setImg4] = useState('')
+  const [img5, setImg5] = useState('')
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [previewImage, setPreviewImage] = useState('')
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({})
+
+  const user = useSelector(state => state.session.user)
+
+  if (!user) history.push('/')
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -34,12 +44,19 @@ const CreateSpot = () => {
         state,
         description,
         name,
-        previewImage,
-        price
+        price,
+        Owner: {id: user.id, firstName: user.firstName, lastName: user.lastName}
     }
 
+    const images = [{url: previewImg, preview: true}]
+
+    if (img2) images.push({url: img2, preview: false})
+    if (img3) images.push({url: img3, preview: false})
+    if (img4) images.push({url: img3, preview: false})
+    if (img5) images.push({url: img3, preview: false})
+
     if (newSpotInfo) {
-       let spot = await dispatch(addSpotThunk(newSpotInfo));
+       let spot = await dispatch(addSpotThunk(newSpotInfo, images));
        history.push(`/spots/${spot.id}`)
     }
 
@@ -173,14 +190,39 @@ const CreateSpot = () => {
         </div>
         <div>
             <h3>Liven up your spot with photos</h3>
-            <p>Submit a link to at least one photo to publish our spot</p>
+            <p>Submit a link to at least one photo to publish your spot</p>
           <label htmlFor='image'>Preview image:</label>
           <input
-            id='previewImage'
+            placeholder='Preview URL'
             type='text'
-            onChange={e => setPreviewImage(e.target.value)}
-            value={previewImage}
+            onChange={e => setPreviewImg(e.target.value)}
+            value={previewImg}
           />
+          <input
+            placeholder='Image URL'
+            type='text'
+            onChange={e => setImg2(e.target.value)}
+            value={img2}
+          />
+          <input
+            placeholder='Image URL'
+            type='text'
+            onChange={e => setImg3(e.target.value)}
+            value={img3}
+          />
+          <input
+            placeholder='Image URL'
+            type='text'
+            onChange={e => setImg4(e.target.value)}
+            value={img4}
+          />
+          <input
+            placeholder='Image URL'
+            type='text'
+            onChange={e => setImg5(e.target.value)}
+            value={img5}
+          />
+
         </div>
         <button>Submit</button>
       </form>
