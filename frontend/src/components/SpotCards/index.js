@@ -3,6 +3,7 @@ import './SpotCards.css'
 
 const SpotCard = ({spot}) => {
 
+  console.log(spot)
 
   return (
     <div className='card-div tooltip'>
@@ -14,8 +15,13 @@ const SpotCard = ({spot}) => {
           <div className='name-and-price'>
     <p className='spot-name'>{spot.name}</p>
     <span className='review-span'>
-    <i className="fa-solid fa-star"></i>
-    {spot.avgRating}
+      {spot.avgRating === "No ratings yet." ? <span><i className="fa-solid fa-star"></i> New! </span>: (
+        <>
+        <i className="fa-solid fa-star"></i>
+        {spot.avgRating}
+        </>
+      )}
+
     </span>
     </div>
     <p className='price'>${spot.price} night</p>
