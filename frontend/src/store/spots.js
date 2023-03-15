@@ -174,8 +174,9 @@ const spotsReducer = (state = initialState, action) => {
             action.spots.Spots.map(spot => newState.userSpots[spot.id] = spot)
             return newState
         case DELETE_SPOT:
-            newState = {...state, userSpots: {...state.userSpots}};
-            delete newState[action.spotId]
+            newState = {...state, allSpots: {...state.allSpots}, userSpots: {...state.userSpots}};
+            delete newState.allSpots[action.spotId]
+            delete newState.userSpots[action.spotId]
             return newState
         case EDIT_SPOT:
             return {...state, singleSpot: {...action.spot}}

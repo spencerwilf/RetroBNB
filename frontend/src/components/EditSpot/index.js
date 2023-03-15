@@ -78,7 +78,7 @@ console.log(spot)
 
   return (
     <div className='user-spot-submission-form'>
-      <h2>List your spot!</h2>
+      <h2>Update your Spot</h2>
       {hasSubmitted && Object.values(errors).length > 0 && (
         <div>
             The following errors were found in your submission:
@@ -178,7 +178,7 @@ console.log(spot)
             value={price}
           />
         </div>
-        <button>Submit</button>
+        <button>Update your Spot</button>
       </form>
     </div>
   )

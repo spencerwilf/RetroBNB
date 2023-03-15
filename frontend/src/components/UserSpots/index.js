@@ -40,7 +40,7 @@ if (!spotsArr) return null;
             </button>
             <div className='user-spots-holder'>
                 {spotsArr &&
-                spotsArr.map(spot => <Link exact='true' to={`/spots/${spot.id}`}><UserSpotCard key={spot.id} spot={spot}/></Link>)}
+                spotsArr.map(spot => <UserSpotCard key={spot.id} spot={spot}/>)}
             </div>
     </div>
   )

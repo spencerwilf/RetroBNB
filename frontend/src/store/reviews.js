@@ -1,9 +1,19 @@
-const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
+import { csrfFetch } from "./csrf";
+
+const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS';
+const ADD_REVIEW = 'reviews/ADD_REVIEW'
 
 const loadReviews = (reviews) => {
     return {
         type: LOAD_REVIEWS,
         reviews
+    }
+}
+
+const addReview = (review) => {
+    return {
+        type: ADD_REVIEW,
+        review
     }
 }
 
@@ -13,6 +23,21 @@ export const loadSpotReviewsThunk = (id) => async (dispatch) => {
         const reviews = await res.json()
         dispatch(loadReviews(reviews))
     }
+}
+
+export const addReviewThunk = (review, spotId, user) => async(dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(review)
+    })
+
+    if (res.ok) {
+        const review = await res.json()
+        review.User = {id: user.id, firstName: user.firstName, lastName: user.lastName}
+        dispatch(addReview(review))
+    }
+
 }
 
 const initialState = {
@@ -29,6 +54,8 @@ const reviewReducer = (state = initialState, action) => {
             let normalized = {}
             newReviews.forEach((review) => normalized[review.id] = review)
             return {...state, spot: normalized}
+        case ADD_REVIEW:
+            return {...state, spot: {...state.spot, ...action.review}, user: {...state.user, ...action.review}}
         default:
             return state
     }

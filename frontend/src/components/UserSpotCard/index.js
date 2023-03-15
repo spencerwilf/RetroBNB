@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import DeleteSpotModal from '../DeleteSpotModal'
+import { useDispatch } from 'react-redux'
+import { getUserSpotsThunk } from '../../store/spots'
 
 const UserSpotCard = ({ spot }) => {
 
-
+    const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
@@ -24,11 +26,17 @@ const UserSpotCard = ({ spot }) => {
 
     const closeMenu = () => setShowMenu(false)
 
+
+    useEffect(() => {
+        dispatch(getUserSpotsThunk())
+    }, [dispatch])
+
   return (
 <>
 
 <div className='user-card-container'>
 
+<Link exact='true' to={`/spots/${spot.id}`}>
             <div className='user-image-container'>
             <img src={spot.previewImage}/>
             </div>
@@ -49,7 +57,7 @@ const UserSpotCard = ({ spot }) => {
             <div className='second-line'>
                 {`$${spot.price} night`}
             </div>
-
+            </Link>
             <button>
         <Link exact='true' to={`/spots/${spot.id}/edit`} spot={spot}>
             Update

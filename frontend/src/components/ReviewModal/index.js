@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { useModal } from "../../context/Modal";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './ReviewModal.css'
 
 const ReviewModal = () => {
 
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState("");
+    const [rating, setRating] = useState("");
     const [errors, setErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false)
     const { closeModal } = useModal();

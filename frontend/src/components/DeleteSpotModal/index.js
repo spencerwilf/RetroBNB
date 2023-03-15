@@ -12,8 +12,7 @@ const DeleteSpotModal = ({spotId}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-         dispatch(deleteSpotThunk(spotId))
-        .then(closeModal)
+        dispatch(deleteSpotThunk(spotId)).then(closeModal)
         history.push(`/spots/current`)
       };
 
