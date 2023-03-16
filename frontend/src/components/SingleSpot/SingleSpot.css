@@ -12,21 +12,49 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 
 .single-spot-reviews {
     margin-right: 5px;
+    margin-bottom: 10px;
 }
 
-.reserve-box {
-    border: 1px dotted;
-    width: 33.33%;
+#reserve-box-price {
+    margin-bottom: 10px;
 }
 
-.left-side {
-    width: 66.66%
+.reserve-button {
+  background: #ff6db6;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  height: 60px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 5px;
 }
 
-.below-images {
+.reserve-box-container {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 18px rgba(0,0,0,.15);
+    display: inline-block;
+    height: 200px;
+    width: 89%;
+    position: sticky;
+    margin-bottom: 50px;
+}
+
+.reserve-box-information {
     display: flex;
-    padding-bottom: 20px;
-    border: 1px dotted;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 200px;
+    padding: 0 20px
+}
+
+.bottom-page-info {
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-between;
 }
 
 .review-list {
@@ -35,4 +63,77 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 
 .indiv-reviews {
     margin: 20px;
+}
+
+.listing-header {
+    display: flex;
+    margin-left: 4vw;
+    flex-direction: column;
+}
+
+.left-hand-listing-details {
+    margin-left: 4vw;
+    width: 61%;
+}
+
+.right-hand-listing-details {
+    width: 38%;
+}
+
+.single-spot-images {
+    display: flex;
+    justify-content: space-between;
+    aspect-ratio: 2/1;
+    padding-top: 20px;
+    width: 90vw;
+    height: 70vh;
+}
+
+.single-spot-big-image {
+    height: 100%;
+    width: 50%;
+}
+
+.spot-image-flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.single-spot-big-image > img {
+    height: 100%;
+    aspect-ratio: 1;
+    width: 99%;
+    object-fit: cover;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.single-spot-small-images-column-one, .single-spot-small-images-column-two {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    width: 24.5%;
+}
+
+.single-spot-small-images-column-one {
+    align-items: center;
+}
+
+.single-spot-small-images-column-one > img {
+    height: 49.5%;
+    object-fit: cover;
+    width: 99%;
+    border-radius: 0;
+}
+
+
+.single-spot-small-images-column-two > img {
+    height: 49.5%;
+    object-fit: cover;
+    width: 99%;
+    border-radius: 0;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+
 }

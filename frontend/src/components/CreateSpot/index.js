@@ -51,8 +51,8 @@ const CreateSpot = () => {
 
     if (img2) images.push({url: img2, preview: false})
     if (img3) images.push({url: img3, preview: false})
-    if (img4) images.push({url: img3, preview: false})
-    if (img5) images.push({url: img3, preview: false})
+    if (img4) images.push({url: img4, preview: false})
+    if (img5) images.push({url: img5, preview: false})
 
 
     if (newSpotInfo) {
@@ -68,6 +68,10 @@ const CreateSpot = () => {
     setName('')
     setPrice('')
     setPreviewImg('')
+    setImg2('')
+    setImg3('')
+    setImg4('')
+    setImg5('')
     setHasSubmitted(false)
     setErrors({})
   }
@@ -81,8 +85,9 @@ const CreateSpot = () => {
     if (description.length < 30) errors.description = "Description needs 30 or more characters";
     if (!name) errors.name = "Title is required"
     if (!price) errors.price = "Price is required"
+    if (!previewImg) errors.previewImg = 'Preview image is required'
     setErrors(errors)
-  }, [country, address, city, state, description, name, price])
+  }, [country, address, city, state, description, previewImg, name, price])
 
 
   return (
@@ -203,33 +208,34 @@ const CreateSpot = () => {
           <label htmlFor='image'>Preview image:</label>
           <input
             placeholder='Preview Image URL'
-            type='text'
-            onChange={e => setPreviewImg(e.target.value)}
+            type='url'
             value={previewImg}
+            onChange={e => setPreviewImg(e.target.value)}
           />
           <input
             placeholder='Image URL'
-            type='text'
+            type='url'
             onChange={e => setImg2(e.target.value)}
             value={img2}
           />
           <input
             placeholder='Image URL'
-            type='text'
-            onChange={e => setImg3(e.target.value)}
+            type='url'
             value={img3}
+            onChange={e => setImg3(e.target.value)}
           />
           <input
             placeholder='Image URL'
-            type='text'
-            onChange={e => setImg4(e.target.value)}
+            type='url'
             value={img4}
+            onChange={e => setImg4(e.target.value)}
           />
           <input
             placeholder='Image URL'
-            type='text'
-            onChange={e => setImg5(e.target.value)}
+            type='url'
             value={img5}
+            onChange={e => setImg5(e.target.value)}
+
           />
 
         </div>

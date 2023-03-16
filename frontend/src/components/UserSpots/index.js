@@ -10,7 +10,6 @@ const UserSpots = () => {
 const dispatch = useDispatch();
 const history = useHistory();
 
-
 const spots = useSelector(state => state.spots.userSpots)
 const user = useSelector(state => state.session.user)
 
@@ -21,7 +20,6 @@ let spotsArr;
 if (spots) {
     spotsArr = Object.values(spots)
 }
-
 
 
 useEffect(() => {

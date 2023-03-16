@@ -19,9 +19,11 @@ const SingleSpot = () => {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
+    const images = spot?.SpotImages;
+
     // if (!reviews) return null;
 
-    const reviewArr = Object.values(reviews).sort((a, b) => b.id - a.id)
+    const reviewArr = Object.values(reviews).sort((a, b) => b.id - a.id);
 
 
     useEffect(() => {
@@ -56,41 +58,48 @@ const SingleSpot = () => {
     const closeMenu = () => setShowMenu(false)
 
 
-    if (!spot) return null
+    if (!spot) return null;
+    if (!images) return null;
 
 
   return (
-    <div>
+    <div className='single-listing-page'>
 
-    <h2>{spot.name}</h2>
-    <div className='single-spot-info'>
-
+    <div className='listing-header'>
+            <h2 className='listing-header-name'>{spot.name}</h2>
             <div className='single-spot-reviews'>
-        <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
             <span id='single-star-rating'>{spot.avgStarRating}
-            {spot.numReviews !== 0 ? ` • ${spot.numReviews} reviews` : ''}</span>
+            {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span>
             <span>{`${spot.city}, ${spot.state}, ${spot.country}`}</span>
-       </div>
     </div>
-    <div className='single-spot-images-div'></div>
+    </div>
+
+<div className='spot-image-flex-container'>
+    <div className='single-spot-images'>
         <div className='single-spot-big-image'>
-    {spot.SpotImages?.length ? <img src={spot.SpotImages[0].url}/> : 'NO IMAGE FOUND'}
+        {spot.SpotImages?.length ? <img clasName='main-spot-image' src={spot.SpotImages[0].url}/> : 'NO IMAGE FOUND'}
+        </div>
+    <div className='single-spot-small-images-column-one'>
+        {images[1] && <img className='single-spot-small-image' src={images[1].url}/>}
+        {images[2] && <img className='single-spot-small-image' src={images[2].url}/>}
+        </div>
+        <div className='single-spot-small-images-column-two'>
+        {images[3] && <img className='single-spot-small-image' src={images[3].url}/>}
+        {images[4] && <img className='single-spot-small-image' src={images[4].url}/>}
+        </div>
     </div>
-        <div className='below-images'>
-        <div className='left-side'>
+    </div>
+
+    <div className='bottom-page-info'>
+
+<div className='left-hand-listing-details'>
+
+        <div className='host-and-description'>
         <h3>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h3>
         <h5>{spot.description}</h5>
         </div>
-        <div className='reserve-box'>
-        <h3>${spot?.price} night</h3>
-        <button onClick={onClick}>Reserve</button>
-        <div className='single-spot-reviews'>
-        <i className="fa-solid fa-star"></i>
-            <span id='single-star-rating'>{spot?.avgStarRating}
-            {spot?.numReviews !== 0 ? ` • ${spot?.numReviews} reviews` : ''}</span>
-            </div>
-        </div>
-        </div>
+
         <div className='review-list'>
             <h2>Reviews</h2>
             {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && <OpenModalButton
@@ -112,8 +121,28 @@ const SingleSpot = () => {
             </button>
             )}
         </div>
-    )) : <h3>No Reviews Yet!</h3>}
+    )) : (sessionUser && sessionUser?.id !== spot?.ownerId) ? <h3>Be the first to leave a review!</h3> : <h3>No Reviews Yet!</h3>}
         </div>
+
+        </div>
+
+<div className='right-hand-listing-details'>
+    <div className='reserve-box-container'>
+        <div className='reserve-box-information'>
+        <h3 id='reserve-box-price'>${spot?.price} night</h3>
+        <div className='single-spot-reviews'>
+        <i className="fa-solid fa-star"></i>
+            <span id='single-star-rating'>{spot?.avgStarRating}
+            {spot?.numReviews !== 0 ? ` • ${spot?.numReviews} reviews` : ''}</span>
+            </div>
+        <button className='reserve-button' onClick={onClick}>Reserve</button>
+
+         </div>
+</div>
+</div>
+
+        </div>
+
     </div>
   )
 }

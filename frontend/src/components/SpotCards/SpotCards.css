@@ -3,6 +3,8 @@
     box-sizing: border-box;
 }
 
+
+
 .spot-info {
     display: flex;
     flex-direction: column;
@@ -32,9 +34,10 @@
   }
 
 
-.name-and-price {
+.name-and-rating {
     display: flex;
     justify-content: space-between;
+    margin-top: 7px;
 }
 
 .spot-name {
@@ -48,8 +51,20 @@
     margin: 0 0
 }
 
+.city {
+    margin-top: 0;
+}
+
 div > img {
     width: 280px;
     height: 250px;
-    border-radius: 16px;
+    border-radius: 12px;
+}
+
+.landing-page-spot-container {
+    color: black;
+}
+
+.review-span {
+    text-align: right;
 }
