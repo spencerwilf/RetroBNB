@@ -246,14 +246,13 @@ router.get('/', validateQueries, async(req, res) => {
         }
        })
        if (!spot.previewImage) {
-        spot.previewImage = 'this is a test'
+        spot.previewImage = 'no image available'
        }
        delete spot.SpotImages
     });
 
     res.json({Spots, page, size})
 })
-
 
 
 
@@ -303,7 +302,7 @@ router.get('/current', requireAuth, async (req, res) => {
         }
        })
        if (!spot.previewImage) {
-        spot.previewImage = 'this is a test'
+        spot.previewImage = 'no image available'
        }
        delete spot.SpotImages
     });

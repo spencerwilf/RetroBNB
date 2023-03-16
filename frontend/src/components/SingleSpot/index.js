@@ -61,16 +61,19 @@ const SingleSpot = () => {
 
   return (
     <div>
-        <h2>{spot.name}</h2>
-        <div className='single-spot-info'>
+
+    <h2>{spot.name}</h2>
+    <div className='single-spot-info'>
+
             <div className='single-spot-reviews'>
         <i class="fa-solid fa-star"></i>
             <span id='single-star-rating'>{spot.avgStarRating}
             {spot.numReviews !== 0 ? ` • ${spot.numReviews} reviews` : ''}</span>
             <span>{`${spot.city}, ${spot.state}, ${spot.country}`}</span>
-            </div>
-        </div>
-        <div>
+       </div>
+    </div>
+    <div className='single-spot-images-div'></div>
+        <div className='single-spot-big-image'>
     {spot.SpotImages?.length ? <img src={spot.SpotImages[0].url}/> : 'NO IMAGE FOUND'}
     </div>
         <div className='below-images'>
