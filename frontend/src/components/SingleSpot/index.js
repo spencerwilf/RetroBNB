@@ -100,6 +100,27 @@ const SingleSpot = () => {
         <h5>{spot.description}</h5>
         </div>
 
+        </div>
+
+<div className='right-hand-listing-details'>
+    <div className='reserve-box-container'>
+        <div className='reserve-box-information'>
+        <h3 id='reserve-box-price'>${spot?.price} night</h3>
+        <div className='single-spot-reviews'>
+        <i className="fa-solid fa-star"></i>
+            <span id='single-star-rating'>{spot?.avgStarRating}
+            {spot?.numReviews !== 0 ? ` • ${spot?.numReviews} reviews` : ''}</span>
+            </div>
+        <button className='reserve-button' onClick={onClick}>Reserve</button>
+
+         </div>
+    </div>
+</div>
+
+
+
+        </div>
+
         <div className='review-list'>
             <h2>Reviews</h2>
             {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && <OpenModalButton
@@ -122,25 +143,6 @@ const SingleSpot = () => {
             )}
         </div>
     )) : (sessionUser && sessionUser?.id !== spot?.ownerId) ? <h3>Be the first to leave a review!</h3> : <h3>No Reviews Yet!</h3>}
-        </div>
-
-        </div>
-
-<div className='right-hand-listing-details'>
-    <div className='reserve-box-container'>
-        <div className='reserve-box-information'>
-        <h3 id='reserve-box-price'>${spot?.price} night</h3>
-        <div className='single-spot-reviews'>
-        <i className="fa-solid fa-star"></i>
-            <span id='single-star-rating'>{spot?.avgStarRating}
-            {spot?.numReviews !== 0 ? ` • ${spot?.numReviews} reviews` : ''}</span>
-            </div>
-        <button className='reserve-button' onClick={onClick}>Reserve</button>
-
-         </div>
-</div>
-</div>
-
         </div>
 
     </div>
