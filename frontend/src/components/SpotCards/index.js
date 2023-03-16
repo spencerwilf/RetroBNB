@@ -7,7 +7,7 @@ const SpotCard = ({spot}) => {
     <div className='card-div tooltip'>
       <span className='tooltiptext'>{spot.name}</span>
         <div className='image-div'>
-        <img src={spot.previewImage} alt=''/>
+        <img src={spot.previewImage} alt='spot preview image' title={spot.name}/>
         </div>
         <div className='spot-info'>
           <div className='name-and-price'>

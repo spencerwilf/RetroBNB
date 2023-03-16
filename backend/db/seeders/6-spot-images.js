@@ -19,7 +19,7 @@ module.exports = {
     {
       spotId: 2,
       url: 'https://bestdesignideas.com/wp-content/uploads/2015/04/Living-room-in-a-retro-style-2.jpg',
-      preview: false
+      preview: true
     },
     {
       spotId: 3,

@@ -106,6 +106,7 @@ const CreateSpot = () => {
           <label htmlFor='country'>Country</label>
           <input
             id='country'
+            placeholder='Country'
             type='text'
             onChange={e => setCountry(e.target.value)}
             value={country}
@@ -115,6 +116,7 @@ const CreateSpot = () => {
           <label htmlFor='street-adress'>Street Address:</label>
           <input
             id='address'
+            placeholder='Address'
             type='text'
             onChange={e => setAddress(e.target.value)}
             value={address}
@@ -125,6 +127,7 @@ const CreateSpot = () => {
           <label htmlFor='city'>City:</label>
           <input
             id='city'
+            placeholder='City'
             type='text'
             onChange={e => setCity(e.target.value)}
             value={city}
@@ -134,6 +137,7 @@ const CreateSpot = () => {
           <label htmlFor='state'>State:</label>
           <input
             id='state'
+            placeholder='State'
             type='text'
             onChange={e => setState(e.target.value)}
             value={state}
@@ -143,24 +147,27 @@ const CreateSpot = () => {
           <label htmlFor='latitude'>Latitude:</label>
           <input
             id='latitude'
+            placeholder='Latitude'
             type='text'
             disabled={true}
           />
         </div>
         <div>
-          <label htmlFor='longitude'>Longitude:</label>
+          <label htmlFor='Longitude'>Longitude:</label>
           <input
             id='longitude'
+            placeholder='longitude'
             type='text'
             disabled={true}
           />
         </div>
-        <h3>Describe your place to Guests</h3>
-        <p>Mention the best features of your space!</p>
+        <h3>Describe your place to guests</h3>
+        <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
         <div>
   <label htmlFor='description'></label>
   <textarea
     id='description'
+    placeholder='Description (must be 30 or more characters)'
     name='description'
     onChange={e => setDescription(e.target.value)}
             value={description}
@@ -172,6 +179,7 @@ const CreateSpot = () => {
           <label htmlFor='name'>name:</label>
           <input
             id='title'
+            placeholder='Name of your spot'
             type='text'
             onChange={e => setName(e.target.value)}
             value={name}
@@ -179,10 +187,11 @@ const CreateSpot = () => {
         </div>
         <div>
             <h3>Set a base price for your spot</h3>
-            <p>Competitive pricing can help your listing stand out</p>
+            <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
           <label htmlFor='price'>$</label>
           <input
             id='price'
+            placeholder='Price per night (USD)'
             type='text'
             onChange={e => setPrice(e.target.value)}
             value={price}
@@ -193,7 +202,7 @@ const CreateSpot = () => {
             <p>Submit a link to at least one photo to publish your spot</p>
           <label htmlFor='image'>Preview image:</label>
           <input
-            placeholder='Preview URL'
+            placeholder='Preview Image URL'
             type='text'
             onChange={e => setPreviewImg(e.target.value)}
             value={previewImg}
@@ -224,7 +233,7 @@ const CreateSpot = () => {
           />
 
         </div>
-        <button>Submit</button>
+        <button>Create Spot</button>
       </form>
     </div>
   );
