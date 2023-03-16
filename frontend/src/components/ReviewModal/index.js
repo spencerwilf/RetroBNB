@@ -3,8 +3,10 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from 'react-redux';
 import './ReviewModal.css'
+import ReviewRating from '../ReviewRating';
+import { addReviewThunk } from '../../store/reviews';
 
-const ReviewModal = () => {
+const ReviewModal = ({spotId}) => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
@@ -15,18 +17,26 @@ const ReviewModal = () => {
     const { closeModal } = useModal();
 
 
+    console.log(rating, review.length)
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsSubmitted(true);
+
+        if (Object.values(errors).length > 0) {
+            return alert('Please fix errors before submitting');
+        }
+
+        const newReview = {
+            review,
+            stars: rating
+        }
+
+
         setErrors({});
-        return dispatch()
+         dispatch(addReviewThunk(newReview, spotId, user))
           .then(closeModal)
-          .catch(
-            async (res) => {
-              const data = await res.json();
-              if (data && data.errors) setErrors(Object.values(data.errors));
-            }
-          );
+
       };
 
   return (
@@ -39,31 +49,19 @@ const ReviewModal = () => {
           ))}
         </ul>
         <div>
-  <label htmlFor='description'></label>
+  <label htmlFor='review'></label>
   <textarea
-    id='description'
-    name='description'
-    onChange={e => (e.target.value)}
+    id='review'
+    placeholder='Leave your review here...'
+    value={review}
+    name='review'
+    onChange={e => setReview(e.target.value)}
   />
 </div>
-<div className="rating-input">
-  <div className="child-star">
-    <i className="fa-solid fa-star"></i>
-  </div>
-  <div className="child-star">
-    <i className="fa-solid fa-star"></i>
-  </div>
-  <div className="child-star">
-    <i className="fa-solid fa-star"></i>
-  </div>
-  <div className="child-star">
-    <i className="fa-solid fa-star"></i>
-  </div>
-  <div className="child-star">
-    <i className="fa-solid fa-star"></i>
-  </div>
-</div>
-<button>Submit Your Review</button>
+
+<div><ReviewRating rating={rating} setRating={setRating}/> stars</div>
+
+<button disabled={review.length < 10 || rating < 1}>Submit Your Review</button>
       </form>
       </div>
   )

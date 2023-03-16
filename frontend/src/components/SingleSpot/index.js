@@ -15,6 +15,8 @@ const SingleSpot = () => {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
+    // if (!reviews) return null;
+
     const reviewArr = Object.values(reviews).sort((a, b) => b.id - a.id)
 
 
@@ -25,6 +27,11 @@ const SingleSpot = () => {
 
     const onClick = () => {
         alert('Feature coming soon!')
+    }
+
+    let userReviewId;
+    if (sessionUser) {
+        userReviewId = reviewArr?.filter(review => review?.userId === sessionUser?.id)
     }
 
 
@@ -51,28 +58,30 @@ const SingleSpot = () => {
         <h5>{spot.description}</h5>
         </div>
         <div className='reserve-box'>
-        <h3>${spot.price} night</h3>
+        <h3>${spot?.price} night</h3>
         <button onClick={onClick}>Reserve</button>
         <div className='single-spot-reviews'>
         <i className="fa-solid fa-star"></i>
-            <span id='single-star-rating'>{spot.avgStarRating}
-            {spot.numReviews !== 0 ? ` • ${spot.numReviews} reviews` : ''}</span>
+            <span id='single-star-rating'>{spot?.avgStarRating}
+            {spot?.numReviews !== 0 ? ` • ${spot?.numReviews} reviews` : ''}</span>
             </div>
         </div>
         </div>
         <div className='review-list'>
             <h2>Reviews</h2>
-            {sessionUser && <OpenModalButton
+            {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && <OpenModalButton
           buttonText="Leave a review"
-          modalComponent={<ReviewModal />}
+          modalComponent={<ReviewModal spotId={spotId}/>}
         />}
-    {reviewArr.length ? reviewArr.map(review => (
-        <div key={review.id} className='indiv-reviews'>
-            <h3>{review.User.firstName}</h3>
-            <h4>{review.createdAt.slice(0, 10)}</h4>
-            <h5><i className="fa-solid fa-star"></i>{review.stars}</h5>
-            <h5>{review.review}</h5>
-            ---------------
+    {reviewArr?.length ? reviewArr?.map(review => (
+        <div key={review?.id} className='indiv-reviews'>
+            <h3>{review?.User?.firstName}</h3>
+            <h4>{review?.createdAt?.slice(0, 10)}</h4>
+            <h5><i className="fa-solid fa-star"></i>{review?.stars}</h5>
+            <h5>{review?.review}</h5>
+            {review?.userId === sessionUser?.id && (
+                <button>Delete</button>
+            )}
         </div>
     )) : <h3>No Reviews Yet!</h3>}
         </div>

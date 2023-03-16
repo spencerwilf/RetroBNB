@@ -1,0 +1,12 @@
+#star-buttons {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+  .star-button-on {
+    color: #000;
+  }
+  .star-button-off {
+    color: #ccc;
+  }
