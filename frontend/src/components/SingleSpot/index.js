@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { loadOneSpotThunk } from '../../store/spots'
@@ -6,6 +6,8 @@ import { loadSpotReviewsThunk } from '../../store/reviews'
 import './SingleSpot.css'
 import OpenModalButton from '../OpenModalButton';
 import ReviewModal from '../ReviewModal'
+import DeleteReviewModal from '../DeleteReviewModal'
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 
 const SingleSpot = () => {
 
@@ -14,6 +16,8 @@ const SingleSpot = () => {
     const reviews = useSelector(state => state.reviews.spot)
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
 
     // if (!reviews) return null;
 
@@ -33,6 +37,23 @@ const SingleSpot = () => {
     if (sessionUser) {
         userReviewId = reviewArr?.filter(review => review?.userId === sessionUser?.id)
     }
+
+
+
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = (e) => {
+            if (!ulRef.current.contains(e.target)) {
+                setShowMenu(false)
+            }
+        }
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener('click', closeMenu)
+    }, [showMenu])
+
+    const closeMenu = () => setShowMenu(false)
 
 
     if (!spot) return null
@@ -80,7 +101,12 @@ const SingleSpot = () => {
             <h5><i className="fa-solid fa-star"></i>{review?.stars}</h5>
             <h5>{review?.review}</h5>
             {review?.userId === sessionUser?.id && (
-                <button>Delete</button>
+                <button>
+                <OpenModalMenuItem
+                itemText='Delete'
+                onItemClick={closeMenu}
+                modalComponent={<DeleteReviewModal reviewId = {review.id}/>} />
+            </button>
             )}
         </div>
     )) : <h3>No Reviews Yet!</h3>}

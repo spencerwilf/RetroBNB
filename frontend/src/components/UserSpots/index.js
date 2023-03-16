@@ -23,6 +23,7 @@ if (spots) {
 }
 
 
+
 useEffect(() => {
     dispatch(getUserSpotsThunk())
 }, [dispatch, spotsArr.length])

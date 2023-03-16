@@ -11,7 +11,6 @@ const EditSpot = ({spot}) => {
   const dispatch = useDispatch();
   const {spotId} = useParams();
 
-console.log(spot)
 
   const [country, setCountry] = useState(spot?.country);
   const [address, setAddress] = useState(spot?.address);
