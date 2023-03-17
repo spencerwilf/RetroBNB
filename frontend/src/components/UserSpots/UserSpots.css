@@ -1,0 +1,51 @@
+.user-spots-holder {
+
+        display: flex;
+        max-width: 1200px;
+        flex-wrap: wrap;
+
+}
+
+
+.user-spots-manage {
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-spots-header {
+    text-align: center;
+}
+
+.flex-test {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-create-spot-button {
+    width: 20vb;
+    align-self: center;
+    margin-bottom: 3%;
+    border: none;
+    font-size: 18px;
+    background: #ff6db6;
+    padding: 12px 20px;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.user-create-spot-button:hover {
+    background: #ff6b6b;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+.plswork {
+
+
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+
+
+    cursor: pointer;
+}

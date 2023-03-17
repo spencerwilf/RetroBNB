@@ -6,6 +6,12 @@ a {
   text-decoration: none;
 }
 
+.logout-button {
+  border: black .5px;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 8px;
+}
+
 .nav-bar {
     display: flex;
     justify-content: space-between;
@@ -63,6 +69,9 @@ a {
     text-decoration: none;
   }
 
+.dropdown-menu-elements {
+  cursor: pointer;
+}
 
   .profile-dropdown {
     position: absolute;

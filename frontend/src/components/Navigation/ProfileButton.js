@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
               <Link exact='true' to='/spots/current'>Manage Spots</Link>
             </div>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button className="logout-button" onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (

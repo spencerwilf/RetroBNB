@@ -34,8 +34,10 @@ function SignupFormModal() {
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="signup-info-div">
+      <h1 className="signup-header">Sign Up</h1>
+
+      <form className="signup-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
@@ -43,6 +45,7 @@ function SignupFormModal() {
           Email
           <input
             type="text"
+            className="signup-field"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -52,6 +55,7 @@ function SignupFormModal() {
           Username
           <input
             type="text"
+            className="signup-field"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -61,6 +65,7 @@ function SignupFormModal() {
           First Name
           <input
             type="text"
+            className="signup-field"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -70,6 +75,7 @@ function SignupFormModal() {
           Last Name
           <input
             type="text"
+            className="signup-field"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -79,6 +85,7 @@ function SignupFormModal() {
           Password
           <input
             type="password"
+            className="signup-field"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -88,13 +95,15 @@ function SignupFormModal() {
           Confirm Password
           <input
             type="password"
+            className="signup-field"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        <button disabled={!email.length || username.length < 4 || !firstName.length || !lastName.length || password.length < 6 ||confirmPassword.length < 6 || password !== confirmPassword ? true : false} type="submit">Sign Up</button>
+        <button className="signup-button" disabled={!email.length || username.length < 4 || !firstName.length || !lastName.length || password.length < 6 ||confirmPassword.length < 6 || password !== confirmPassword ? true : false} type="submit">Sign Up</button>
       </form>
+      </div>
     </>
   );
 }

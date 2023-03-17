@@ -4,6 +4,7 @@ import UserSpotCard from '../UserSpotCard'
 import { getUserSpotsThunk } from '../../store/spots'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
+import './UserSpots.css'
 
 const UserSpots = () => {
 
@@ -29,17 +30,25 @@ useEffect(() => {
 if (!spotsArr) return null;
 
   return (
-    <div>
-        <h1>Manage Spots</h1>
+    <div >
+        <div className='flex-test'>
+        <h1 className='manage-spots-header'>Manage Spots</h1>
 
-            <button>
+            <button className='user-create-spot-button'>
+
                 <Link exact='true' to='/spots/new'>
-                <div>Create a New Spot</div>
+                <div className='plswork'>
+                Create a New Spot
+                </div>
                 </Link>
+
             </button>
+            </div>
+            <div className='user-spots-manage'>
             <div className='user-spots-holder'>
                 {spotsArr &&
                 spotsArr.map(spot => <UserSpotCard key={spot.id} spot={spot}/>)}
+            </div>
             </div>
     </div>
   )

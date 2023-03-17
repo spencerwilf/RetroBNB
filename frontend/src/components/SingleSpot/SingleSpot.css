@@ -54,7 +54,7 @@ font-family: 'Montserrat', sans-serif;
     flex-direction: column;
     justify-content: space-around;
     height: 200px;
-    padding: 0 20px
+    padding: 0 20px;
 }
 
 .bottom-page-info {
@@ -89,12 +89,13 @@ font-family: 'Montserrat', sans-serif;
 
 .right-hand-listing-details {
     width: 38%;
+    margin-left: 10vh;
+
 }
 
 .single-spot-images {
     display: flex;
     justify-content: space-between;
-    aspect-ratio: 2/1;
     padding-top: 20px;
     width: 90vw;
     height: 70vh;
@@ -112,7 +113,6 @@ font-family: 'Montserrat', sans-serif;
 
 .single-spot-big-image > img {
     height: 100%;
-    aspect-ratio: 1;
     width: 99%;
     object-fit: cover;
     border-bottom-right-radius: 0;

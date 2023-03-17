@@ -1,0 +1,52 @@
+.login-form-div {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-form {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.login-form-div, .login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-input {
+    display: flex;
+    flex-direction: row;
+}
+
+.login-buttons {
+   display: flex;
+   flex-direction: column;
+   align-self: center;
+}
+
+.regular-login {
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    border: .5px solid #ddd;
+    border-radius: 8px;
+    height: 6vh;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.demo-login {
+    border: .5px solid #ddd;
+    border-radius: 8px;
+    height: 6vh;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.regular-login:not(:disabled):hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.demo-login:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
