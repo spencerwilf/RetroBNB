@@ -30,6 +30,7 @@ font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   font-size: 16px;
   margin-top: 5px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .reserve-button:hover {
@@ -47,6 +48,7 @@ font-family: 'Montserrat', sans-serif;
     width: 89%;
     position: sticky;
     margin-bottom: 50px;
+
 }
 
 .reserve-box-information {
@@ -147,4 +149,29 @@ font-family: 'Montserrat', sans-serif;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
 
+}
+
+#img3 {
+    border-bottom-right-radius: 0;
+}
+
+#img4 {
+    border-top-right-radius: 0;
+}
+
+.review-list button {
+    list-style: none;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 5vh;
+    border-radius: 16px;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 1px solid #ddd;
+    height: 6vh;
+    width: 15vw;
+}
+
+.review-list button:hover {
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }

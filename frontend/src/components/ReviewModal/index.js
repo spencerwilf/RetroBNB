@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import React, { useState } from 'react'
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from 'react-redux';
 import './ReviewModal.css'
@@ -13,15 +12,14 @@ const ReviewModal = ({spotId}) => {
     const [review, setReview] = useState("");
     const [rating, setRating] = useState("");
     const [errors, setErrors] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false)
+    // const [isSubmitted, setIsSubmitted] = useState(false)
     const { closeModal } = useModal();
 
 
-    console.log(rating, review.length)
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsSubmitted(true);
+        // setIsSubmitted(true);
 
         if (Object.values(errors).length > 0) {
             return alert('Please fix errors before submitting');
@@ -41,8 +39,8 @@ const ReviewModal = ({spotId}) => {
 
   return (
     <div id='review-modal'>
-      <h3>How was your stay?</h3>
-      <form onSubmit={handleSubmit}>
+      <h2 className='review-box-header'>How was your stay?</h2>
+      <form onSubmit={handleSubmit} className='leave-review-form'>
         <ul>
           {Object.values(errors).map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -59,9 +57,10 @@ const ReviewModal = ({spotId}) => {
   />
 </div>
 
-<div><ReviewRating rating={rating} setRating={setRating}/> stars</div>
+<div className='review-modal-stars-text'>
+  <ReviewRating rating={rating} setRating={setRating}/> stars</div>
 
-<button disabled={review.length < 10 || rating < 1}>Submit Your Review</button>
+<button className='leave-review-button' disabled={review.length < 10 || rating < 1}>Submit Your Review</button>
       </form>
       </div>
   )

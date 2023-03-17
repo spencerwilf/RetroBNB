@@ -1,0 +1,53 @@
+.user-spot-submission-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-spot-submission-form button {
+    margin-top: 5vh;
+    border: .5px solid #ddd;
+    border-radius: 8px;
+    height: 10vh;
+    width: 27.8vw;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.user-spot-submission-form button:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    cursor: pointer;
+}
+
+
+.new-spot-create-form {
+    display: flex;
+    align-items: flex-start
+}
+
+.user-spot-submission-form .new-spot-create-form {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+
+}
+
+.new-spot-create-form input {
+    width: 400px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    height: 4vh;
+    border: 1px solid #b7a6a6;
+    display: flex;
+
+}
+
+.create-spot-form-field {
+    display: flex;
+    flex-direction: row;
+
+}
+
+#create-spot-description {
+    width: 40vw;
+    height: 20vh;
+}

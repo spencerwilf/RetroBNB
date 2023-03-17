@@ -1,5 +1,6 @@
 .home-page-grid {
     display: flex;
-    max-width: 1200px;
+
     flex-wrap: wrap;
+    justify-content: center;
 }

@@ -1,0 +1,59 @@
+.user-card-container {
+    margin: 20px 20px;
+    box-sizing: border-box;
+    line-height: 1.7em;
+}
+
+.user-card-container a {
+    color: black;
+}
+
+.second-line {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.user-spot-info-2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-spot-info-name-span {
+    display: flex;
+}
+
+.user-spot-bottom-card-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-page-delete-button, .user-page-update-button {
+    border: none;
+    border-radius: 16px;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 1px solid #ddd;
+    height: 5vh;
+}
+
+.user-page-delete-button > li {
+    list-style: none;
+}
+
+.user-page-button-div {
+    display: flex;
+
+    margin-top: 10px;
+}
+
+.user-page-button-div > .user-page-delete-button {
+    margin-left: 8px;
+}
+
+.user-page-button-div > .user-page-update-button {
+    margin-right: 8px;
+}
+
+.user-page-delete-button:hover, .user-page-update-button:hover {
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+}

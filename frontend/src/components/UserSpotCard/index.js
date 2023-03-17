@@ -4,6 +4,7 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import DeleteSpotModal from '../DeleteSpotModal'
 import { useDispatch } from 'react-redux'
 import { getUserSpotsThunk } from '../../store/spots'
+import './UserSpotCard.css'
 
 const UserSpotCard = ({ spot }) => {
 
@@ -38,15 +39,15 @@ const UserSpotCard = ({ spot }) => {
 
 <Link exact='true' to={`/spots/${spot.id}`}>
             <div className='user-image-container'>
-            <img src={spot.previewImage}/>
+            <img src={spot.previewImage} alt=''/>
             </div>
 
+
+    <div className='user-spot-bottom-card-info'>
+<div className='user-spot-info-2'>
             <div className='first-line'>
-                {spot.name}
-                {`${spot.city}, ${spot.state}`}
-            </div>
-
-            <span className='review-span'>
+                <span className='user-spot-info-name-span'>{spot.name}</span>
+                <span className='review-span'>
             {spot.avgRating === "No ratings yet." ? <span><i className="fa-solid fa-star"></i> New! </span>: (
             <>
             <i className="fa-solid fa-star"></i>
@@ -54,23 +55,33 @@ const UserSpotCard = ({ spot }) => {
             </>
                           )}
                 </span>
-            <div className='second-line'>
+            </div>
+            </div>
+
+
+            <div className='second-line-price'>
                 {`$${spot.price} night`}
+            <div className='second-line-location'>
+            {`${spot.city}, ${spot.state}`}
+            </div>
+            </div>
             </div>
             </Link>
-            <button>
+
+            <div className='user-page-button-div'>
+            <button className='user-page-update-button'>
         <Link exact='true' to={`/spots/${spot.id}/edit`} spot={spot}>
             Update
         </Link>
             </button>
 
-            <button>
+            <button className='user-page-delete-button'>
         <OpenModalMenuItem
         itemText='Delete'
         onItemClick={closeMenu}
         modalComponent={<DeleteSpotModal spotId = {spot.id}/>} />
     </button>
-
+    </div>
 </div>
 
 

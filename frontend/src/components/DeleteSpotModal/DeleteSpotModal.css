@@ -1,0 +1,39 @@
+.delete-spot-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete-spot-entry-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete-confirmation-text {
+    text-align: center;
+    line-height: 2em;
+}
+
+.delete-spot-modal-buttons {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.delete-spot-modal-buttons > button {
+    border: none;
+    border-radius: 16px;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 1px solid #ddd;
+    height: 5vh;
+}
+
+#delete-spot-modal-delete-button {
+    margin-top: 4vh;
+    margin-bottom: 5px;
+}
+
+#delete-spot-modal-keep-button {
+    margin-top: 5px;
+}

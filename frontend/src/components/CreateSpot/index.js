@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSpotThunk } from '../../store/spots';
+import './CreateSpot.css'
 
 const CreateSpot = () => {
 
@@ -21,8 +22,8 @@ const CreateSpot = () => {
   const [img3, setImg3] = useState('')
   const [img4, setImg4] = useState('')
   const [img5, setImg5] = useState('')
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  // const [lat, setLat] = useState(0);
+  // const [lng, setLng] = useState(0);
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [errors, setErrors] = useState({})
 
@@ -106,11 +107,12 @@ const CreateSpot = () => {
       )}
       <h3>Where's your place located?</h3>
       <p>Guests will only get your exact address once they've booked a reservation.</p>
-      <form onSubmit={onSubmit}>
+      <form className='new-spot-create-form' onSubmit={onSubmit}>
         <div>
           <label htmlFor='country'>Country</label>
           <input
             id='country'
+            className='create-spot-form-field'
             placeholder='Country'
             type='text'
             onChange={e => setCountry(e.target.value)}
@@ -121,6 +123,7 @@ const CreateSpot = () => {
           <label htmlFor='street-adress'>Street Address:</label>
           <input
             id='address'
+            className='create-spot-form-field'
             placeholder='Address'
             type='text'
             onChange={e => setAddress(e.target.value)}
@@ -132,6 +135,7 @@ const CreateSpot = () => {
           <label htmlFor='city'>City:</label>
           <input
             id='city'
+            className='create-spot-form-field'
             placeholder='City'
             type='text'
             onChange={e => setCity(e.target.value)}
@@ -142,6 +146,7 @@ const CreateSpot = () => {
           <label htmlFor='state'>State:</label>
           <input
             id='state'
+            className='create-spot-form-field'
             placeholder='State'
             type='text'
             onChange={e => setState(e.target.value)}
@@ -152,6 +157,7 @@ const CreateSpot = () => {
           <label htmlFor='latitude'>Latitude:</label>
           <input
             id='latitude'
+            className='create-spot-form-field'
             placeholder='Latitude (feature in progress)'
             type='text'
             disabled={true}
@@ -161,6 +167,7 @@ const CreateSpot = () => {
           <label htmlFor='Longitude'>Longitude:</label>
           <input
             id='longitude'
+            className='create-spot-form-field'
             placeholder='Longitude (feature in progress)'
             type='text'
             disabled={true}
@@ -171,7 +178,8 @@ const CreateSpot = () => {
         <div>
   <label htmlFor='description'></label>
   <textarea
-    id='description'
+    id='create-spot-description'
+    className='create-spot-form-field'
     placeholder='Description (must be 30 or more characters)'
     name='description'
     onChange={e => setDescription(e.target.value)}
@@ -184,6 +192,7 @@ const CreateSpot = () => {
           <label htmlFor='name'>name:</label>
           <input
             id='title'
+            className='create-spot-form-field'
             placeholder='Name of your spot'
             type='text'
             onChange={e => setName(e.target.value)}
@@ -196,6 +205,7 @@ const CreateSpot = () => {
           <label htmlFor='price'>$</label>
           <input
             id='price'
+            className='create-spot-form-field'
             placeholder='Price per night (USD)'
             type='text'
             onChange={e => setPrice(e.target.value)}
@@ -209,30 +219,35 @@ const CreateSpot = () => {
           <input
             placeholder='Preview Image URL'
             type='url'
+            className='create-spot-form-field'
             value={previewImg}
             onChange={e => setPreviewImg(e.target.value)}
           />
           <input
             placeholder='Image URL'
             type='url'
+            className='create-spot-form-field'
             onChange={e => setImg2(e.target.value)}
             value={img2}
           />
           <input
             placeholder='Image URL'
             type='url'
+            className='create-spot-form-field'
             value={img3}
             onChange={e => setImg3(e.target.value)}
           />
           <input
             placeholder='Image URL'
             type='url'
+            className='create-spot-form-field'
             value={img4}
             onChange={e => setImg4(e.target.value)}
           />
           <input
             placeholder='Image URL'
             type='url'
+            className='create-spot-form-field'
             value={img5}
             onChange={e => setImg5(e.target.value)}
 

@@ -1,9 +1,7 @@
 .user-spots-holder {
-
-        display: flex;
-        max-width: 1200px;
-        flex-wrap: wrap;
-
+    display: flex;
+    max-width: 1200px;
+    flex-wrap: wrap;
 }
 
 
@@ -40,12 +38,8 @@
   }
 
 .plswork {
-
-
     font-size: 18px;
     font-family: 'Montserrat', sans-serif;
     color: #fff;
-
-
     cursor: pointer;
 }

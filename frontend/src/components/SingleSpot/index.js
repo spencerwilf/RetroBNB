@@ -81,15 +81,15 @@ const SingleSpot = () => {
 <div className='spot-image-flex-container'>
     <div className='single-spot-images'>
         <div className='single-spot-big-image'>
-        {spot.SpotImages?.length ? <img clasName='main-spot-image' src={spot.SpotImages[0].url}/> : 'NO IMAGE FOUND'}
+        {spot.SpotImages?.length ? <img clasName='main-spot-image' src={spot.SpotImages[0].url} alt=''/> : 'NO IMAGE FOUND'}
         </div>
     <div className='single-spot-small-images-column-one'>
-        {images[1] && <img className='single-spot-small-image' src={images[1].url}/>}
-        {images[2] && <img className='single-spot-small-image' src={images[2].url}/>}
+        {images[1] && <img className='single-spot-small-image' src={images[1].url} alt=''/>}
+        {images[2] && <img className='single-spot-small-image' src={images[2].url} alt=''/>}
         </div>
         <div className='single-spot-small-images-column-two'>
-        {images[3] && <img className='single-spot-small-image' src={images[3].url}/>}
-        {images[4] && <img className='single-spot-small-image' src={images[4].url}/>}
+        {images[3] && <img id='img3' className='single-spot-small-image' src={images[3].url} alt=''/>}
+        {images[4] && <img id='img4' className='single-spot-small-image' src={images[4].url} alt=''/>}
         </div>
     </div>
     </div>

@@ -90,7 +90,7 @@ const EditSpot = ({spot}) => {
       )}
       <h3>Where's your place located?</h3>
       <p>Guests will only get your exact address once they've booked a reservation.</p>
-      <form onSubmit={onSubmit}>
+      <form className='new-spot-create-form' onSubmit={onSubmit}>
         <div>
           <label htmlFor='country'>Country</label>
           <input
@@ -132,6 +132,7 @@ const EditSpot = ({spot}) => {
           <label htmlFor='latitude'>Latitude:</label>
           <input
             id='latitude'
+            placeholder='Feature in progress'
             type='text'
             disabled={true}
           />
@@ -140,6 +141,7 @@ const EditSpot = ({spot}) => {
           <label htmlFor='longitude'>Longitude:</label>
           <input
             id='longitude'
+            placeholder='Feature in progress'
             type='text'
             disabled={true}
           />
@@ -149,7 +151,7 @@ const EditSpot = ({spot}) => {
         <div>
   <label htmlFor='description'></label>
   <textarea
-    id='description'
+    id='create-spot-description'
     name='description'
     onChange={e => setDescription(e.target.value)}
             value={description}
@@ -158,7 +160,7 @@ const EditSpot = ({spot}) => {
 <div>
     <h3>Create a title for your spot</h3>
     <p>Catch guests' attention with a title that highlights what makes your place special</p>
-          <label htmlFor='name'>name:</label>
+          <label htmlFor='name'>Name:</label>
           <input
             id='title'
             type='text'
