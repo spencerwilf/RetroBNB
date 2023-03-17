@@ -67,13 +67,11 @@ const SingleSpot = () => {
 
     <div className='listing-header'>
             <h2 className='listing-header-name'>{spot.name}</h2>
-            <div className='single-spot-reviews'>
-            <i class="fa-solid fa-star"></i>
-            <span id='single-star-rating'>{spot.avgStarRating}
-            {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span>
+
             <span>{`${spot.city}, ${spot.state}, ${spot.country}`}</span>
     </div>
-    </div>
+
+
 
 <div className='spot-image-flex-container'>
     <div className='single-spot-images'>
@@ -122,9 +120,17 @@ const SingleSpot = () => {
         </div>
 
         <div className='review-list'>
+            <div className='review-section-header'>
             <h2>Reviews</h2>
+
+            {reviewArr.length > 0 && <div className='single-spot-reviews'>
+            <i class="fa-solid fa-star"></i>
+            <span id='single-star-rating'>{spot.avgStarRating}
+            {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span></div>}
+            </div>
+
             {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && <OpenModalButton
-          buttonText="Leave a review"
+          buttonText="Post Your Review"
           modalComponent={<ReviewModal spotId={spotId}/>}
         />}
     {reviewArr?.length ? reviewArr?.map(review => (

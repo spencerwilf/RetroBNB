@@ -2,6 +2,9 @@
     display: none;
 }
 
+a {
+  text-decoration: none;
+}
 
 .nav-bar {
     display: flex;
@@ -47,6 +50,7 @@
     color: #ff6db6;
     text-shadow: 2px 2px #ff94a9, -2px -2px #fffff0;
     margin-left: 60px;
+    text-decoration: none;
 }
 
 .logo-text:hover {

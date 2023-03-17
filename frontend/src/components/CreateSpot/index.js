@@ -93,7 +93,7 @@ const CreateSpot = () => {
   return (
 
     <div className='user-spot-submission-form'>
-      <h2>List your spot!</h2>
+      <h2>Create a New Spot</h2>
       {hasSubmitted && Object.values(errors).length > 0 && (
         <div>
             The following errors were found in your submission:
@@ -152,7 +152,7 @@ const CreateSpot = () => {
           <label htmlFor='latitude'>Latitude:</label>
           <input
             id='latitude'
-            placeholder='Latitude'
+            placeholder='Latitude (feature in progress)'
             type='text'
             disabled={true}
           />
@@ -161,7 +161,7 @@ const CreateSpot = () => {
           <label htmlFor='Longitude'>Longitude:</label>
           <input
             id='longitude'
-            placeholder='longitude'
+            placeholder='Longitude (feature in progress)'
             type='text'
             disabled={true}
           />
@@ -180,7 +180,7 @@ const CreateSpot = () => {
 </div>
 <div>
     <h3>Create a title for your spot</h3>
-    <p>Catch guests' attention with a title that highlights what makes your place special</p>
+    <p>Catch guests' attention with a title that highlights what makes your place special.</p>
           <label htmlFor='name'>name:</label>
           <input
             id='title'
@@ -204,7 +204,7 @@ const CreateSpot = () => {
         </div>
         <div>
             <h3>Liven up your spot with photos</h3>
-            <p>Submit a link to at least one photo to publish your spot</p>
+            <p>Submit a link to at least one photo to publish your spot.</p>
           <label htmlFor='image'>Preview image:</label>
           <input
             placeholder='Preview Image URL'

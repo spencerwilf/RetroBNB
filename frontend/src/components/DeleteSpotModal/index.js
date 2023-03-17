@@ -25,7 +25,7 @@ const DeleteSpotModal = ({spotId}) => {
   return (
     <div className='delete-spot-form'>
 <form onSubmit={handleSubmit}>
-    <h2>Confirm deletion</h2>
+    <h2>Confirm Delete</h2>
     <h3>Are you sure you want to remove this spot?</h3>
     <button type='submit'>Yes (Delete Spot)</button>
     <button onClick={closeButton}>No (Keep Spot)</button>
