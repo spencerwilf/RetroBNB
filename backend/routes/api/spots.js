@@ -207,10 +207,11 @@ router.get('/', validateQueries, async(req, res) => {
         where: {
             // lat: {[Op.between]: [minLat, maxLat]},
             // lng: {[Op.between]: [minLng, maxLng]},
-            price: {[Op.between]: [minPrice, maxPrice]}
+            // price: {[Op.between]: [minPrice, maxPrice]}
         },
         ...pagination
     })
+
 
 
     let Spots = [];
@@ -250,6 +251,7 @@ router.get('/', validateQueries, async(req, res) => {
        }
        delete spot.SpotImages
     });
+
 
     res.json({Spots, page, size})
 })

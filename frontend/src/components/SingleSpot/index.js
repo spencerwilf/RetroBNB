@@ -8,6 +8,7 @@ import OpenModalButton from '../OpenModalButton';
 import ReviewModal from '../ReviewModal'
 import DeleteReviewModal from '../DeleteReviewModal'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
+import { clearSpot } from '../../store/spots'
 
 const SingleSpot = () => {
 
@@ -29,6 +30,10 @@ const SingleSpot = () => {
     useEffect(() => {
         dispatch(loadOneSpotThunk(spotId))
         dispatch(loadSpotReviewsThunk(spotId))
+
+        return () => {
+            dispatch(clearSpot())
+        }
     }, [dispatch, spotId, reviewArr.length])
 
     const onClick = () => {

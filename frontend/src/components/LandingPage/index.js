@@ -16,6 +16,7 @@ const LandingPage = () => {
         dispatch(fetchSpotsThunk())
     }, [dispatch])
 
+
     if (!spotsObj) return null;
 
   return (

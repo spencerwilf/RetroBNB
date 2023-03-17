@@ -7,6 +7,7 @@ const ADD_SPOT_IMAGES = 'spots/ADD_SPOT_IMAGES'
 const LOAD_USER_SPOTS = 'spots/LOAD_USER_SPOTS'
 const DELETE_SPOT = 'spots/delete'
 const EDIT_SPOT = 'spots/EDIT_SPOT'
+const CLEAR_SPOT = 'spots/CLEAR_SPOT'
 
 const loadSpots = (spots) => {
     return {
@@ -57,6 +58,13 @@ const editSpot = (spot) => {
     return {
         type: EDIT_SPOT,
         spot
+    }
+}
+
+
+export const clearSpot = () => {
+    return {
+        type: CLEAR_SPOT
     }
 }
 
@@ -180,6 +188,8 @@ const spotsReducer = (state = initialState, action) => {
             return newState
         case EDIT_SPOT:
             return {...state, singleSpot: {...action.spot}}
+        case CLEAR_SPOT:
+            return {...state, singleSpot: {}}
         default:
             return state
     }
