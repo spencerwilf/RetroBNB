@@ -2,7 +2,8 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { editSpotThunk, loadOneSpotThunk } from '../../store/spots';
+import { editSpotThunk } from '../../store/spots';
+import './EditSpot.css'
 
 
 const EditSpot = ({spot}) => {
@@ -23,9 +24,6 @@ const EditSpot = ({spot}) => {
 
   const user = useSelector(state => state.session.user)
 
-
-// console.log('!!!!SPOT.id!!!!!!!',spot.id)
-// console.log('!!!!spotId!!!!!!!',spotId)
 
   useEffect(() => {
     let errors = {};
@@ -137,7 +135,7 @@ const EditSpot = ({spot}) => {
             disabled={true}
           />
         </div>
-        <div>
+        <div id='longitude-border-input'>
           <label htmlFor='longitude'>Longitude:</label>
           <input
             id='longitude'
@@ -157,7 +155,8 @@ const EditSpot = ({spot}) => {
     onChange={e => setDescription(e.target.value)}
   />
 </div>
-<div>
+<div className='update-bottom-form-items'>
+
     <h3>Create a title for your spot</h3>
     <p>Catch guests' attention with a title that highlights what makes your place special</p>
           <label htmlFor='name'>Name:</label>
@@ -167,7 +166,7 @@ const EditSpot = ({spot}) => {
             value={name}
             onChange={e => setName(e.target.value)}
           />
-        </div>
+
         <div>
             <h3>Set a base price for your spot</h3>
             <p>Competitive pricing can help your listing stand out</p>
@@ -178,6 +177,7 @@ const EditSpot = ({spot}) => {
             value={price}
             onChange={e => setPrice(e.target.value)}
           />
+        </div>
         </div>
         <button>Update your Spot</button>
       </form>

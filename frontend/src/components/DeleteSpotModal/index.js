@@ -24,6 +24,7 @@ const DeleteSpotModal = ({spotId}) => {
 
 
   return (
+
     <div className='delete-spot-form'>
 <form className='delete-spot-entry-form' onSubmit={handleSubmit}>
     <h2>Confirm Delete</h2>
@@ -34,6 +35,7 @@ const DeleteSpotModal = ({spotId}) => {
     </div>
     </form>
     </div>
+
   )
 }
 

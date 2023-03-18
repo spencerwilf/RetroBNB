@@ -107,8 +107,10 @@ const CreateSpot = () => {
             </ul>
         </div>
       )}
+
       <h3>Where's your place located?</h3>
       <p>Guests will only get your exact address once they've booked a reservation.</p>
+      <div id='create-spot-page-wrapper'>
       <form className='new-spot-create-form' onSubmit={onSubmit}>
         <div>
           <label htmlFor='country'>Country</label>
@@ -165,7 +167,7 @@ const CreateSpot = () => {
             disabled={true}
           />
         </div>
-        <div>
+        <div id='longitude-border-input'>
           <label htmlFor='Longitude'>Longitude:</label>
           <input
             id='longitude'
@@ -175,6 +177,7 @@ const CreateSpot = () => {
             disabled={true}
           />
         </div>
+
         <h3>Describe your place to guests</h3>
         <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
         <div>
@@ -258,6 +261,7 @@ const CreateSpot = () => {
         </div>
         <button>Create Spot</button>
       </form>
+    </div>
     </div>
   );
 }

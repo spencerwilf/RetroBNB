@@ -111,8 +111,8 @@ const SingleSpot = () => {
         <h3 id='reserve-box-price'>${spot?.price} night</h3>
         <div className='single-spot-reviews'>
         <i className="fa-solid fa-star"></i>
-            <span id='single-star-rating'>{spot?.avgStarRating}
-            {spot?.numReviews !== 0 ? ` • ${spot?.numReviews} reviews` : ''}</span>
+            <span id='single-star-rating'>{spot.avgStarRating}
+            {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span>
             </div>
         <button className='reserve-button' onClick={onClick}>Reserve</button>
 
@@ -129,7 +129,7 @@ const SingleSpot = () => {
             <h2>Reviews</h2>
 
             {reviewArr.length > 0 && <div className='single-spot-reviews'>
-            <i class="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
             <span id='single-star-rating'>{spot.avgStarRating}
             {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span></div>}
             </div>

@@ -8,9 +8,16 @@ a {
 
 .logout-button {
   border: black .5px;
+  height: 4vh;
+  width: 8vw;
+  margin-top: 1vh;
   font-family: 'Montserrat', sans-serif;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.logout-button:hover {
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-bar {
@@ -90,6 +97,16 @@ a {
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    line-height: 4vh;
+  }
+
+  .user-menu-action-buttons {
+    border-top: 1px solid #ddd;
+    padding-top: .7em;
+  }
+
+  .user-menu-info-buttons {
+    padding-bottom: .7em;
   }
 
   .profile-dropdown li {
