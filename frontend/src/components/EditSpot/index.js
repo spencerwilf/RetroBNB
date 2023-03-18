@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { editSpotThunk } from '../../store/spots';
+import { editSpotThunk, loadOneSpotThunk } from '../../store/spots';
 
 
 const EditSpot = ({spot}) => {
@@ -10,7 +10,6 @@ const EditSpot = ({spot}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const {spotId} = useParams();
-
 
   const [country, setCountry] = useState(spot?.country);
   const [address, setAddress] = useState(spot?.address);
@@ -24,7 +23,9 @@ const EditSpot = ({spot}) => {
 
   const user = useSelector(state => state.session.user)
 
-  if (!user) history.push('/')
+
+// console.log('!!!!SPOT.id!!!!!!!',spot.id)
+// console.log('!!!!spotId!!!!!!!',spotId)
 
   useEffect(() => {
     let errors = {};
@@ -36,7 +37,7 @@ const EditSpot = ({spot}) => {
     if (!name) errors.name = "Title is required"
     if (!price) errors.price = "Price is required"
     setErrors(errors)
-  }, [country, address, city, state, description, name, price])
+  }, [country, address, city, state, description, name, price, spotId])
 
 
   const onSubmit = async (e) => {
@@ -54,12 +55,10 @@ const EditSpot = ({spot}) => {
         price,
     }
 
-
-
-
     if (newSpotInfo) {
        let spot = await dispatch(editSpotThunk(newSpotInfo, spotId));
-       history.push(`/spots/${spot.id}`)
+       setHasSubmitted(false)
+       history.push(`/spots/${spotId}`)
     }
 
     setCountry('')
@@ -69,9 +68,10 @@ const EditSpot = ({spot}) => {
     setDescription('')
     setName('')
     setPrice('')
-    setHasSubmitted(false)
     setErrors({})
   }
+
+  if (!user) history.push('/')
 
   if (!spot) return null
 
@@ -96,17 +96,17 @@ const EditSpot = ({spot}) => {
           <input
             id='country'
             type='text'
-            onChange={e => setCountry(e.target.value)}
             value={country}
+            onChange={e => setCountry(e.target.value)}
           />
         </div>
         <div>
           <label htmlFor='street-adress'>Street Address:</label>
           <input
             id='address'
+            value={address}
             type='text'
             onChange={e => setAddress(e.target.value)}
-            value={address}
           />
 
         </div>
@@ -114,18 +114,18 @@ const EditSpot = ({spot}) => {
           <label htmlFor='city'>City:</label>
           <input
             id='city'
+            value={city}
             type='text'
             onChange={e => setCity(e.target.value)}
-            value={city}
           />
         </div>
         <div>
           <label htmlFor='state'>State:</label>
           <input
             id='state'
+            value={state}
             type='text'
             onChange={e => setState(e.target.value)}
-            value={state}
           />
         </div>
         <div>
@@ -153,8 +153,8 @@ const EditSpot = ({spot}) => {
   <textarea
     id='create-spot-description'
     name='description'
+    value={description}
     onChange={e => setDescription(e.target.value)}
-            value={description}
   />
 </div>
 <div>
@@ -164,8 +164,8 @@ const EditSpot = ({spot}) => {
           <input
             id='title'
             type='text'
-            onChange={e => setName(e.target.value)}
             value={name}
+            onChange={e => setName(e.target.value)}
           />
         </div>
         <div>
@@ -175,8 +175,8 @@ const EditSpot = ({spot}) => {
           <input
             id='price'
             type='text'
-            onChange={e => setPrice(e.target.value)}
             value={price}
+            onChange={e => setPrice(e.target.value)}
           />
         </div>
         <button>Update your Spot</button>

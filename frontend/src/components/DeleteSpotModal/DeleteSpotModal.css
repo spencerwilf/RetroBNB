@@ -29,6 +29,11 @@
     height: 5vh;
 }
 
+.delete-spot-modal-buttons > button:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    cursor: pointer;
+}
+
 #delete-spot-modal-delete-button {
     margin-top: 4vh;
     margin-bottom: 5px;

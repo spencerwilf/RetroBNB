@@ -32,6 +32,19 @@ const CreateSpot = () => {
   if (!user) history.push('/')
 
 
+  useEffect(() => {
+    let errors = {};
+    if(!country) errors.country = "Country is required"
+    if (!address) errors.address = "Address is required"
+    if (!city) errors.city = "City is required"
+    if (!state) errors.state = "State is required"
+    if (description.length < 30) errors.description = "Description needs 30 or more characters";
+    if (!name) errors.name = "Title is required"
+    if (!price) errors.price = "Price is required"
+    if (!previewImg) errors.previewImg = 'Preview image is required'
+    setErrors(errors)
+  }, [country, address, city, state, description, previewImg, name, price])
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true);
@@ -77,18 +90,7 @@ const CreateSpot = () => {
     setErrors({})
   }
 
-  useEffect(() => {
-    let errors = {};
-    if(!country) errors.country = "Country is required"
-    if (!address) errors.address = "Address is required"
-    if (!city) errors.city = "City is required"
-    if (!state) errors.state = "State is required"
-    if (description.length < 30) errors.description = "Description needs 30 or more characters";
-    if (!name) errors.name = "Title is required"
-    if (!price) errors.price = "Price is required"
-    if (!previewImg) errors.previewImg = 'Preview image is required'
-    setErrors(errors)
-  }, [country, address, city, state, description, previewImg, name, price])
+
 
 
   return (
@@ -189,7 +191,7 @@ const CreateSpot = () => {
 <div>
     <h3>Create a title for your spot</h3>
     <p>Catch guests' attention with a title that highlights what makes your place special.</p>
-          <label htmlFor='name'>name:</label>
+          <label htmlFor='name'>Name:</label>
           <input
             id='title'
             className='create-spot-form-field'

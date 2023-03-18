@@ -15,6 +15,12 @@ a {
 
 .nav-bar {
     display: flex;
+    /* position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    padding-top: 5px;
+    background-color: white; */
     justify-content: space-between;
     align-items: center;
     border-bottom: solid lightgray 1.5px;;
