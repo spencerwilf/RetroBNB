@@ -1,0 +1,30 @@
+.delete-review-form-wrapper {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.delete-review-form {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.delete-review-form-wrapper, .delete-review-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#delete-review-confirm-button {
+    margin-bottom: 15px;
+    background-color: lightcoral;
+}
+
+#confirm-delete-button-group {
+    margin-top: 2em;
+}
+
+#confirm-delete-review-text {
+    text-align: center;
+}

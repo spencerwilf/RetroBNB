@@ -18,6 +18,13 @@
     align-items: center;
 }
 
+.review-modal-wrapper-div {
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
 #modal-content {
     border-radius: 20px;
     width: 30%;
@@ -38,6 +45,7 @@
 
   #review {
     height: 15vh;
+    margin-top: 3em;
     width: 100%;
   }
 

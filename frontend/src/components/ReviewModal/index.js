@@ -38,6 +38,7 @@ const ReviewModal = ({spotId}) => {
       };
 
   return (
+    <div className='review-modal-wrapper-div'>
     <div id='review-modal'>
       <h2 className='review-box-header'>How was your stay?</h2>
       <form onSubmit={handleSubmit} className='leave-review-form'>
@@ -62,6 +63,7 @@ const ReviewModal = ({spotId}) => {
 
 <button className='leave-review-button' disabled={review.length < 10 || rating < 1}>Submit Your Review</button>
       </form>
+      </div>
       </div>
   )
 }

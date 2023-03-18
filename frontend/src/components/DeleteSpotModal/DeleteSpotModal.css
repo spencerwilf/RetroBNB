@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 10px;
 }
 
 .delete-spot-entry-form {
@@ -34,10 +35,13 @@
     cursor: pointer;
 }
 
+
 #delete-spot-modal-delete-button {
     margin-top: 4vh;
     margin-bottom: 5px;
+    background-color: lightcoral;
 }
+
 
 #delete-spot-modal-keep-button {
     margin-top: 5px;
