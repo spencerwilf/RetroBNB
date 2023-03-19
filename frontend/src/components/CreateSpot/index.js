@@ -51,6 +51,11 @@ const CreateSpot = () => {
     if (description?.length > 254) errors.description = "Input cannot be more than 255 characters";
     if (name.length > 254) errors.name = "Input cannot be more than 255 characters"
     if (price.length > 254) errors.price = "Input cannot be more than 255 characters"
+    if (previewImg.length > 254) errors.previewImg = 'Input cannot be more than 255 characters'
+    if (img2.length > 254) errors.img2 = 'Input cannot be more than 255 characters'
+    if (img3.length > 254) errors.img3 = 'Input cannot be more than 255 characters'
+    if (img4.length > 254) errors.img4 = 'Input cannot be more than 255 characters'
+    if (img5.length > 254) errors.img5 = 'Input cannot be more than 255 characters'
 
     setErrors(errors)
   }, [country, address, city, state, description, previewImg, name, price])
@@ -241,6 +246,7 @@ const CreateSpot = () => {
             onChange={e => setImg2(e.target.value)}
             value={img2}
           />
+          {hasSubmitted && errors.img2 && (<p className='creation-errors'>{errors.img2}</p>)}
           <input
             placeholder='Image URL'
             type='url'
@@ -248,6 +254,7 @@ const CreateSpot = () => {
             value={img3}
             onChange={e => setImg3(e.target.value)}
           />
+          {hasSubmitted && errors.img3 && (<p className='creation-errors'>{errors.img3}</p>)}
           <input
             placeholder='Image URL'
             type='url'
@@ -255,14 +262,15 @@ const CreateSpot = () => {
             value={img4}
             onChange={e => setImg4(e.target.value)}
           />
+          {hasSubmitted && errors.img4 && (<p className='creation-errors'>{errors.img4}</p>)}
           <input
             placeholder='Image URL'
             type='url'
             className='create-spot-form-field'
             value={img5}
             onChange={e => setImg5(e.target.value)}
-
           />
+          {hasSubmitted && errors.img5 && (<p className='creation-errors'>{errors.img5}</p>)}
 
         </div>
         <button>Create Spot</button>
