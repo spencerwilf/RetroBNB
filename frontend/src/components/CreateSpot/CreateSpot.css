@@ -58,3 +58,7 @@
     height: 20vh;
     margin-bottom: 3vh;
 }
+
+.creation-errors {
+    color: red;
+}

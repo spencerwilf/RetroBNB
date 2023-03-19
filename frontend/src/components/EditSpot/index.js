@@ -34,6 +34,14 @@ const EditSpot = ({spot}) => {
     if (description?.length < 30) errors.description = "Description needs 30 or more characters";
     if (!name) errors.name = "Title is required"
     if (!price) errors.price = "Price is required"
+
+    if (country.length > 254) errors.country = "Input cannot be more than 255 characters"
+    if (address.length > 254) errors.address = "Input cannot be more than 255 characters"
+    if (city.length > 254) errors.city = "Input cannot be more than 255 characters"
+    if (state.length > 254) errors.state = "Input cannot be more than 255 characters"
+    if (description?.length > 254) errors.description = "Input cannot be more than 255 characters";
+    if (name.length > 254) errors.name = "Input cannot be more than 255 characters"
+    if (price.length > 254) errors.price = "Input cannot be more than 255 characters"
     setErrors(errors)
   }, [country, address, city, state, description, name, price, spotId])
 
@@ -76,16 +84,6 @@ const EditSpot = ({spot}) => {
   return (
     <div className='user-spot-submission-form'>
       <h2>Update your Spot</h2>
-      {hasSubmitted && Object.values(errors).length > 0 && (
-        <div>
-            The following errors were found in your submission:
-            <ul>
-                {Object.values(errors).map(error => (
-                    <li key={error}>{error}</li>
-                ))}
-            </ul>
-        </div>
-      )}
       <h3>Where's your place located?</h3>
       <p>Guests will only get your exact address once they've booked a reservation.</p>
       <form className='new-spot-create-form' onSubmit={onSubmit}>
@@ -97,6 +95,7 @@ const EditSpot = ({spot}) => {
             value={country}
             onChange={e => setCountry(e.target.value)}
           />
+          {hasSubmitted && errors.country && (<p className='creation-errors'>{errors.country}</p>)}
         </div>
         <div>
           <label htmlFor='street-adress'>Street Address:</label>
@@ -106,7 +105,7 @@ const EditSpot = ({spot}) => {
             type='text'
             onChange={e => setAddress(e.target.value)}
           />
-
+        {hasSubmitted && errors.address && (<p className='creation-errors'>{errors.address}</p>)}
         </div>
         <div>
           <label htmlFor='city'>City:</label>
@@ -116,6 +115,7 @@ const EditSpot = ({spot}) => {
             type='text'
             onChange={e => setCity(e.target.value)}
           />
+          {hasSubmitted && errors.city && (<p className='creation-errors'>{errors.city}</p>)}
         </div>
         <div>
           <label htmlFor='state'>State:</label>
@@ -125,6 +125,7 @@ const EditSpot = ({spot}) => {
             type='text'
             onChange={e => setState(e.target.value)}
           />
+          {hasSubmitted && errors.state && (<p className='creation-errors'>{errors.state}</p>)}
         </div>
         <div>
           <label htmlFor='latitude'>Latitude:</label>
@@ -154,6 +155,7 @@ const EditSpot = ({spot}) => {
     value={description}
     onChange={e => setDescription(e.target.value)}
   />
+  {hasSubmitted && errors.description && (<p className='creation-errors'>{errors.description}</p>)}
 </div>
 <div className='update-bottom-form-items'>
 
@@ -166,7 +168,7 @@ const EditSpot = ({spot}) => {
             value={name}
             onChange={e => setName(e.target.value)}
           />
-
+          {hasSubmitted && errors.name && (<p className='creation-errors'>{errors.name}</p>)}
         <div>
             <h3>Set a base price for your spot</h3>
             <p>Competitive pricing can help your listing stand out</p>
@@ -177,6 +179,7 @@ const EditSpot = ({spot}) => {
             value={price}
             onChange={e => setPrice(e.target.value)}
           />
+          {hasSubmitted && errors.price && (<p className='creation-errors'>{errors.price}</p>)}
         </div>
         </div>
         <button>Update your Spot</button>

@@ -34,7 +34,8 @@ const CreateSpot = () => {
 
   useEffect(() => {
     let errors = {};
-    if(!country) errors.country = "Country is required"
+
+    if (!country) errors.country = "Country is required"
     if (!address) errors.address = "Address is required"
     if (!city) errors.city = "City is required"
     if (!state) errors.state = "State is required"
@@ -42,6 +43,15 @@ const CreateSpot = () => {
     if (!name) errors.name = "Title is required"
     if (!price) errors.price = "Price is required"
     if (!previewImg) errors.previewImg = 'Preview image is required'
+
+    if (country.length > 254) errors.country = "Input cannot be more than 255 characters"
+    if (address.length > 254) errors.address = "Input cannot be more than 255 characters"
+    if (city.length > 254) errors.city = "Input cannot be more than 255 characters"
+    if (state.length > 254) errors.state = "Input cannot be more than 255 characters"
+    if (description?.length > 254) errors.description = "Input cannot be more than 255 characters";
+    if (name.length > 254) errors.name = "Input cannot be more than 255 characters"
+    if (price.length > 254) errors.price = "Input cannot be more than 255 characters"
+
     setErrors(errors)
   }, [country, address, city, state, description, previewImg, name, price])
 
@@ -97,17 +107,6 @@ const CreateSpot = () => {
 
     <div className='user-spot-submission-form'>
       <h2>Create a New Spot</h2>
-      {hasSubmitted && Object.values(errors).length > 0 && (
-        <div>
-            The following errors were found in your submission:
-            <ul>
-                {Object.values(errors).map(error => (
-                    <li key={error}>{error}</li>
-                ))}
-            </ul>
-        </div>
-      )}
-
       <h3>Where's your place located?</h3>
       <p>Guests will only get your exact address once they've booked a reservation.</p>
       <div id='create-spot-page-wrapper'>
@@ -122,6 +121,7 @@ const CreateSpot = () => {
             onChange={e => setCountry(e.target.value)}
             value={country}
           />
+          {hasSubmitted && errors.country && (<p className='creation-errors'>{errors.country}</p>)}
         </div>
         <div>
           <label htmlFor='street-adress'>Street Address:</label>
@@ -133,7 +133,7 @@ const CreateSpot = () => {
             onChange={e => setAddress(e.target.value)}
             value={address}
           />
-
+          {hasSubmitted && errors.address && (<p className='creation-errors'>{errors.address}</p>)}
         </div>
         <div>
           <label htmlFor='city'>City:</label>
@@ -145,6 +145,7 @@ const CreateSpot = () => {
             onChange={e => setCity(e.target.value)}
             value={city}
           />
+          {hasSubmitted && errors.city && (<p className='creation-errors'>{errors.city}</p>)}
         </div>
         <div>
           <label htmlFor='state'>State:</label>
@@ -156,6 +157,7 @@ const CreateSpot = () => {
             onChange={e => setState(e.target.value)}
             value={state}
           />
+          {hasSubmitted && errors.state && (<p className='creation-errors'>{errors.state}</p>)}
         </div>
         <div>
           <label htmlFor='latitude'>Latitude:</label>
@@ -190,6 +192,7 @@ const CreateSpot = () => {
     onChange={e => setDescription(e.target.value)}
             value={description}
   />
+  {hasSubmitted && errors.description && (<p className='creation-errors'>{errors.description}</p>)}
 </div>
 <div>
     <h3>Create a title for your spot</h3>
@@ -203,6 +206,7 @@ const CreateSpot = () => {
             onChange={e => setName(e.target.value)}
             value={name}
           />
+          {hasSubmitted && errors.name && (<p className='creation-errors'>{errors.name}</p>)}
         </div>
         <div>
             <h3>Set a base price for your spot</h3>
@@ -216,6 +220,7 @@ const CreateSpot = () => {
             onChange={e => setPrice(e.target.value)}
             value={price}
           />
+          {hasSubmitted && errors.price && (<p className='creation-errors'>{errors.price}</p>)}
         </div>
         <div>
             <h3>Liven up your spot with photos</h3>
@@ -228,6 +233,7 @@ const CreateSpot = () => {
             value={previewImg}
             onChange={e => setPreviewImg(e.target.value)}
           />
+          {hasSubmitted && errors.previewImg && (<p className='creation-errors'>{errors.previewImg}</p>)}
           <input
             placeholder='Image URL'
             type='url'
