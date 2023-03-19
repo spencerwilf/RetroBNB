@@ -19,6 +19,7 @@ const ReviewModal = ({spotId}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let validationErrors = {};
+
         if (review.length > 254) {
           validationErrors.review = 'Review must be less than 255 characters'
           setErrors(validationErrors)

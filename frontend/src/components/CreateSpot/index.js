@@ -51,6 +51,7 @@ const CreateSpot = () => {
     if (description?.length > 254) errors.description = "Input cannot be more than 255 characters";
     if (name.length > 254) errors.name = "Input cannot be more than 255 characters"
     if (price.length > 254) errors.price = "Input cannot be more than 255 characters"
+
     if (previewImg.length > 254) errors.previewImg = 'Input cannot be more than 255 characters'
     if (img2.length > 254) errors.img2 = 'Input cannot be more than 255 characters'
     if (img3.length > 254) errors.img3 = 'Input cannot be more than 255 characters'
@@ -58,7 +59,7 @@ const CreateSpot = () => {
     if (img5.length > 254) errors.img5 = 'Input cannot be more than 255 characters'
 
     setErrors(errors)
-  }, [country, address, city, state, description, previewImg, name, price])
+  }, [country, address, city, state, description, previewImg, name, price, img2, img3, img4, img5])
 
   const onSubmit = async (e) => {
     e.preventDefault();
