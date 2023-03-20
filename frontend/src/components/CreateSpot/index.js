@@ -31,6 +31,10 @@ const CreateSpot = () => {
 
   if (!user) history.push('/')
 
+  function isImage(url) {
+    const check = /\.(png|jpe?g)$/i;
+    return check.test(url)
+  }
 
   useEffect(() => {
     let errors = {};
@@ -57,6 +61,12 @@ const CreateSpot = () => {
     if (img3.length > 254) errors.img3 = 'Input cannot be more than 255 characters'
     if (img4.length > 254) errors.img4 = 'Input cannot be more than 255 characters'
     if (img5.length > 254) errors.img5 = 'Input cannot be more than 255 characters'
+
+    if (!(isImage(previewImg))) errors.previewImg = 'URL must end in .png, .jpg or .jpeg'
+    if (img2 && !(isImage(img2))) errors.img2 = 'URL must end in .png, .jpg or .jpeg'
+    if (img3 && !(isImage(img3))) errors.img3 = 'URL must end in .png, .jpg or .jpeg'
+    if (img4 && !(isImage(img4))) errors.img4 = 'URL must end in .png, .jpg or .jpeg'
+    if (img5 && !(isImage(img5))) errors.img5 = 'URL must end in .png, .jpg or .jpeg'
 
     setErrors(errors)
   }, [country, address, city, state, description, previewImg, name, price, img2, img3, img4, img5])
