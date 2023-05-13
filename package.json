@@ -1,5 +1,5 @@
 {
-  "name": "new-auth-me",
+  "name": "retrobnb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spencerwilf/new-API-project.git"
+    "url": "git+https://github.com/spencerwilf/RetroBNB.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/spencerwilf/new-API-project/issues"
+    "url": "https://github.com/spencerwilf/RetroBNB/issues"
   },
-  "homepage": "https://github.com/spencerwilf/new-API-project#readme"
+  "homepage": "https://github.com/spencerwilf/RetroBNB#readme"
 }
