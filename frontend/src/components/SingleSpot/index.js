@@ -9,6 +9,9 @@ import ReviewModal from '../ReviewModal'
 import DeleteReviewModal from '../DeleteReviewModal'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import { clearSpot } from '../../store/spots'
+import CalendarModal from './Calendar'
+import { loadBookingsThunk } from '../../store/spots'
+
 
 const SingleSpot = () => {
 
@@ -30,15 +33,16 @@ const SingleSpot = () => {
     useEffect(() => {
         dispatch(loadOneSpotThunk(spotId))
         dispatch(loadSpotReviewsThunk(spotId))
+        dispatch(loadBookingsThunk(spotId))
 
         return () => {
             dispatch(clearSpot())
         }
     }, [dispatch, spotId, reviewArr.length])
 
-    const onClick = () => {
-        alert('Feature coming soon!')
-    }
+    // const onClick = () => {
+    //     alert('Feature coming soon!')
+    // }
 
     let userReviewId;
     if (sessionUser) {
@@ -108,15 +112,26 @@ const SingleSpot = () => {
 <div className='right-hand-listing-details'>
     <div className='reserve-box-container'>
         <div className='reserve-box-information'>
+            <div className='reserve-spot-box-top-area'>
         <h3 id='reserve-box-price'>${spot?.price} night</h3>
         <div className='single-spot-reviews'>
         <i className="fa-solid fa-star"></i>
             <span id='single-star-rating'>{spot.avgStarRating}
             {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span>
             </div>
-        <button className='reserve-button' onClick={onClick}>Reserve</button>
+                          </div>
+                        
+                            {spot.Owner.id !== sessionUser.id ? (
+                              <OpenModalButton
+                                  buttonText="Reserve"
+                                  modalComponent={<CalendarModal spotId={spotId} />}
+
+                              />
+                            ): <p>Manage your spot</p>}
+                          
 
          </div>
+                      
     </div>
 </div>
 

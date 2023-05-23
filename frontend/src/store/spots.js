@@ -8,6 +8,8 @@ const LOAD_USER_SPOTS = 'spots/LOAD_USER_SPOTS'
 const DELETE_SPOT = 'spots/delete'
 const EDIT_SPOT = 'spots/EDIT_SPOT'
 const CLEAR_SPOT = 'spots/CLEAR_SPOT'
+const ADD_BOOKING = 'spots/ADD_BOOKING'
+const GET_BOOKINGS = 'spots/GET_BOOKINGS'
 
 const loadSpots = (spots) => {
     return {
@@ -27,6 +29,21 @@ const addSpot = (spot) => {
     return {
         type: ADD_SPOT,
         spot
+    }
+}
+
+
+const loadBookings = (bookings) => {
+    return {
+        type: GET_BOOKINGS,
+        bookings
+    }
+}
+
+const addBooking = (booking) => {
+    return {
+        type: ADD_BOOKING,
+        booking
     }
 }
 
@@ -77,6 +94,18 @@ export const fetchSpotsThunk = () => async (dispatch) => {
     }
 }
 
+
+
+export const loadBookingsThunk = (spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/bookings`)
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadBookings(data))
+    }
+}
+
+
+
 export const loadOneSpotThunk = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
     if (res.ok) {
@@ -118,6 +147,23 @@ export const addSpotThunk = (spot, images) => async (dispatch) => {
     }
 }
 
+
+
+export const addBookingThunk = (spotId, booking) => async (dispatch) => {
+
+    const res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(booking)
+    })
+
+    if (res.ok) {
+        const booking = await res.json();
+        dispatch(addBooking(booking))
+    }
+}
+
+
 export const getUserSpotsThunk = () => async (dispatch) => {
     const res = await csrfFetch('/api/spots/current');
     if (res.ok) {
@@ -157,7 +203,8 @@ export const editSpotThunk = (spot, spotId) => async (dispatch) => {
 const initialState = {
     allSpots: {},
     singleSpot: {},
-    userSpots: {}
+    userSpots: {},
+    spotBookings: {}
 }
 
 
@@ -192,6 +239,12 @@ const spotsReducer = (state = initialState, action) => {
             return newState
         case CLEAR_SPOT:
             return {...state, singleSpot: {}}
+        case GET_BOOKINGS:
+            newState = { ...state, spotBookings: {} }
+            action.bookings.bookings.map(booking => newState.spotBookings[booking.id] = booking)
+            return newState
+        case ADD_BOOKING:
+            return {...state, spotBookings: {...state.spotBookings, ...action.booking}}
         default:
             return state
     }

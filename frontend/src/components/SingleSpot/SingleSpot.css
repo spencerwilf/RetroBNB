@@ -11,13 +11,19 @@ font-family: 'Montserrat', sans-serif;
     margin-right: 10px;
 }
 
+.reserve-spot-box-top-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .single-spot-reviews {
-    margin-right: 5px;
-    margin-bottom: 10px;
+    /* margin-right: 5px;
+    margin-bottom: 10px; */
 }
 
 #reserve-box-price {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .reserve-button {
@@ -48,7 +54,15 @@ font-family: 'Montserrat', sans-serif;
     width: 89%;
     position: sticky;
     margin-bottom: 50px;
+    max-width: 400px;
+    min-height: 500px;
 
+}
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .reserve-box-information {
@@ -57,6 +71,7 @@ font-family: 'Montserrat', sans-serif;
     justify-content: space-around;
     height: 200px;
     padding: 0 20px;
+    /* max-width: 50px; */
 }
 
 .bottom-page-info {
