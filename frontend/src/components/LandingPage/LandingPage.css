@@ -3,4 +3,15 @@
 
     flex-wrap: wrap;
     justify-content: center;
+    /* width: 50%; */
+}
+
+
+.home-page-front-wrapper {
+    display: flex;
+
+}
+
+.map-container {
+    width: 50%;
 }

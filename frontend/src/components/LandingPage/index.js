@@ -4,6 +4,7 @@ import { fetchSpotsThunk } from '../../store/spots'
 import { Link } from 'react-router-dom'
 import SpotCard from '../SpotCards'
 import './LandingPage.css'
+import MapContainer from '../Maps'
 
 const LandingPage = () => {
 
@@ -20,6 +21,7 @@ const LandingPage = () => {
     if (!spotsObj) return null;
 
   return (
+    <div className='home-page-front-wrapper'>
     <div className='home-page-grid'>
         {spotsObj && spots.map(spot => (
             <Link key={spot.id} to={`/spots/${spot.id}`}>
@@ -27,6 +29,10 @@ const LandingPage = () => {
             </Link>
         ))}
     </div>
+    {/* <div className='map-container'>
+    <MapContainer/>
+          </div> */}
+      </div>
   )
 }
 
