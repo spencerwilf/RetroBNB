@@ -85,7 +85,7 @@ const SingleSpot = () => {
 <div className='spot-image-flex-container'>
     <div className='single-spot-images'>
         <div className='single-spot-big-image'>
-        {spot.SpotImages?.length ? <img clasName='main-spot-image' src={spot.SpotImages[0].url} alt=''/> : 'NO IMAGE FOUND'}
+        {spot.SpotImages?.length ? <img className='main-spot-image' src={spot.SpotImages[0].url} alt=''/> : 'NO IMAGE FOUND'}
         </div>
     <div className='single-spot-small-images-column-one'>
         {images[1] && <img className='single-spot-small-image' src={images[1].url} alt=''/>}

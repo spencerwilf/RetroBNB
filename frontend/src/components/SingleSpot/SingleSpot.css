@@ -59,10 +59,39 @@ font-family: 'Montserrat', sans-serif;
 
 }
 
+
+/* .rdrStaticRanges, */
+/* .rdrDateDisplay, */
+.rdrDefinedRangesWrapper,
+/* .rdrMonthAndYearWrapper, */
+.rdrWeekDays {
+    display: none !important;
+}
+
+
+.rdrCalendarWrapper {
+    width: 100% !important;
+    padding: 0 2rem;
+}
+
 .booking-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+.book-and-close-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin: 3rem 0;
+}
+
+
+.start-and-end-dates {
+    display: flex;
+    gap: 30px;
 }
 
 .reserve-box-information {

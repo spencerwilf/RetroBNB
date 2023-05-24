@@ -159,7 +159,9 @@ export const addBookingThunk = (spotId, booking) => async (dispatch) => {
 
     if (res.ok) {
         const booking = await res.json();
+        console.log('!!!!!',booking)
         dispatch(addBooking(booking))
+        return booking
     }
 }
 
@@ -241,10 +243,12 @@ const spotsReducer = (state = initialState, action) => {
             return {...state, singleSpot: {}}
         case GET_BOOKINGS:
             newState = { ...state, spotBookings: {} }
-            action.bookings.bookings.map(booking => newState.spotBookings[booking.id] = booking)
+            action.bookings.bookings.map((booking, i) => newState.spotBookings[i] = booking)
             return newState
         case ADD_BOOKING:
-            return {...state, spotBookings: {...state.spotBookings, ...action.booking}}
+            newState = {...state, spotBookings: {...state.spotBookings}}
+            newState.spotBookings[Object.values(newState.spotBookings).length] = action.booking
+            return newState
         default:
             return state
     }
