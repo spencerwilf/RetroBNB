@@ -1,0 +1,40 @@
+.user-booking-card-wrapper {
+    display: flex;
+    border: 1px solid;
+    padding: 2rem;
+    gap: 2rem;
+    width: 50%;
+}
+
+.user-trips-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-trips-img {
+    width: 100%;
+}
+
+.edit-delete-trip-buttons{
+    display: flex;
+    gap: 20px;
+}
+
+
+.edit-delete-trip-buttons button {
+        background-color: rgba(255, 222, 173, 0);
+            color: #ff6db6;
+            border: 1px solid #ff6db6;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            width: 6rem;
+            height: 2rem;
+}
+
+
+.edit-delete-trip-buttons button:hover {
+        background-color: #ff6db6;
+            color: white;
+            cursor: pointer;
+}

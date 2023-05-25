@@ -19,6 +19,7 @@ import { DateRangePicker } from 'react-date-range';
 import { addBookingThunk } from '../../store/spots';
 import DatePicker from "react-datepicker";
 import LoginFormModal from '../LoginFormModal'
+import { addDays, isBefore, isAfter } from 'date-fns';
 
 const SingleSpot = () => {
 
@@ -43,7 +44,6 @@ const SingleSpot = () => {
     const images = spot?.SpotImages;
     
 
-    console.log(spot)
 
 
     const selectionRange = {
@@ -67,10 +67,6 @@ const SingleSpot = () => {
     //     closeModal()
     // }
 
-    async function book() {
-        dispatch(addBookingThunk(spotId, { startDate, endDate }))
-        // closeModal()
-    }
 
 
     let bookedDates = Object.values(bookings).map((booking) => ({
@@ -79,6 +75,15 @@ const SingleSpot = () => {
         //  display: 'none'
     }))
 
+
+    const isDateDisabled = (date) => {
+        for (const prebookedDate of bookedDates) {
+            if (isBefore(date, addDays(prebookedDate, 1)) && isAfter(date, addDays(prebookedDate, -1))) {
+                return true;
+            }
+        }
+        return false;
+    };
 
  
 
@@ -108,9 +113,11 @@ const SingleSpot = () => {
     }
 
 
+    
     useEffect(() => {
+
         const handleClick = (event) => {
-            if (showCalendar && !excludedElementRef.current.contains(event.target)) {
+            if (!excludedElementRef.current.contains(event.target) && showCalendar) {
                 setShowCalendar(false);
             }
         };
@@ -121,7 +128,6 @@ const SingleSpot = () => {
             window.removeEventListener('click', handleClick);
         };
     }, [showCalendar]);
-
 
 
     
@@ -141,11 +147,12 @@ const SingleSpot = () => {
     const closeMenu = () => setShowMenu(false)
 
 
+
     if (!spot) return null;
     if (!images) return null;
 
 
-    
+
 
     const handleDateClick = () => {
         setShowCalendar(!showCalendar)
@@ -156,7 +163,7 @@ const SingleSpot = () => {
         sessionUser ? setModalContent(<CalendarModal startDate={startDate} endDate={endDate} spotId={spotId}/>) : setModalContent(<LoginFormModal/>)
     }
 
-
+console.log(showCalendar)
 
   return (
     <div className='single-listing-page'>
@@ -190,8 +197,16 @@ const SingleSpot = () => {
 <div className='left-hand-listing-details'>
 
         <div className='host-and-description'>
-        <h3>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h3>
-        <h5>{spot.description}</h5>
+        <h2 style={{fontWeight:'500'}}>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h2>
+        <p style={{fontSize:'14px', lineHeight:'22px'}}>{spot.description}</p>
+
+                      {/* <DateRangePicker
+                          ranges={[selectionRange]}
+                          onChange={handleSelect}
+                          minDate={minDate}
+                          disabledDate={isDateDisabled}
+                          className='date-picker-2'
+                      /> */}
         </div>
 
         </div>
@@ -202,9 +217,12 @@ const SingleSpot = () => {
             <div className='reserve-spot-box-top-area'>
         <h3 id='reserve-box-price'>${spot.price} night</h3>
         <div className='single-spot-reviews'>
-        <i className="fa-solid fa-star"></i>
-            <span id='single-star-rating'>{spot.avgStarRating}
-            {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span>
+        
+                                  <span id='single-star-rating'>
+                                <i id='reserve-box-star-icon' className="fa-solid fa-star"></i>
+                                      <span >{spot.avgStarRating}</span>
+                                      <span style={{ color:'#717171'}}>{spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews`) : ''}</span>
+                                </span>
             </div>
                           </div>
 
@@ -226,7 +244,7 @@ const SingleSpot = () => {
                                       year: 'numeric',
                                   })}</p></div>
                             </div>
-                            <div>Guests placeholder</div>
+                            {/* <div>Guests placeholder</div> */}
                           </div>
                         
                             {spot.Owner.id !== sessionUser?.id ? (
@@ -239,11 +257,7 @@ const SingleSpot = () => {
                                           ranges={[selectionRange]}
                                           onChange={handleSelect}
                                           minDate={minDate}
-                                          disabledDates={bookedDates}
-                                          editableDateInputs={true}
-                                        //   scroll={{ enabled: true }}
-                                          showSelectionPreview={true}
-                                          moveRangeOnFirstSelection={false}
+                                          disabledDate={isDateDisabled}
                                       />
 
 
@@ -255,7 +269,7 @@ const SingleSpot = () => {
                             ): null}
                           
                           <div>
-                            <div>
+                            <div style={{marginTop:'2rem'}}>
                           <div className='nights-and-prices'>
                                       <p>${`${spot?.price} x ${(endDate - startDate)/(24 * 60 * 60 * 1000) } nights`}</p>
                                       <p>${(spot?.price * ((endDate - startDate) / (24 * 60 * 60 * 1000))).toFixed(2)}</p>
@@ -275,7 +289,7 @@ const SingleSpot = () => {
                           </div>
                           
          </div>
-                      <button onClick={setContent} className='reserve-booking-button'>Reserve</button>
+                      <button onClick={setContent} className='reserve-button'>Reserve</button>
 
          
                       
