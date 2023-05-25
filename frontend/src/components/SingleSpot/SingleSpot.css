@@ -11,6 +11,24 @@ font-family: 'Montserrat', sans-serif;
     margin-right: 10px;
 }
 
+.check-in-checkout-guests {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.checkin {
+    width: 50%;
+}
+
+.checkout {
+    width: 50%;
+    border-left: 1px solid black;
+    box-sizing: border-box;
+}
+
 .reserve-spot-box-top-area {
     display: flex;
     justify-content: space-between;
@@ -24,6 +42,13 @@ font-family: 'Montserrat', sans-serif;
 
 #reserve-box-price {
     /* margin-bottom: 10px; */
+}
+
+.check-in-checkout-upper {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    width: 100%;
 }
 
 .reserve-button {
@@ -50,13 +75,24 @@ font-family: 'Montserrat', sans-serif;
     border: 1px solid #ddd;
     box-shadow: 0 4px 18px rgba(0,0,0,.15);
     display: inline-block;
-    height: 200px;
+    height: 490px;
     width: 89%;
     position: sticky;
     margin-bottom: 50px;
-    max-width: 400px;
+    max-width: 380px;
+    max-height: 520px;
     min-height: 500px;
+    top: 120px;
+        display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+}
 
+
+.reserve-booking-button {
+    margin-bottom: 5rem;
+    width: 10rem;
+    align-self: center;
 }
 
 
@@ -70,16 +106,60 @@ font-family: 'Montserrat', sans-serif;
 
 
 .rdrCalendarWrapper {
-    width: 100% !important;
-    padding: 0 2rem;
+    /* width: 100% !important; */
+    padding: 2rem;
+    border-radius: 10px;
 }
 
 .booking-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 100px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .15);
+    border-radius: 12px;
+    background: white;
 }
 
+
+.dates-button {
+    background-color: white;
+    color: #3D91FF;
+    border: none;
+    width: 7rem;
+    height: 2rem;
+    border-radius: 10px;
+    font-family: 'Montserrat',
+        sans-serif;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        border: 1px solid #3D91FF;
+}
+
+
+.dates-button:hover {
+       color: white;
+            background-color: #3D91FF;
+            cursor: pointer;
+}
+
+
+.nights-and-prices {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.box-date {
+    margin-left: .5rem;
+} 
+
+.box-check-labels {
+    margin: .5rem;
+    font-size: 10px;
+}
 
 .book-and-close-buttons {
     display: flex;
@@ -98,7 +178,7 @@ font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 200px;
+    /* height: 200px; */
     padding: 0 20px;
     /* max-width: 50px; */
 }
@@ -136,7 +216,10 @@ font-family: 'Montserrat', sans-serif;
 .right-hand-listing-details {
     width: 38%;
     margin-left: 10vh;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2.8vw;
 }
 
 .single-spot-images {
