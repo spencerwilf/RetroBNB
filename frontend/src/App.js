@@ -8,6 +8,7 @@ import SingleSpot from "./components/SingleSpot";
 import CreateSpot from "./components/CreateSpot";
 import UserSpots from "./components/UserSpots";
 import EditSpotWrapper from "./components/EditSpot/EditSpotWrapper";
+import UserBookings from "./components/UserBookings";
 
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path='/spots/current'>
           <UserSpots/>
+          </Route>
+          <Route path='/bookings'>
+        <UserBookings/>
           </Route>
           <Route path = '/spots/:spotId/edit'>
             <EditSpotWrapper/>

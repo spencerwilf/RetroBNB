@@ -62,6 +62,9 @@ function ProfileButton({ user }) {
             <div>
               <Link exact='true' to='/spots/current'>Manage Spots</Link>
             </div>
+            <div>
+                <Link exact='true' to='/bookings'>Trips</Link>
+            </div>
             <li>
               <button className="logout-button" onClick={logout}>Log Out</button>
             </li>

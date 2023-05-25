@@ -1,5 +1,5 @@
 .card-div {
-    margin: 20px 20px;
+    margin: 20px 10px;
     box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@
     flex-direction: column;
 }
 
-.tooltip {
+/* .tooltip {
     position: relative;
     display: inline-block;
   }
@@ -30,7 +30,7 @@
 
   .tooltip:hover .tooltiptext {
     visibility: visible;
-  }
+  } */
 
 
 .name-and-rating {
@@ -44,20 +44,26 @@
     justify-content: space-between;
     max-width: 60%;
     margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .price {
-    margin: 0 0
+    margin: 0;
+    font-size: 14px;
 }
 
 .city {
     margin-top: 0;
+    color: #7F7F7F;
 }
 
 div > img {
-    width: 280px;
-    height: 250px;
+    width: 330px;
+    height: 300px;
     border-radius: 12px;
+    transition: transform 0.5s;
 }
 
 .landing-page-spot-container {
@@ -66,4 +72,25 @@ div > img {
 
 .review-span {
     text-align: right;
+    display: flex;
+    gap: 5px;
+    font-size: 13px;
+}
+
+.image-div-2 {
+    width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        /* Adjust the border-radius as needed */
+        overflow: hidden;
+}
+
+
+.image-div-2 > img:hover {
+transform: scale(1.1);
+}
+
+.image-div {
+    overflow: hidden;
+    position: relative;
 }

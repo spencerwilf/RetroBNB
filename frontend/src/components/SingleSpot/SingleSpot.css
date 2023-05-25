@@ -9,15 +9,77 @@ font-family: 'Montserrat', sans-serif;
 
 #single-star-rating {
     margin-right: 10px;
+    font-size: 13px;
+}
+
+#reserve-box-star-icon {
+    margin-right: 5px;
+}
+
+.check-in-checkout-guests {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #D3D3D3;
+    border-radius: 6px;
+}
+
+.checkin {
+    width: 50%;
+}
+
+
+.calendar-modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.calendar-modal-buttons button {
+    background-color: rgba(255, 222, 173, 0);
+    color: #ff6db6;
+    border: 1px solid #ff6db6;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    width: 6rem;
+    height: 2rem;
+}
+
+
+.calendar-modal-buttons button:hover {
+    background-color: #ff6db6;
+    color: white;
+    cursor: pointer;
+}
+
+.checkout {
+    width: 50%;
+    border-left: 1px solid #D3D3D3;
+    box-sizing: border-box;
+}
+
+.reserve-spot-box-top-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .single-spot-reviews {
-    margin-right: 5px;
-    margin-bottom: 10px;
+    /* margin-right: 5px;
+    margin-bottom: 10px; */
 }
 
 #reserve-box-price {
-    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.check-in-checkout-upper {
+    display: flex;
+    justify-content: space-between;
+    /* border-bottom: 1px solid #D3D3D3; */
+    width: 100%;
+    cursor: pointer;
 }
 
 .reserve-button {
@@ -31,6 +93,9 @@ font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   margin-top: 5px;
   font-family: 'Montserrat', sans-serif;
+    margin-bottom: 3rem;
+        width: 10rem;
+        align-self: center;
 }
 
 .reserve-button:hover {
@@ -43,25 +108,132 @@ font-family: 'Montserrat', sans-serif;
     border-radius: 12px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 18px rgba(0,0,0,.15);
-    display: inline-block;
-    height: 200px;
+    height: 490px;
     width: 89%;
     position: sticky;
     margin-bottom: 50px;
+    max-width: 380px;
+    max-height: 520px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* 
 
+.date-picker-2 .rdrCalendarWrapper {
+    padding: 0;
+    margin-top: 2rem;
+} */
+
+
+.reserve-booking-button {
+    margin-bottom: 5rem;
+    width: 10rem;
+    align-self: center;
+}
+
+
+/* .rdrStaticRanges, */
+/* .rdrDateDisplay, */
+.rdrDefinedRangesWrapper,
+/* .rdrMonthAndYearWrapper, */
+.rdrWeekDays {
+    display: none !important;
+}
+
+
+.rdrCalendarWrapper {
+    /* width: 100% !important; */
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 100px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .15);
+    border-radius: 12px;
+    background: white;
+}
+
+
+.confirm-booking-modal {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+}
+
+
+.dates-button {
+    background-color: white;
+    color: #3D91FF;
+    border: none;
+    width: 7rem;
+    height: 2rem;
+    border-radius: 10px;
+    font-family: 'Montserrat',
+        sans-serif;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        border: 1px solid #3D91FF;
+}
+
+
+.dates-button:hover {
+       color: white;
+            background-color: #3D91FF;
+            cursor: pointer;
+}
+
+
+.nights-and-prices {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.box-date {
+    margin-left: .5rem;
+} 
+
+.box-check-labels {
+    margin: .5rem;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.book-and-close-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin: 3rem 0;
+}
+
+
+.start-and-end-dates {
+    display: flex;
+    gap: 30px;
 }
 
 .reserve-box-information {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 200px;
+    /* height: 200px; */
     padding: 0 20px;
+    /* max-width: 50px; */
 }
 
 .bottom-page-info {
     display: flex;
     margin-top: 2%;
+    width: 75vw;
     border-bottom: 1px solid #ddd;
     justify-content: space-between;
 }
@@ -69,7 +241,7 @@ font-family: 'Montserrat', sans-serif;
 .review-list {
     margin-top: 20px;
     margin-bottom: 50px;
-    margin-left: 4vw;
+    /* margin-left: 4vw; */
 }
 
 
@@ -80,27 +252,30 @@ font-family: 'Montserrat', sans-serif;
 
 .listing-header {
     display: flex;
-    margin-left: 4vw;
+    /* margin-left: 4vw; */
     flex-direction: column;
 }
 
 .left-hand-listing-details {
-    margin-left: 4vw;
+    /* margin-left: 4vw; */
     width: 61%;
 }
 
 .right-hand-listing-details {
     width: 38%;
     margin-left: 10vh;
-
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* margin-right: 2.8vw; */
 }
 
 .single-spot-images {
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
-    width: 90vw;
-    height: 70vh;
+    width: 75vw;
+    height: 52vh;
 }
 
 .single-spot-big-image {
@@ -108,9 +283,15 @@ font-family: 'Montserrat', sans-serif;
     width: 50%;
 }
 
+
+.single-listing-page {
+    margin-left: 6vw;
+}
+
 .spot-image-flex-container {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    /* margin-left: 4vw; */
 }
 
 .single-spot-big-image > img {
