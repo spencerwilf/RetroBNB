@@ -232,7 +232,7 @@ router.get('/', validateQueries, async(req, res) => {
 
 
         if (!avg[0].dataValues.avgRating || avg[0].dataValues.avgRating === 'null') {
-            spot.avgRating = 'No ratings yet.'
+            spot.avgRating = 'New!'
         } else {
             spot.avgRating = Number(avg[0].dataValues.avgRating).toFixed(1)
 
@@ -341,7 +341,7 @@ router.get('/:spotId', async (req, res) => {
     })
 
     if (!avg[0].dataValues.avgRating || avg[0].dataValues.avgRating === 'null') {
-        spot.dataValues.avgStarRating = 'No ratings yet.'
+        spot.dataValues.avgStarRating = 'New!'
     } else {
         spot.dataValues.avgStarRating = Number(avg[0].dataValues.avgRating).toFixed(1)
     }

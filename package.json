@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/spencerwilf/RetroBNB/issues"
   },
-  "homepage": "https://github.com/spencerwilf/RetroBNB#readme"
+  "homepage": "https://github.com/spencerwilf/RetroBNB#readme",
+  "dependencies": {
+    "react-calendar": "^4.2.1"
+  }
 }
