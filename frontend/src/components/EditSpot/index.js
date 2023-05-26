@@ -82,110 +82,135 @@ const EditSpot = ({spot}) => {
   if (!spot) return null
 
   return (
-    <div className='user-spot-submission-form'>
-      <h2>Update your Spot</h2>
-      <h3>Where's your place located?</h3>
-      <p>Guests will only get your exact address once they've booked a reservation.</p>
-      <form className='new-spot-create-form' onSubmit={onSubmit}>
-        <div>
-          <label htmlFor='country'>Country</label>
-          <input
-            id='country'
-            type='text'
-            value={country}
-            onChange={e => setCountry(e.target.value)}
-          />
-          {hasSubmitted && errors.country && (<p className='creation-errors'>{errors.country}</p>)}
-        </div>
-        <div>
-          <label htmlFor='street-adress'>Street Address:</label>
-          <input
-            id='address'
-            value={address}
-            type='text'
-            onChange={e => setAddress(e.target.value)}
-          />
-        {hasSubmitted && errors.address && (<p className='creation-errors'>{errors.address}</p>)}
-        </div>
-        <div>
-          <label htmlFor='city'>City:</label>
-          <input
-            id='city'
-            value={city}
-            type='text'
-            onChange={e => setCity(e.target.value)}
-          />
-          {hasSubmitted && errors.city && (<p className='creation-errors'>{errors.city}</p>)}
-        </div>
-        <div>
-          <label htmlFor='state'>State:</label>
-          <input
-            id='state'
-            value={state}
-            type='text'
-            onChange={e => setState(e.target.value)}
-          />
-          {hasSubmitted && errors.state && (<p className='creation-errors'>{errors.state}</p>)}
-        </div>
-        <div>
-          <label htmlFor='latitude'>Latitude:</label>
-          <input
-            id='latitude'
-            placeholder='Feature in progress'
-            type='text'
-            disabled={true}
-          />
-        </div>
-        <div id='longitude-border-input'>
-          <label htmlFor='longitude'>Longitude:</label>
-          <input
-            id='longitude'
-            placeholder='Feature in progress'
-            type='text'
-            disabled={true}
-          />
-        </div>
-        <h3>Describe your place to Guests</h3>
-        <p>Mention the best features of your space!</p>
-        <div>
-  <label htmlFor='description'></label>
-  <textarea
-    id='create-spot-description'
-    name='description'
-    value={description}
-    onChange={e => setDescription(e.target.value)}
-  />
-  {hasSubmitted && errors.description && (<p className='creation-errors'>{errors.description}</p>)}
-</div>
-<div className='update-bottom-form-items'>
 
-    <h3>Create a title for your spot</h3>
-    <p>Catch guests' attention with a title that highlights what makes your place special</p>
-          <label htmlFor='name'>Name:</label>
-          <input
-            id='title'
-            type='text'
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-          {hasSubmitted && errors.name && (<p className='creation-errors'>{errors.name}</p>)}
-        <div>
+    <div className='user-spot-submission-form'>
+
+      <h2 style={{ textAlign: 'center' }}>Edit Spot</h2>
+
+      <div id='create-spot-page-wrapper'>
+
+        <form className='new-spot-create-form' onSubmit={onSubmit}>
+          <div>
+            <h3>Where's your place located?</h3>
+            <p style={{ marginBottom: '2rem' }}>Guests will only get your exact address once they've booked a reservation.</p>
+            <div>
+              <label htmlFor='country'>Country</label>
+              <input
+                id='country'
+                className='create-spot-form-field'
+                placeholder='Country'
+                type='text'
+                onChange={e => setCountry(e.target.value)}
+                value={country}
+              />
+              {hasSubmitted && errors.country && (<p className='creation-errors'>{errors.country}</p>)}
+            </div>
+            <div>
+              <label htmlFor='street-adress'>Street Address</label>
+              <input
+                id='address'
+                className='create-spot-form-field'
+                placeholder='Address'
+                type='text'
+                onChange={e => setAddress(e.target.value)}
+                value={address}
+              />
+              {hasSubmitted && errors.address && (<p className='creation-errors'>{errors.address}</p>)}
+            </div>
+            <div>
+              <label htmlFor='city'>City</label>
+              <input
+                id='city'
+                className='create-spot-form-field'
+                placeholder='City'
+                type='text'
+                onChange={e => setCity(e.target.value)}
+                value={city}
+              />
+              {hasSubmitted && errors.city && (<p className='creation-errors'>{errors.city}</p>)}
+            </div>
+            <div>
+              <label htmlFor='state'>State</label>
+              <input
+                id='state'
+                className='create-spot-form-field'
+                placeholder='State'
+                type='text'
+                onChange={e => setState(e.target.value)}
+                value={state}
+              />
+              {hasSubmitted && errors.state && (<p className='creation-errors'>{errors.state}</p>)}
+            </div>
+            <div>
+              <label htmlFor='latitude'>Latitude</label>
+              <input
+                id='latitude'
+                className='create-spot-form-field'
+                placeholder='Latitude (feature in progress)'
+                type='text'
+                disabled={true}
+              />
+            </div>
+            <div id='longitude-border-input'>
+              <label htmlFor='Longitude'>Longitude</label>
+              <input
+                id='longitude'
+                className='create-spot-form-field'
+                placeholder='Longitude (feature in progress)'
+                type='text'
+                disabled={true}
+              />
+            </div>
+          </div>
+
+          <div style={{ borderBottom: '1px solid #DDDDDD', padding: '1rem 0' }}>
+            <h3>Describe your place to guests</h3>
+            <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+            <div>
+              <label htmlFor='description'></label>
+              <textarea
+                id='create-spot-description'
+                className='create-spot-form-field'
+                placeholder='Description (must be 30 or more characters)'
+                name='description'
+                onChange={e => setDescription(e.target.value)}
+                value={description}
+              />
+              {hasSubmitted && errors.description && (<p className='creation-errors'>{errors.description}</p>)}
+            </div>
+          </div>
+          <div style={{ borderBottom: '1px solid #DDDDDD', padding: '1rem 0' }}>
+            <h3>Create a title for your spot</h3>
+            <p>Catch guests' attention with a title that highlights what makes your place special.</p>
+            <input
+              id='title'
+              className='create-spot-form-field'
+              placeholder='Name of your spot'
+              type='text'
+              onChange={e => setName(e.target.value)}
+              value={name}
+            />
+            {hasSubmitted && errors.name && (<p className='creation-errors'>{errors.name}</p>)}
+          </div>
+          <div style={{ marginBottom:'2rem', padding: '1rem 0' }}>
             <h3>Set a base price for your spot</h3>
-            <p>Competitive pricing can help your listing stand out</p>
-          <label htmlFor='price'>$</label>
-          <input
-            id='price'
-            type='text'
-            value={price}
-            onChange={e => setPrice(e.target.value)}
-          />
-          {hasSubmitted && errors.price && (<p className='creation-errors'>{errors.price}</p>)}
-        </div>
-        </div>
-        <button className='reserve-button'>Update your Spot</button>
-      </form>
+            <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
+            <input
+              id='price'
+              className='create-spot-form-field'
+              placeholder='Price per night (USD)'
+              type='text'
+              onChange={e => setPrice(e.target.value)}
+              value={price}
+            />
+            {hasSubmitted && errors.price && (<p className='creation-errors'>{errors.price}</p>)}
+          </div>
+          
+          <button className='reserve-button'>Update</button>
+        </form>
+      </div>
     </div>
-  )
+  );
 }
 
 export default EditSpot
