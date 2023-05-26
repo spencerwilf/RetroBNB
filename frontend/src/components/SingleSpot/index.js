@@ -163,7 +163,17 @@ const SingleSpot = () => {
         sessionUser ? setModalContent(<CalendarModal startDate={startDate} endDate={endDate} spotId={spotId}/>) : setModalContent(<LoginFormModal/>)
     }
 
-console.log(showCalendar)
+
+    const setDeleteReview = () => {
+        setModalContent(<DeleteReviewModal/>)
+    }
+
+
+    const options = {
+        year: 'numeric',
+        month: 'long'
+    };
+
 
   return (
     <div className='single-listing-page'>
@@ -302,11 +312,13 @@ console.log(showCalendar)
 
         <div className='review-list'>
             <div className='review-section-header'>
-            <h2>Reviews</h2>
 
             {reviewArr.length > 0 && <div className='single-spot-reviews'>
-            <i className="fa-solid fa-star"></i>
-            <span id='single-star-rating'>{spot.avgStarRating}
+            
+           
+            <span className='review-span-stars-avg' id='single-star-rating'>
+                <i style={{marginRight:'7px', fontSize:'15px'}} className="fa-solid fa-star"></i>
+                {spot.avgStarRating}
             {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span></div>}
             </div>
 
@@ -314,25 +326,44 @@ console.log(showCalendar)
           buttonText="Post Your Review"
           modalComponent={<ReviewModal spotId={spotId}/>}
         />}
+        <div className='review-bottom-section'>
     {reviewArr?.length ? reviewArr?.map(review => (
+        
         <div key={review?.id} className='indiv-reviews'>
-            <h3>{review?.User?.firstName}</h3>
-            <h4>{review?.createdAt?.slice(0, 10)}</h4>
-            <h5><i className="fa-solid fa-star"></i>{review?.stars}</h5>
-            <h5>{review?.review}</h5>
+
+            <div className='review-info-container-info'>
+                
+            <div className='user-review-pfp'>{review?.User?.firstName[0]}</div>
+            <div className='reviewer-name-and-date'>
+            <span>{review?.User?.firstName}</span>
+            <span id='review-posting-date'>{new Date(review?.createdAt).toLocaleString('en-US', options)}</span>
+                </div>
+            </div>
+            
+
+            {/* <h5><i className="fa-solid fa-star"></i>{review?.stars}</h5> */}
+            <p className='main-review-content'>{review?.review}</p>
+            
             {review?.userId === sessionUser?.id && (
+                <>
+                {/* <i  class="fa-solid fa-ellipsis"></i>
+                
+                <div onClick={setDeleteReview}>Delete Comment</div>
                 <button>
                 <OpenModalMenuItem
                 itemText='Delete'
                 onItemClick={closeMenu}
                 modalComponent={<DeleteReviewModal reviewId = {review.id}/>} />
-            </button>
+            </button> */}
+                </>
             )}
+            
         </div>
     )) : (sessionUser && sessionUser?.id !== spot?.ownerId) ? <h3>Be the first to leave a review!</h3> : <h3>No Reviews Yet!</h3>}
         </div>
 
     </div>
+      </div>
   )
 }
 

@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
         <div className='right-hand-icons'>
         {sessionUser && (
           <Link to='/spots/new'>
-        <h4 id='list-your-spot'>List your spot!</h4>
+        <h4 id='list-your-spot'>RetroBnb your Home</h4>
         </Link>
       )}
     <i className="fa-solid fa-globe"></i>

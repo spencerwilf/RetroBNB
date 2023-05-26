@@ -12,6 +12,52 @@ font-family: 'Montserrat', sans-serif;
     font-size: 13px;
 }
 
+.reviewer-name-and-date {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 4px;
+}
+
+.user-review-pfp {
+    background-color: #ff6db6;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+.review-info-container-info {
+    display: flex;
+    gap: 12px;
+}
+
+#review-posting-date {
+    font-size: 13px;
+    opacity: .4;
+}
+
+
+
+.review-span-stars-avg#single-star-rating {
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.single-spot-reviews {
+    margin-top: 4rem;
+}
+
 #reserve-box-star-icon {
     margin-right: 5px;
 }
@@ -244,10 +290,26 @@ font-family: 'Montserrat', sans-serif;
     /* margin-left: 4vw; */
 }
 
+.review-bottom-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
 
 .indiv-reviews {
-    margin: 30px;
-    border-bottom: 1px solid #ddd;
+display: flex;
+flex-direction: column;
+word-wrap: break-word;
+width: 50%;
+
+}
+
+
+.main-review-content {
+ font-size: 14px;
+ margin-top: 25px;
+ width: 70%;
 }
 
 .listing-header {
