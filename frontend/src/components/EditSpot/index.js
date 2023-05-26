@@ -182,7 +182,7 @@ const EditSpot = ({spot}) => {
           {hasSubmitted && errors.price && (<p className='creation-errors'>{errors.price}</p>)}
         </div>
         </div>
-        <button>Update your Spot</button>
+        <button className='reserve-button'>Update your Spot</button>
       </form>
     </div>
   )

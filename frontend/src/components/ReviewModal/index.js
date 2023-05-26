@@ -52,7 +52,7 @@ const ReviewModal = ({spotId}) => {
   <label htmlFor='review'></label>
   <textarea
     id='review'
-    placeholder='Leave your review here...'
+    placeholder='Please type at least 10 characters.'
     value={review}
     name='review'
     onChange={e => setReview(e.target.value)}
@@ -64,7 +64,7 @@ const ReviewModal = ({spotId}) => {
 <div className='review-modal-stars-text'>
   <ReviewRating rating={rating} setRating={setRating}/> stars</div>
 
-<button className='leave-review-button' disabled={review.length < 10 || rating < 1}>Submit Your Review</button>
+<button className='leave-review-button' disabled={review.length < 10 || rating < 1}>Post</button>
       </form>
       </div>
       </div>

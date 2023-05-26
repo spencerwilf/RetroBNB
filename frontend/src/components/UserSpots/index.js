@@ -34,7 +34,7 @@ if (!spotsArr) return null;
         <div className='flex-test'>
         <h1 className='manage-spots-header'>Manage Spots</h1>
 
-            <button className='user-create-spot-button'>
+            {/* <button className='user-create-spot-button'>
 
                 <Link exact='true' to='/spots/new'>
                 <div className='plswork'>
@@ -42,7 +42,7 @@ if (!spotsArr) return null;
                 </div>
                 </Link>
 
-            </button>
+            </button> */}
             </div>
             <div className='user-spots-manage'>
             <div className='user-spots-holder'>

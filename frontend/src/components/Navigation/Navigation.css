@@ -30,7 +30,7 @@ a {
     background-color: white; */
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid lightgray 1.5px;;
+    border-bottom: solid rgba(211, 211, 211, 0.657) 1px;;
 }
 
 .profile-button {

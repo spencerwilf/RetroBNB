@@ -55,7 +55,7 @@ font-family: 'Montserrat', sans-serif;
 }
 
 .single-spot-reviews {
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
 }
 
 #reserve-box-star-icon {
@@ -310,6 +310,10 @@ width: 50%;
  font-size: 14px;
  margin-top: 25px;
  width: 70%;
+}
+
+.review-section-header {
+    margin-top: 4rem;
 }
 
 .listing-header {

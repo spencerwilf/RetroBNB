@@ -75,6 +75,8 @@ div > img {
     display: flex;
     gap: 5px;
     font-size: 13px;
+    align-self: flex-start;
+    align-items: center;
 }
 
 .image-div-2 {

@@ -1,6 +1,6 @@
 .home-page-grid {
     display: flex;
-
+    margin-top: 2rem;
     flex-wrap: wrap;
     justify-content: center;
     /* width: 50%; */

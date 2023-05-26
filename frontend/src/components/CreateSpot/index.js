@@ -122,11 +122,15 @@ const CreateSpot = () => {
   return (
 
     <div className='user-spot-submission-form'>
-      <h2>Create a New Spot</h2>
-      <h3>Where's your place located?</h3>
-      <p>Guests will only get your exact address once they've booked a reservation.</p>
+
+      <h2 style={{textAlign:'center'}}>Create a New Spot</h2>
+
       <div id='create-spot-page-wrapper'>
+
       <form className='new-spot-create-form' onSubmit={onSubmit}>
+        <div>
+          <h3>Where's your place located?</h3>
+          <p style={{marginBottom:'2rem'}}>Guests will only get your exact address once they've booked a reservation.</p>
         <div>
           <label htmlFor='country'>Country</label>
           <input
@@ -140,7 +144,7 @@ const CreateSpot = () => {
           {hasSubmitted && errors.country && (<p className='creation-errors'>{errors.country}</p>)}
         </div>
         <div>
-          <label htmlFor='street-adress'>Street Address:</label>
+          <label htmlFor='street-adress'>Street Address</label>
           <input
             id='address'
             className='create-spot-form-field'
@@ -152,7 +156,7 @@ const CreateSpot = () => {
           {hasSubmitted && errors.address && (<p className='creation-errors'>{errors.address}</p>)}
         </div>
         <div>
-          <label htmlFor='city'>City:</label>
+          <label htmlFor='city'>City</label>
           <input
             id='city'
             className='create-spot-form-field'
@@ -164,7 +168,7 @@ const CreateSpot = () => {
           {hasSubmitted && errors.city && (<p className='creation-errors'>{errors.city}</p>)}
         </div>
         <div>
-          <label htmlFor='state'>State:</label>
+          <label htmlFor='state'>State</label>
           <input
             id='state'
             className='create-spot-form-field'
@@ -176,7 +180,7 @@ const CreateSpot = () => {
           {hasSubmitted && errors.state && (<p className='creation-errors'>{errors.state}</p>)}
         </div>
         <div>
-          <label htmlFor='latitude'>Latitude:</label>
+          <label htmlFor='latitude'>Latitude</label>
           <input
             id='latitude'
             className='create-spot-form-field'
@@ -186,7 +190,7 @@ const CreateSpot = () => {
           />
         </div>
         <div id='longitude-border-input'>
-          <label htmlFor='Longitude'>Longitude:</label>
+          <label htmlFor='Longitude'>Longitude</label>
           <input
             id='longitude'
             className='create-spot-form-field'
@@ -195,7 +199,9 @@ const CreateSpot = () => {
             disabled={true}
           />
         </div>
+          </div>
 
+          <div style={{ borderBottom: '1px solid #DDDDDD', padding:'1rem 0'}}>
         <h3>Describe your place to guests</h3>
         <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
         <div>
@@ -210,10 +216,10 @@ const CreateSpot = () => {
   />
   {hasSubmitted && errors.description && (<p className='creation-errors'>{errors.description}</p>)}
 </div>
-<div>
+          </div>
+          <div style={{  borderBottom: '1px solid #DDDDDD', padding:'1rem 0'}}>
     <h3>Create a title for your spot</h3>
     <p>Catch guests' attention with a title that highlights what makes your place special.</p>
-          <label htmlFor='name'>Name:</label>
           <input
             id='title'
             className='create-spot-form-field'
@@ -224,10 +230,9 @@ const CreateSpot = () => {
           />
           {hasSubmitted && errors.name && (<p className='creation-errors'>{errors.name}</p>)}
         </div>
-        <div>
+          <div style={{ borderBottom: '1px solid #DDDDDD', padding: '1rem 0' }}>
             <h3>Set a base price for your spot</h3>
             <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
-          <label htmlFor='price'>$</label>
           <input
             id='price'
             className='create-spot-form-field'
@@ -238,10 +243,9 @@ const CreateSpot = () => {
           />
           {hasSubmitted && errors.price && (<p className='creation-errors'>{errors.price}</p>)}
         </div>
-        <div>
+          <div style={{  padding: '1rem 0' }}>
             <h3>Liven up your spot with photos</h3>
             <p>Submit a link to at least one photo to publish your spot.</p>
-          <label htmlFor='image'>Preview image:</label>
           <input
             placeholder='Preview Image URL'
             type='url'
@@ -284,7 +288,7 @@ const CreateSpot = () => {
           {hasSubmitted && errors.img5 && (<p className='creation-errors'>{errors.img5}</p>)}
 
         </div>
-        <button>Create Spot</button>
+        <button className='reserve-button'>Create Spot</button>
       </form>
     </div>
     </div>

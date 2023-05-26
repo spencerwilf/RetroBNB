@@ -2,6 +2,8 @@
     margin: 20px 20px;
     box-sizing: border-box;
     line-height: 1.7em;
+    display: flex;
+    flex-direction: column;
 }
 
 .user-card-container a {
@@ -12,6 +14,11 @@
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+}
+
+#user-spot-manage-img {
+    width: 800px;
+    height: 400px;
 }
 
 .user-spot-info-2 {
@@ -25,7 +32,8 @@
 
 .user-spot-bottom-card-info {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: space-between;
 }
 
 .user-page-delete-button, .user-page-update-button {
@@ -34,6 +42,7 @@
     font-family: 'Montserrat', sans-serif;
     border-bottom: 1px solid #ddd;
     height: 5vh;
+    cursor: pointer;
 }
 
 .user-page-delete-button > li {
@@ -42,16 +51,24 @@
 
 .user-page-button-div {
     display: flex;
-
+    justify-content: center;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .user-page-button-div > .user-page-delete-button {
     margin-left: 8px;
+        padding: 1rem;
+            display: flex;
+            align-items: center;
 }
 
 .user-page-button-div > .user-page-update-button {
     margin-right: 8px;
+    cursor: pointer;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .user-page-delete-button:hover, .user-page-update-button:hover {

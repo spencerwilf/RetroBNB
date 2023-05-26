@@ -40,10 +40,18 @@ const SingleSpot = () => {
     const [showCalendar, setShowCalendar] = useState(false)
     const ulRef = useRef();
     const {setModalContent} = useModal()
+    const [showDelete, setShowDelete] = useState(false)
 
     const images = spot?.SpotImages;
     
 
+    const handleMouseEnter = () => {
+        setShowDelete(true);
+    };
+
+    const handleMouseLeave = () => {
+        setShowDelete(false);
+    };
 
 
     const selectionRange = {
@@ -335,7 +343,13 @@ const SingleSpot = () => {
                 
             <div className='user-review-pfp'>{review?.User?.firstName[0]}</div>
             <div className='reviewer-name-and-date'>
-            <span>{review?.User?.firstName}</span>
+            <span style={{display:'flex'}}>{review?.User?.firstName}
+                    {review?.userId === sessionUser?.id && showDelete && (
+                        <>
+                            <span onClick={setDeleteReview}>Delete</span>
+                        </>
+                    )}
+                    </span>
             <span id='review-posting-date'>{new Date(review?.createdAt).toLocaleString('en-US', options)}</span>
                 </div>
             </div>
@@ -344,22 +358,10 @@ const SingleSpot = () => {
             {/* <h5><i className="fa-solid fa-star"></i>{review?.stars}</h5> */}
             <p className='main-review-content'>{review?.review}</p>
             
-            {review?.userId === sessionUser?.id && (
-                <>
-                {/* <i  class="fa-solid fa-ellipsis"></i>
-                
-                <div onClick={setDeleteReview}>Delete Comment</div>
-                <button>
-                <OpenModalMenuItem
-                itemText='Delete'
-                onItemClick={closeMenu}
-                modalComponent={<DeleteReviewModal reviewId = {review.id}/>} />
-            </button> */}
-                </>
-            )}
+            
             
         </div>
-    )) : (sessionUser && sessionUser?.id !== spot?.ownerId) ? <h3>Be the first to leave a review!</h3> : <h3>No Reviews Yet!</h3>}
+    )) : (sessionUser && sessionUser?.id !== spot?.ownerId) ? <h3>Be the first to leave a review!</h3> : <h3 style={{fontWeight:'500'}}>No Reviews Yet</h3>}
         </div>
 
     </div>
