@@ -14,6 +14,7 @@
 .delete-confirmation-text {
     text-align: center;
     line-height: 2em;
+    font-weight: 400;
 }
 
 .delete-spot-modal-buttons {
@@ -28,6 +29,12 @@
     font-family: 'Montserrat', sans-serif;
     border-bottom: 1px solid #ddd;
     height: 5vh;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .delete-spot-modal-buttons > button:hover {

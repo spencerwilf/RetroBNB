@@ -22,7 +22,6 @@ function Navigation({ isLoaded }){
         <h4 id='list-your-spot'>RetroBnb your Home</h4>
         </Link>
       )}
-    <i className="fa-solid fa-globe"></i>
       {isLoaded && (
         <div>
           <ProfileButton user={sessionUser} />

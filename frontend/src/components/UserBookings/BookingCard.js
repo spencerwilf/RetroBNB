@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './BookingCard.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import OpenModalButton from '../OpenModalButton';
 import ReviewModal from '../ReviewModal'
+import loadSpotReviewsThunk from '../../store/reviews'
+import { deleteBookingThunk } from '../../store/booking';
 
 const BookingCard = ({spot}) => {
 
     const today = new Date()
     const sessionUser = useSelector(state => state.session.user);
     const reviews = useSelector(state => state.reviews.spot)
+    const dispatch = useDispatch()
 
     const reviewArr = Object.values(reviews)
 
@@ -17,6 +20,10 @@ const BookingCard = ({spot}) => {
         userReviewId = reviewArr?.filter(review => review?.userId === sessionUser?.id)
     }
 
+
+    const deleteBooking = () => {
+        dispatch(deleteBookingThunk(spot.id))
+    }
 
     
 
@@ -31,19 +38,19 @@ const BookingCard = ({spot}) => {
                 <p>{`End date: ${spot.endDate.slice(0,10)}`}</p>
                 </div>
 
-                {Date.parse(spot.startDate) > today.getTime() && (
+                {/* {Date.parse(spot.startDate) > today.getTime() && (
                     <div className='edit-delete-trip-buttons'>
 
-                        <button>Edit trip</button>
-                        <button>Cancel trip</button>
+                        <button >Edit trip</button>
+                        <button onClick={deleteBooking}>Cancel trip</button>
                     </div>
-                )}
+                )} */}
 
 
-                {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && Date.parse(spot.startDate) < today.getTime() && <OpenModalButton
+                {/* {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && Date.parse(spot.startDate) < today.getTime() && <OpenModalButton
                     buttonText="Post Your Review"
-                    modalComponent={<ReviewModal />}
-                />}
+                    modalComponent={<ReviewModal spotId={spot.id}/>}
+                />} */}
 
 
             </div>

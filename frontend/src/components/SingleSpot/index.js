@@ -45,7 +45,7 @@ const SingleSpot = () => {
     const images = spot?.SpotImages;
     
 
-    const handleMouseEnter = () => {
+    const handleMouseEnter = (review) => {
         setShowDelete(true);
     };
 
@@ -172,8 +172,8 @@ const SingleSpot = () => {
     }
 
 
-    const setDeleteReview = () => {
-        setModalContent(<DeleteReviewModal/>)
+    const setDeleteReview = (e,review) => {
+        setModalContent(<DeleteReviewModal reviewId={review.id}/>)
     }
 
 
@@ -337,20 +337,26 @@ const SingleSpot = () => {
         <div className='review-bottom-section'>
     {reviewArr?.length ? reviewArr?.map(review => (
         
-        <div key={review?.id} className='indiv-reviews'>
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key={review?.id} className='indiv-reviews'>
 
             <div className='review-info-container-info'>
                 
             <div className='user-review-pfp'>{review?.User?.firstName[0]}</div>
             <div className='reviewer-name-and-date'>
-            <span style={{display:'flex'}}>{review?.User?.firstName}
-                    {review?.userId === sessionUser?.id && showDelete && (
-                        <>
-                            <span onClick={setDeleteReview}>Delete</span>
-                        </>
-                    )}
+            <span style={{display:'flex', alignItems:'center'}}>{review?.User?.firstName}
+                   
                     </span>
             <span id='review-posting-date'>{new Date(review?.createdAt).toLocaleString('en-US', options)}</span>
+                    {review?.userId === sessionUser?.id && (
+
+                        <span className='delete-review-button-reviews'>
+                            <OpenModalMenuItem
+                                itemText="Delete"
+                                onItemClick={closeMenu}
+                                modalComponent={<DeleteReviewModal />}
+                            />
+                        </span>
+                    )}
                 </div>
             </div>
             

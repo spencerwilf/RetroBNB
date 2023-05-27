@@ -22,7 +22,9 @@ const LandingPage = () => {
 
   return (
     <div className='home-page-front-wrapper'>
+        <div>
     <div className='home-page-grid'>
+        <div></div>
         {spotsObj && spots.map(spot => (
             <Link key={spot.id} to={`/spots/${spot.id}`}>
                 <SpotCard spot={spot}/>
@@ -32,6 +34,7 @@ const LandingPage = () => {
     {/* <div className='map-container'>
     <MapContainer/>
           </div> */}
+      </div>
       </div>
   )
 }

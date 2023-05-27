@@ -15,7 +15,7 @@ const UserBookings = () => {
 
     useEffect(() => {
         dispatch(getUserBookingsThunk())
-    }, [dispatch])
+    }, [dispatch,, upcomingTrips])
 
 
     const upcomingTripsArr = Object.values(trips).filter(trip => new Date(Date.parse(trip.startDate)).getTime() > today.getTime())

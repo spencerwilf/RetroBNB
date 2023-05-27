@@ -1,6 +1,6 @@
 .user-booking-card-wrapper {
     display: flex;
-    border: 1px solid;
+    /* border: 1px solid; */
     padding: 2rem;
     gap: 2rem;
     width: 50%;

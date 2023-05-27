@@ -18,13 +18,24 @@
 
 #delete-review-confirm-button {
     margin-bottom: 15px;
-    background-color: lightcoral;
+    background-color: #FE6DB6;
+    color: white;
 }
 
 #confirm-delete-button-group {
     margin-top: 2em;
 }
 
+#confirm-delete-button-group button {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 #confirm-delete-review-text {
     text-align: center;
+    font-weight: 400;
 }

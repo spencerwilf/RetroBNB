@@ -11,6 +11,7 @@ const CLEAR_SPOT = 'spots/CLEAR_SPOT'
 const ADD_BOOKING = 'spots/ADD_BOOKING'
 const GET_BOOKINGS = 'spots/GET_BOOKINGS'
 
+
 const loadSpots = (spots) => {
     return {
         type: LOAD_SPOTS,
@@ -46,6 +47,9 @@ const addBooking = (booking) => {
         booking
     }
 }
+
+
+
 
 const addSpotImages = (spot, spotImages) => {
     return {
@@ -182,6 +186,10 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
         dispatch(deleteSpot(spotId))
     }
 }
+
+
+
+
 
 
 export const editSpotThunk = (spot, spotId) => async (dispatch) => {

@@ -306,6 +306,14 @@ width: 50%;
 }
 
 
+.delete-review-button-reviews > li {
+    list-style: none;
+    /* margin-left: 5px; */
+    font-size: 12px;
+    color: #999999;
+}
+
+
 .main-review-content {
  font-size: 14px;
  margin-top: 25px;
