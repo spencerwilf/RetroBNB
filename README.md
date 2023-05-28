@@ -14,3 +14,14 @@
 <p>
 Core features include the ability for users to list properties as well as edit and remove those listings. On the client-side, users can book other listings and leave reviews.
 </p>
+
+
+<h2 align="center">Core Features</a></h2>
+
+- Listings full CRUD
+- Reviews full CRUD
+- Bookings full CRUD
+
+<h2 align="center">Future Features</h2>
+
+- Geographic-based search
