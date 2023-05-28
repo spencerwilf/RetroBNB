@@ -8,9 +8,9 @@
 
 ## Airbnb, but make it retro.
 
-<h3>Welcome to RetroBnb, a blast-from-the-past Airbnb clone! RetroBnb is a full-stack web application that utilizes an Express backend, along with Sequelize to interface with a PostgreSQL database. In the frontend, RetroBnb utilizes React and Redux to create a seamless user experience.
-<h3>
+<p>Welcome to RetroBnb, a blast-from-the-past Airbnb clone! RetroBnb is a full-stack web application that utilizes an Express backend, along with Sequelize to interface with a PostgreSQL database. In the frontend, RetroBnb utilizes React and Redux to create a seamless user experience.
+<p>
 
-<h3>
+<p>
 Core features include the ability for users to list properties as well as edit and remove those listings. On the client-side, users can book other listings and leave reviews.
-</h3>
+</p>
