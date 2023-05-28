@@ -16,12 +16,12 @@ Core features include the ability for users to list properties as well as edit a
 </p>
 
 
-<h2 align="center">Core Features</a></h2>
+<h2>Core Features</a></h2>
 
 - Listings full CRUD
 - Reviews full CRUD
 - Bookings full CRUD
 
-<h2 align="center">Future Features</h2>
+<h2>Future Features</h2>
 
 - Geographic-based search
