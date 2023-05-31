@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf"
 
 const GET_USER_BOOKINGS = 'bookings/GET_USER_BOOKINGS'
 const DELETE_BOOKING = 'spots/DELETE_BOOKING'
+const EDIT_BOOKING = 'spots/EDIT_BOOKING'
 
 
 
@@ -17,6 +18,14 @@ const deleteBooking = (bookingId) => {
     return {
         type: DELETE_BOOKING,
         bookingId
+    }
+}
+
+
+const editBooking = (booking) => {
+    return {
+        type: EDIT_BOOKING,
+        booking
     }
 }
 
@@ -40,6 +49,20 @@ export const deleteBookingThunk = (bookingId) => async (dispatch) => {
 }
 
 
+export const editBookingThunk = (booking) => async (dispatch) => {
+    const res = await csrfFetch(`/api/bookings/${booking.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(booking)
+    })
+    if (res.ok) {
+        const booking = res.json()
+        dispatch(editBooking(booking))
+        return booking
+    }
+}
+
+
 const initialState = {}
 
 
@@ -51,8 +74,12 @@ const bookingReducer = (state = initialState, action) => {
             action.bookings.Bookings.map(booking => newState[booking.id] = booking)
             return newState
         case DELETE_BOOKING:
+            newState = { ...state}
+            delete newState[action.bookingId]
+            return newState
+        case EDIT_BOOKING:
             newState = { ...state, spotBookings: { ...state.spotBookings } }
-            delete newState.spotBookings[action.bookingId]
+            newState.spotBookings[action.booking.id] = action.booking
             return newState
         default:
             return state

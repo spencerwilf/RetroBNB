@@ -12,6 +12,54 @@
     align-items: center;
 }
 
+.delete-booking-modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.delete-booking-modal-buttons button {
+    border: 1px solid #ff6db6;
+    color: #ff6db6;
+    border-radius: 8px;
+    background-color: #ff6db600;
+    width: 6rem;
+    height: 2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.delete-booking-modal-buttons button:hover {
+    background-color: #ff6db6;
+    color: white;
+    cursor: pointer;
+}
+
+
+.edit-date-confirm-button {
+    background: rgba(245, 222, 179, 0);
+    color: #ff6db6;
+    border: 1px solid #ff6db6;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 10px;
+    width: 6rem;
+    height: 2rem;
+}
+
+
+.booking-edit-and-delete-button-container {
+    display: flex;
+    gap: 20px;
+    font-weight: 500;
+}
+
+
+.edit-date-confirm-button:hover {
+ background-color: #ff6db6;
+ color: white;
+ cursor: pointer;
+}
+
 .user-trips-img {
     width: 100%;
 }
@@ -19,6 +67,13 @@
 .edit-delete-trip-buttons{
     display: flex;
     gap: 20px;
+}
+
+
+.user-booking-card-wrapper {
+    border: 1px solid #C8C8C8;
+    border-radius: 14px;
+    margin-bottom: 20px;
 }
 
 
