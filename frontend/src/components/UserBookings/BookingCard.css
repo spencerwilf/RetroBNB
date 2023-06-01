@@ -18,6 +18,11 @@
     margin-top: 1rem;
 }
 
+.edit-cancel-bookings:hover {
+color: #ff6db6;
+cursor: pointer;
+}
+
 .delete-booking-modal-buttons button {
     border: 1px solid #ff6db6;
     color: #ff6db6;

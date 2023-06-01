@@ -88,9 +88,9 @@ const BookingCard = ({spot}) => {
                         </div>
                       {new Date(spot.startDate).getTime() > new Date().getTime() && (
                         <div className='booking-edit-and-delete-button-container'>
-                        <p onClick={setContent}>Edit</p>
+                                <p className='edit-cancel-bookings' onClick={setContent}>Edit</p>
                                 
-                        <p onClick={setDeleteContent}>Cancel</p>
+                        <p className='edit-cancel-bookings' onClick={setDeleteContent}>Cancel</p>
                         </div>
                       )}
 

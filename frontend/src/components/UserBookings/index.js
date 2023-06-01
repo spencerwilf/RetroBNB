@@ -36,7 +36,7 @@ const UserBookings = () => {
           upcomingTripsArr.length ? (
             <>
               <h1 style={{ fontWeight:'500' }}>Upcoming Trips</h1>
-              <h5 style={{fontWeight:'300'}} onClick={setUpcoming}>View past trips</h5>
+              <h5 style={{fontWeight:'300', cursor:'pointer'}} onClick={setUpcoming}>View past trips</h5>
               {upcomingTripsArr.map(trip => (
                 <BookingCard key={trip.id} spot={trip} />
               ))}
@@ -49,7 +49,7 @@ const UserBookings = () => {
             pastTripsArr.length && (
               <>
                 <h1 style={{ fontWeight:'500' }}>Where you've been</h1>
-              <h5 style={{fontWeight:'300'}} onClick={setUpcoming}>View upcoming trips</h5>
+              <h5 style={{fontWeight:'300', cursor:'pointer'}} onClick={setUpcoming}>View upcoming trips</h5>
                 {pastTripsArr.map(trip => (
                   <BookingCard key={trip.id} spot={trip} />
                 ))}

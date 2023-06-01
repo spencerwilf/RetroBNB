@@ -47,7 +47,13 @@ font-family: 'Montserrat', sans-serif;
 
 #hosted-by-you-manage {
     color: black;
-    margin-bottom: 2rem;
+    /* margin-bottom: 4rem; */
+}
+
+.host-and-description {
+        display: flex;
+            flex-direction: column;
+            gap: 20px;
 }
 
 #hosted-by-you-manage:hover {
@@ -179,7 +185,7 @@ cursor: pointer;
   border-radius: 8px;
   height: 60px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   margin-top: 5px;
   font-family: 'Montserrat', sans-serif;
@@ -327,6 +333,7 @@ cursor: pointer;
     width: 75vw;
     border-bottom: 1px solid #ddd;
     justify-content: space-between;
+    padding-bottom: 1rem;
 }
 
 .review-list {
@@ -385,13 +392,13 @@ width: 50%;
     margin-left: 10vh;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     /* margin-right: 2.8vw; */
 }
 
 .single-spot-images {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding-top: 20px;
     width: 75vw;
     height: 52vh;

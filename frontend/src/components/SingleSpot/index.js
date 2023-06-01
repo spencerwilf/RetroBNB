@@ -221,7 +221,10 @@ const SingleSpot = () => {
 
         <div className='host-and-description'>
             {sessionUser?.id === spot.Owner.id ? (
-                          <h2 style={{ fontWeight: '500', marginBottom:'2rem' }}>{`Hosted by You • `}<Link to='/spots/current'><span id='hosted-by-you-manage' >Manage spot</span></Link></h2>
+                <div>
+                          <h2 style={{ fontWeight: '500', marginBottom:'1rem' }}>{`Hosted by You`}</h2>
+                              <Link to='/spots/current'><span id='hosted-by-you-manage' >Manage spot</span></Link>
+                          </div>
                       ) : <h2 style={{ fontWeight: '500', }}>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h2>}
                      
         {/* {sessionUser?.id === spot.Owner.id && (
