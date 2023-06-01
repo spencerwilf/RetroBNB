@@ -2,8 +2,10 @@
     display: flex;
     margin-top: 2rem;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     /* width: 50%; */
+    margin-left: 8vw;
+    margin-bottom: 4rem;
 }
 
 
@@ -14,4 +16,40 @@
 
 .map-container {
     width: 50%;
+}
+
+
+/* .splash-page-wrapper {
+    display: flex;
+} */
+
+.home-footer {
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    width: 100%;
+    border-top: 1px solid #D0D0D0;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-right: 50px;
+}
+
+.footer-indiv-socials {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    color: black;
+}
+
+
+.footer-indiv-socials:hover {
+    color: #FE6DB6;
+    cursor: pointer;
 }

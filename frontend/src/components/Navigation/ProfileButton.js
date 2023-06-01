@@ -60,10 +60,10 @@ function ProfileButton({ user }) {
             </div>
             <div className="user-menu-action-buttons">
             <div>
-              <Link exact='true' to='/spots/current'>Manage Spots</Link>
+                <Link exact='true' to='/spots/current'><span className="menu-action-item">Manage Spots</span></Link>
             </div>
             <div>
-                <Link exact='true' to='/bookings'>Trips</Link>
+                <Link exact='true' to='/bookings'><span className="menu-action-item">Trips</span></Link>
             </div>
             <li>
               <button className="logout-button" onClick={logout}>Log Out</button>

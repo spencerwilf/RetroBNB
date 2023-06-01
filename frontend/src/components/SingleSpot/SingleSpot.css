@@ -45,13 +45,23 @@ font-family: 'Montserrat', sans-serif;
 }
 
 
+#hosted-by-you-manage {
+    color: black;
+    margin-bottom: 2rem;
+}
+
+#hosted-by-you-manage:hover {
+color: #ff6db6;
+cursor: pointer;
+}
+
 
 .review-span-stars-avg#single-star-rating {
     font-size: 20px;
     font-weight: 500;
     display: flex;
     align-items: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .single-spot-reviews {
@@ -118,6 +128,40 @@ font-family: 'Montserrat', sans-serif;
 
 #reserve-box-price {
     font-weight: 600;
+    gap: 3px;
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.stay-fact-subheading-1 {
+    font-weight: 500;
+}
+
+.stay-fact-subheading-2 {
+    font-size: 14px;
+    color: #808080;
+}
+
+
+.stay-fact-headings {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+#stay-icons {
+    font-size: 22px;
+}
+
+
+.stay-facts {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 2rem;
+    align-items: flex-start;
 }
 
 .check-in-checkout-upper {
@@ -155,8 +199,9 @@ font-family: 'Montserrat', sans-serif;
     border: 1px solid #ddd;
     box-shadow: 0 4px 18px rgba(0,0,0,.15);
     height: 490px;
-    width: 89%;
+    width: 100%;
     position: sticky;
+    top: 0;
     margin-bottom: 50px;
     max-width: 380px;
     max-height: 520px;
@@ -321,7 +366,7 @@ width: 50%;
 }
 
 .review-section-header {
-    margin-top: 4rem;
+    margin: 4rem 0;
 }
 
 .listing-header {

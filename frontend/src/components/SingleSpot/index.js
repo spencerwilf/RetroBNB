@@ -177,6 +177,11 @@ const SingleSpot = () => {
     }
 
 
+    const setPostReview = () => {
+        setModalContent(<ReviewModal spotId={spot.id} />)
+    }
+
+
     const options = {
         year: 'numeric',
         month: 'long'
@@ -187,7 +192,7 @@ const SingleSpot = () => {
     <div className='single-listing-page'>
 
     <div className='listing-header'>
-            <h2 className='listing-header-name'>{spot.name}</h2>
+            <h2 style={{fontWeight:'600'}} className='listing-header-name'>{spot.name}</h2>
 
             <span>{`${spot.city}, ${spot.state}, ${spot.country}`}</span>
     </div>
@@ -215,7 +220,13 @@ const SingleSpot = () => {
 <div className='left-hand-listing-details'>
 
         <div className='host-and-description'>
-        <h2 style={{fontWeight:'500'}}>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h2>
+            {sessionUser?.id === spot.Owner.id ? (
+                          <h2 style={{ fontWeight: '500', marginBottom:'2rem' }}>{`Hosted by You • `}<Link to='/spots/current'><span id='hosted-by-you-manage' >Manage spot</span></Link></h2>
+                      ) : <h2 style={{ fontWeight: '500', }}>{`Hosted by ${spot?.Owner?.firstName} ${spot?.Owner?.lastName}`}</h2>}
+                     
+        {/* {sessionUser?.id === spot.Owner.id && (
+            <h3 style={{fontWeight:'400'}}>Manage spot</h3>
+        )} */}
         <p style={{fontSize:'14px', lineHeight:'22px'}}>{spot.description}</p>
 
                       {/* <DateRangePicker
@@ -226,11 +237,37 @@ const SingleSpot = () => {
                           className='date-picker-2'
                       /> */}
         </div>
+        <div style={{marginTop:'3rem'}}>
+            <div className='stay-facts'>
+            <i id='stay-icons' class="fa-solid fa-medal"></i>
+            <div className='stay-fact-headings'>
+            <span className='stay-fact-subheading-1'>{spot?.Owner?.firstName} is a Superhost</span>
+            <span className='stay-fact-subheading-2'>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</span>
+            </div>
+            </div>
+            <div className='stay-facts'>
+                          <i id='stay-icons' class="fa-solid fa-map-pin"></i>
+                <div className='stay-fact-headings'>
+                <span className='stay-fact-subheading-1'>Great location</span>
+                <span className='stay-fact-subheading-2'>100% of recent guests gave the location a 5-star rating.</span>
+                </div>
+            </div>
+
+            <div className='stay-facts'>
+                          <i id='stay-icons' class="fa-regular fa-calendar"></i>
+                <div className='stay-fact-headings'>
+                <span className='stay-fact-subheading-1'>Free cancellation before check-in</span>
+                          </div>
+            </div>
+        </div>
 
         </div>
 
 <div className='right-hand-listing-details'>
-{sessionUser?.id !== spot.Owner.id ? <div className='reserve-box-container'>
+
+{sessionUser?.id !== spot.Owner.id ? 
+       
+        <div className='reserve-box-container'>
         <div className='reserve-box-information'>
             <div className='reserve-spot-box-top-area'>
         <h3 id='reserve-box-price'>${spot.price} night</h3>
@@ -310,8 +347,9 @@ const SingleSpot = () => {
                       <button onClick={setContent} className='reserve-button'>Reserve</button>
 
          
-                      
-    </div> : <Link to='/spots/current'>Manage Spot</Link>}
+
+
+    </div> : null}
 </div>
 
 
@@ -323,17 +361,19 @@ const SingleSpot = () => {
 
             {reviewArr.length > 0 && <div className='single-spot-reviews'>
             
-           
+        
             <span className='review-span-stars-avg' id='single-star-rating'>
                 <i style={{marginRight:'7px', fontSize:'15px'}} className="fa-solid fa-star"></i>
                 {spot.avgStarRating}
-            {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span></div>}
+            {spot.numReviews !== 0 ? (spot.numReviews === 1 ? (` • ${spot.numReviews} review`) : ` • ${spot.numReviews} reviews` ) : ''}</span>
+            
+                          
+              
+            </div>}
+                  {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && <span onClick={setPostReview}>Leave a review</span>}
             </div>
 
-            {sessionUser && userReviewId.length < 1 && spot?.ownerId !== sessionUser.id && <OpenModalButton
-          buttonText="Post Your Review"
-          modalComponent={<ReviewModal spotId={spotId}/>}
-        />}
+            
         <div className='review-bottom-section'>
     {reviewArr?.length ? reviewArr?.map(review => (
         
@@ -353,7 +393,7 @@ const SingleSpot = () => {
                             <OpenModalMenuItem
                                 itemText="Delete"
                                 onItemClick={closeMenu}
-                                modalComponent={<DeleteReviewModal />}
+                                modalComponent={<DeleteReviewModal reviewId={review?.id}/>}
                             />
                         </span>
                     )}

@@ -7,17 +7,28 @@ a {
 }
 
 .logout-button {
-  border: black .5px;
+  border: 1px solid #ff6db6;
+  color:#ff6db6;
   height: 4vh;
   width: 8vw;
   margin-top: 1vh;
   font-family: 'Montserrat', sans-serif;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
+  background-color: #dddddd00;
 }
 
 .logout-button:hover {
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ff6db6;
+  color: white;
+}
+
+.menu-action-item {
+  color: black;
+}
+
+.menu-action-item:hover {
+  color: #ff6db6;
 }
 
 .nav-bar {

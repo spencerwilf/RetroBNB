@@ -28,7 +28,7 @@ const DeleteTripModal = ({ spotId }) => {
 
     return (
         <div id='delete-booking-confirm-modal' className='confirm-booking-modal'>
-            <h3>Delete Booking?</h3>
+            <h3>Cancel Booking?</h3>
    
    <div className='delete-booking-modal-buttons'>
             <button onClick={deleteBooking}>Confirm</button>
