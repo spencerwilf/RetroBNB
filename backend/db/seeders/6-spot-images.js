@@ -161,6 +161,135 @@ module.exports = {
       url: 'https://shiplapandshells.com/wp-content/uploads/2021/11/Christmas-cottage-kitchen-7-SQ-768x1024.jpg',
       preview: false
     },
+        {
+      spotId: 7,
+      url: 'https://www.miamicondoinvestments.com/wp-content/uploads/2022/01/A10950366_5_6.jpg',
+      preview: true
+    },
+            {
+      spotId: 7,
+      url: 'https://www.morismoreno.com/wp-content/uploads/2020/09/LuxeMagazine_091314_1630.jpg',
+      preview: false
+    },
+            {
+      spotId: 7,
+      url: 'https://luxexpose.com/wp-content/uploads/2022/10/LuxExpose-8505-SW-53rd-Ave-3.jpg',
+      preview: false
+    },
+            {
+      spotId: 7,
+      url: 'https://i.pinimg.com/originals/bd/a6/1d/bda61d044ad23359cc3f2f44d827a748.jpg',
+      preview: false
+    },
+            {
+      spotId: 7,
+      url: 'https://cdn.incollect.com/sites/default/files/zoom/1566855082_BrownDavis_072513_3693.jpg',
+      preview: false
+    },
+            {
+      spotId: 8,
+      url: 'https://wp.zillowstatic.com/streeteasy/2/cohen2-3ac18c.jpg',
+      preview: true
+    },
+                {
+      spotId: 8,
+      url: 'https://i.ytimg.com/vi/VgXMhbs1Aek/maxresdefault.jpg',
+      preview: false
+    },
+                    {
+      spotId: 8,
+      url: 'https://suitehotelnewyork.com/wp-content/uploads/2019/07/bedroom-1.jpg',
+      preview: false
+    },
+                        {
+      spotId: 8,
+      url: 'https://media.timeout.com/images/105136162/750/422/image.jpg',
+      preview: false
+    },
+                            {
+      spotId: 8,
+      url: 'https://images.wsj.net/im-507709/?width=2000&',
+      preview: false
+    },
+                {
+      spotId: 9,
+      url: 'https://www.badasslucasranch.com/wp-content/uploads/2020/08/slide-img1-1024x682.jpg',
+      preview: true
+    },
+                    {
+      spotId: 9,
+      url: 'https://www.travelandleisure.com/thmb/KIhokRAusKSXqAVJDbOlOmkrK_g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/lodge-jl-bar-ranch-JLBAR0121-80ea728612904faf8e6fa57a767f3055.jpg',
+      preview: false
+    },
+                        {
+      spotId: 9,
+      url: 'https://res.cloudinary.com/resortsandlodges/image/fetch/w_800,h_520,c_fill/https://media.travelnetsolutions.com/f02fe181e0991a2903e7c0f53a4cbfdc/original.jpg',
+      preview: false
+    },
+                            {
+      spotId: 9,
+      url: 'https://passport-cdn.kiwicollection.com/blog/drive/uploads/2020/02/000706-01-exterior-mountain-view-sunset-694x390.jpg',
+      preview: false
+    },
+                                {
+      spotId: 9,
+      url: 'https://d170905xy03hmu.cloudfront.net/media2/images/crop_1200_630/lodge/horses-galloping-by-lodge-at-siwash-lake.jpg',
+      preview: false
+    },
+                                    {
+      spotId: 10,
+      url: 'https://www.counton2.com/wp-content/uploads/sites/7/2022/02/exterior.png?strip=1',
+      preview: true
+    },
+                                        {
+      spotId: 10,
+      url: 'https://bloximages.newyork1.vip.townnews.com/postandcourier.com/content/tncms/assets/v3/editorial/e/15/e15cf682-1c9c-11ed-be3e-1fbc33b70687/612fb7b6353d2.image.jpg',
+      preview: false
+    },
+                                        {
+      spotId: 10,
+      url: 'https://dk-decor.com/wp-content/uploads/2015/11/Charleston-classic-design-parlor-feature-1120x747.jpg',
+      preview: false
+    },
+                                        {
+      spotId: 10,
+      url: 'https://dk-decor.com/wp-content/uploads/2015/11/Charleston-classic-design-entry-hall.jpg',
+      preview: false
+    },
+                                        {
+      spotId: 10,
+      url: 'https://dk-decor.com/wp-content/uploads/2015/11/Charleston-classic-design-parlor-detail.jpg',
+      preview: false
+    },
+                                            {
+      spotId: 11,
+      url: 'https://ca-times.brightspotcdn.com/dims4/default/81abd33/2147483647/strip/true/crop/5098x3399+0+0/resize/1200x800!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F58%2F02%2Feeb978e54d048813f622191ccfbd%2Fsmg-0620.jpg',
+      preview: true
+    },
+                                                {
+      spotId: 11,
+      url: 'https://www.recorder.com/getattachment/d7024d25-7bb1-4a58-a838-784c5a7d6b23/A1-yankeecandlehome-ph12',
+      preview: false
+    },
+                                                    {
+      spotId: 11,
+      url: 'https://s.hdnux.com/photos/01/26/67/33/22771436/6/1200x0.jpg',
+      preview: false
+    },
+                                                        {
+      spotId: 11,
+      url: 'https://images.mansionglobal.com/im-754382?width=1280&height=853',
+      preview: false
+    },
+                                                            {
+      spotId: 11,
+      url: 'https://cdn10.bostonmagazine.com/wp-content/uploads/sites/2/2019/05/Great-House-at-Castle-Hill.restored-Allee.high-res_Trustees.jpg',
+      preview: false
+    },
+    
+    
+    
+    
   ])
   },
 
